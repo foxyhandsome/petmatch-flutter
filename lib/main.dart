@@ -22,17 +22,17 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+// class Login extends StatelessWidget {
+//   const Login({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [Color.fromARGB(255, 238, 128, 95), Color.fromARGB(255, 240, 68, 125)])),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       decoration: const BoxDecoration(
+//           gradient: LinearGradient(
+//               begin: Alignment.topRight,
+//               end: Alignment.bottomLeft,
+//               colors: [Color.fromARGB(255, 238, 128, 95), Color.fromARGB(255, 240, 68, 125)])),
+//     );
+//   }
+// }
