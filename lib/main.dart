@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:petmatch/authenticationsScreen/login.dart';
+import 'package:petmatch/authenticationsScreen/loginyo.dart';
+import 'package:petmatch/authenticationsScreen/regisuser.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Color.fromARGB(230, 234, 64, 128)
       ),
 
-      home: Login(),
+      home: loginyo(),
     );
   }
 }
