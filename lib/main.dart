@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:petmatch/authenticationsScreen/loginyo.dart';
+import 'package:petmatch/authenticationsScreen/petbreed.dart';
 import 'package:petmatch/authenticationsScreen/regisuser.dart';
+import 'package:petmatch/authenticationsScreen/regpet.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,20 +11,24 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Petmatch',
-      
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Color.fromARGB(230, 234, 64, 128)
-      ),
+
+      theme: ThemeData.dark()
+          .copyWith(scaffoldBackgroundColor: Color.fromARGB(230, 234, 64, 128)
+          ),
 
       home: loginyo(),
     );
   }
 }
+
+
 // class Login extends StatelessWidget {
 //   const Login({Key? key}) : super(key: key);
 

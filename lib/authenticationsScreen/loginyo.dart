@@ -57,10 +57,6 @@ class _loginyoState extends State<loginyo> {
                 },
                 child: Text('สมัครสมาชิก'),
               ),
-
-              
-              
-
             ],
           ),
         ),

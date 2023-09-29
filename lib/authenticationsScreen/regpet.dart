@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:matcher/matcher.dart';
 
-class regisuser extends StatefulWidget {
-  const regisuser({super.key});
+class regpet extends StatefulWidget {
+  const regpet({super.key});
 
   @override
-  State<regisuser> createState() => _regisuserState();
+  State<regpet> createState() => _regpetState();
 }
 
-class _regisuserState extends State<regisuser> {
-  @override
+class _regpetState extends State<regpet> {
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Color.fromARGB(255, 255, 255, 255),
@@ -24,7 +21,7 @@ class _regisuserState extends State<regisuser> {
           },
         ),
         title: Text(
-          "สมัครสมาชิกเจ้าของสัตว์เลี้ยง",
+          "ข้อมูลสัตว์เลี้ยง",
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -40,8 +37,8 @@ class _regisuserState extends State<regisuser> {
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: ('ชื่อผู้ใช้งาน'),
-                  prefixIcon: Icon(Icons.person_2),
+                  labelText: ('ชื่อสัตว์เลี้ยง'),
+                  prefixIcon: Icon(Icons.pets),
                 ),
               ),
               TextField(
@@ -49,8 +46,8 @@ class _regisuserState extends State<regisuser> {
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: ('รหัสผ่าน'),
-                  prefixIcon: Icon(Icons.lock),
+                  labelText: ('สายพันธุ์'),
+                  prefixIcon: Icon(Icons.pest_control_rodent_sharp),
                 ),
               ),
               TextField(
@@ -58,7 +55,7 @@ class _regisuserState extends State<regisuser> {
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: ('เบอร์โทรศัพท์'),
+                  labelText: ('เพศ'),
                   prefixIcon: Icon(Icons.phone),
                 ),
               ),
@@ -67,7 +64,7 @@ class _regisuserState extends State<regisuser> {
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: ('ที่อยู่'),
+                  labelText: ('อายุสัตว์เลี้ยง'),
                   prefixIcon: Icon(Icons.home),
                 ),
               ),
@@ -76,10 +73,11 @@ class _regisuserState extends State<regisuser> {
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: ('ช่องทางการติดต่อออนไลน์'),
-                  prefixIcon: Icon(Icons.chat),
+                  labelText: ('สีขน'),
+                  prefixIcon: Icon(Icons.pets_rounded),
                 ),
-              ),     
+              ),
+
             ],
           ),
         ),
