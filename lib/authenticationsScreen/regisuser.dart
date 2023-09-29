@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:matcher/matcher.dart';
+import 'package:petmatch/authenticationsScreen/regpet.dart';
 
 class regisuser extends StatefulWidget {
   const regisuser({super.key});
@@ -31,11 +32,12 @@ class _regisuserState extends State<regisuser> {
       body: SingleChildScrollView(
         child: Center(
           child: Column(
-            children: const [
-              SizedBox(
+            children:  [
+              const SizedBox(
                 height: 30,
               ),
-              TextField(
+
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -44,7 +46,8 @@ class _regisuserState extends State<regisuser> {
                   prefixIcon: Icon(Icons.person_2),
                 ),
               ),
-              TextField(
+
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -53,7 +56,8 @@ class _regisuserState extends State<regisuser> {
                   prefixIcon: Icon(Icons.lock),
                 ),
               ),
-              TextField(
+
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -62,7 +66,8 @@ class _regisuserState extends State<regisuser> {
                   prefixIcon: Icon(Icons.phone),
                 ),
               ),
-              TextField(
+              
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -71,7 +76,8 @@ class _regisuserState extends State<regisuser> {
                   prefixIcon: Icon(Icons.home),
                 ),
               ),
-              TextField(
+
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -79,7 +85,18 @@ class _regisuserState extends State<regisuser> {
                   labelText: ('ช่องทางการติดต่อออนไลน์'),
                   prefixIcon: Icon(Icons.chat),
                 ),
-              ),     
+              ),  
+
+              TextButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => regpet())));
+                },
+                child: Text('หน้าต่อไป'),
+              ),   
             ],
           ),
         ),

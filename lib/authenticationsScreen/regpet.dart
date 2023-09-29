@@ -28,11 +28,11 @@ class _regpetState extends State<regpet> {
       body: SingleChildScrollView(
         child: Center(
           child: Column(
-            children: const [
-              SizedBox(
+            children: [
+              const SizedBox(
                 height: 30,
               ),
-              TextField(
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -41,7 +41,7 @@ class _regpetState extends State<regpet> {
                   prefixIcon: Icon(Icons.pets),
                 ),
               ),
-              TextField(
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -50,7 +50,7 @@ class _regpetState extends State<regpet> {
                   prefixIcon: Icon(Icons.pest_control_rodent_sharp),
                 ),
               ),
-              TextField(
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -59,7 +59,7 @@ class _regpetState extends State<regpet> {
                   prefixIcon: Icon(Icons.phone),
                 ),
               ),
-              TextField(
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -68,7 +68,7 @@ class _regpetState extends State<regpet> {
                   prefixIcon: Icon(Icons.home),
                 ),
               ),
-              TextField(
+              const TextField(
                 style:
                     TextStyle(color: Colors.black), // Set text color to black
                 decoration: InputDecoration(
@@ -77,6 +77,15 @@ class _regpetState extends State<regpet> {
                   prefixIcon: Icon(Icons.pets_rounded),
                 ),
               ),
+
+               TextButton(
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                ),
+                onPressed: () {},
+                child: Text('สมัคสมาชิก'),
+              ),   
 
             ],
           ),
