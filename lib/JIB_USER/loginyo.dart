@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:petmatch/authenticationsScreen/editdogtest.dart';
 import 'package:petmatch/authenticationsScreen/regisuser.dart';
 
 import '../constant/domain.dart';
@@ -27,6 +28,7 @@ class _loginyoState extends State<loginyo> {
             },
           );
           print(response);
+          GotoHome();
           // Handle the response here as needed
         } else {
           // Handle case where either username or password is empty
@@ -51,6 +53,16 @@ class _loginyoState extends State<loginyo> {
         }
       }
     }
+    GotoHome() {
+    Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return editdogtest();
+        },
+      ),
+      (_) => false,
+    );
+  }
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
