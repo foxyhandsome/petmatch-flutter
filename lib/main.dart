@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:petmatch/authenticationsScreen/editdogtest.dart';
+import 'package:petmatch/JIB_USER/profileuser.dart';
+import 'package:petmatch/JIB_USER/registerdog2jib.dart';
+import 'package:petmatch/JIB_USER/registerdogjib.dart';
 import 'package:petmatch/authenticationsScreen/edituser.dart';
-import 'package:petmatch/JIB_USER/loginyo.dart';
+import 'package:petmatch/JIB_USER/loginjib.dart';
 import 'package:petmatch/authenticationsScreen/petbreed.dart';
-import 'package:petmatch/authenticationsScreen/profiledog.dart';
-import 'package:petmatch/authenticationsScreen/profileuser.dart';
-import 'package:petmatch/authenticationsScreen/regisuser.dart';
+import 'package:petmatch/authenticationsScreen/regisuser_kaou.dart';
 import 'package:petmatch/authenticationsScreen/regpet.dart';
 import 'package:petmatch/authenticationsScreen/test.dart';
 
@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
       title: 'Petmatch',
 
       theme: ThemeData.dark()
-          .copyWith(scaffoldBackgroundColor: Color.fromARGB(255, 210, 180, 222)
+          .copyWith(scaffoldBackgroundColor: Color.fromARGB(255, 175, 122, 197)
           ),
 
-      home: loginyo(),
+      home: profileuser(),
     );
   }
 }

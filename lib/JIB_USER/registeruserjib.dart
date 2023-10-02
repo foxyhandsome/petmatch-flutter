@@ -1,17 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:petmatch/JIB_USER/loginjib.dart';
+import 'package:petmatch/JIB_USER/registerdogjib.dart';
 import 'dart:io';
 
 import 'package:petmatch/authenticationsScreen/editdog.dart';
-import 'package:petmatch/authenticationsScreen/test.dart';
 
-class editdogtest extends StatefulWidget {
+class registeruserjib extends StatefulWidget {
   @override
-  _editdogtestState createState() => _editdogtestState();
+  _registeruserjibState createState() => _registeruserjibState();
 }
 
-class _editdogtestState extends State<editdogtest> {
+class _registeruserjibState extends State<registeruserjib> {
   final dio = Dio();
   login(){
     if(usernameController.text.isNotEmpty && passwordController.text.isNotEmpty){
@@ -40,6 +41,19 @@ class _editdogtestState extends State<editdogtest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: Text(
+          "สมัครสมาชิกเจ้าของ",
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
       // backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -63,7 +77,6 @@ class _editdogtestState extends State<editdogtest> {
 
                 SizedBox(height: 20.0),
                 TextField(
-                controller: usernameController,
                 decoration: InputDecoration(
                   labelText: 'ชื่อผู้ใช้งาน',
                   border: OutlineInputBorder(
@@ -94,7 +107,6 @@ class _editdogtestState extends State<editdogtest> {
 
               SizedBox(height: 20.0), 
               TextField(
-                controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'รหัสผ่าน',
                   border: OutlineInputBorder(
@@ -189,7 +201,7 @@ class _editdogtestState extends State<editdogtest> {
            SizedBox(height: 20),
             // Dropdown เพศ
             Text(
-              'เพศของสัตว์เลี้ยง',
+              'เขต',
               style: TextStyle(fontSize: 16),
             ),
             DropdownButton<String>(
@@ -233,7 +245,7 @@ class _editdogtestState extends State<editdogtest> {
             ),
 
               TextButton(
-                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: ((context) => test()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: ((context) => loginjib()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
                 },
                 child: Text(
                   'หากมีบัญชีผู้ใช้แล้ว กดเพื่อเข้าสู่ระบบ',
@@ -254,9 +266,9 @@ class _editdogtestState extends State<editdogtest> {
                       ),
                     ),
                 onPressed: () {
-                  editdog();
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => registerdogjib())));
                 },
-                child: Text('สมัครสมาชิก')
+                child: Text('หน้าต่อไป')
               ),
           ],
         ),
@@ -267,6 +279,6 @@ class _editdogtestState extends State<editdogtest> {
 
 void main() {
   runApp(MaterialApp(
-    home: editdogtest(),
+    home: registeruserjib(),
   ));
 }
