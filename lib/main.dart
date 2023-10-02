@@ -7,6 +7,7 @@ import 'package:petmatch/authenticationsScreen/profiledog.dart';
 import 'package:petmatch/authenticationsScreen/profileuser.dart';
 import 'package:petmatch/authenticationsScreen/regisuser.dart';
 import 'package:petmatch/authenticationsScreen/regpet.dart';
+import 'package:petmatch/authenticationsScreen/test.dart';
 
 void main() {
   runApp(const MyApp());
