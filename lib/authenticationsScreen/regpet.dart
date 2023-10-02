@@ -10,7 +10,7 @@ class regpet extends StatefulWidget {
 class _regpetState extends State<regpet> {
  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    var scaffold = Scaffold(
       // backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
@@ -92,5 +92,6 @@ class _regpetState extends State<regpet> {
         ),
       ),
     );
+    return scaffold;
   }
 }

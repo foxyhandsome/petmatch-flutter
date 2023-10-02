@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:petmatch/authenticationsScreen/loginyo.dart';
+import 'package:petmatch/authenticationsScreen/editdogtest.dart';
+import 'package:petmatch/authenticationsScreen/edituser.dart';
+import 'package:petmatch/JIB_USER/loginyo.dart';
 import 'package:petmatch/authenticationsScreen/petbreed.dart';
+import 'package:petmatch/authenticationsScreen/profiledog.dart';
+import 'package:petmatch/authenticationsScreen/profileuser.dart';
 import 'package:petmatch/authenticationsScreen/regisuser.dart';
 import 'package:petmatch/authenticationsScreen/regpet.dart';
 
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Petmatch',
 
       theme: ThemeData.dark()
-          .copyWith(scaffoldBackgroundColor: Color.fromARGB(230, 234, 64, 128)
+          .copyWith(scaffoldBackgroundColor: Color.fromARGB(255, 210, 180, 222)
           ),
 
       home: loginyo(),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:petmatch/authenticationsScreen/editdog.dart';
 import 'package:petmatch/authenticationsScreen/edituser.dart';
 
-class profileuser extends StatefulWidget {
+class profiledog extends StatefulWidget {
   @override
-  _profileuserState createState() => _profileuserState();
+  _profiledogState createState() => _profiledogState();
 }
 
-class _profileuserState extends State<profileuser> {
+class _profiledogState extends State<profiledog> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
@@ -19,7 +20,7 @@ class _profileuserState extends State<profileuser> {
           );
     return Scaffold(
       appBar: AppBar(
-        title: Text('โปรไฟล์เจ้าของสัตว์เลี้ยง'),
+        title: Text('โปรไฟล์สัตว์เลี้ยง'),
       ),
 
       body: Container(
@@ -41,7 +42,7 @@ class _profileuserState extends State<profileuser> {
            SizedBox(height: 16.0),
             FloatingActionButton(
               onPressed: () {
-               Navigator.push(context, MaterialPageRoute(builder: ((context) => edituser()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+               Navigator.push(context, MaterialPageRoute(builder: ((context) => editdog()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
               },
               backgroundColor: Color.fromARGB(255, 255, 255, 255), // สีพื้นหลังของปุ่ม
               child: Icon(Icons.edit),
