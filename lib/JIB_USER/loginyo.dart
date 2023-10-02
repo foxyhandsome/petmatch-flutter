@@ -88,6 +88,7 @@ class _loginyoState extends State<loginyo> {
                   prefixIcon: Icon(Icons.person_2),
                 ),
               ),
+              
 
               SizedBox(height: 20.0), 
               TextField(
@@ -99,6 +100,7 @@ class _loginyoState extends State<loginyo> {
                    prefixIcon: Icon(Icons.lock),
                 ),
               ),
+              
 
               SizedBox(height: 20.0), 
                ElevatedButton(

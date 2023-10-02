@@ -16,6 +16,15 @@ class _testState extends State<test> {
         child: Center(
           child: Column(
             children: [
+
+              const Text (
+                "เลือกตัวเลข",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+
               DropdownButton(
                 iconSize: 50.0,
                 items: const [
