@@ -3,6 +3,7 @@ import 'package:petmatch/authenticationsScreen/loginyo.dart';
 import 'package:petmatch/authenticationsScreen/petbreed.dart';
 import 'package:petmatch/authenticationsScreen/regisuser.dart';
 import 'package:petmatch/authenticationsScreen/regpet.dart';
+import 'package:petmatch/authenticationsScreen/test.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
           .copyWith(scaffoldBackgroundColor: Color.fromARGB(230, 234, 64, 128)
           ),
 
-      home: loginyo(),
+      home: regisuser(),
     );
   }
 }

@@ -66,16 +66,36 @@ class _regisuserState extends State<regisuser> {
                   prefixIcon: Icon(Icons.phone),
                 ),
               ),
-              
-              const TextField(
-                style:
-                    TextStyle(color: Colors.black), // Set text color to black
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: ('ที่อยู่'),
-                  prefixIcon: Icon(Icons.home),
+              const Text (
+                "ที่อยู่",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold
                 ),
               ),
+
+              DropdownButton(
+                iconSize: 50.0,
+                isExpanded: true,
+                items: const [
+
+                  DropdownMenuItem(child: Text("1"),value: "1",),
+                  DropdownMenuItem(child: Text("2"),value: "2",),
+                  DropdownMenuItem(child: Text("3"),value: "3",),
+                  DropdownMenuItem(child: Text("4"),value: "4",),
+                ], 
+                  onChanged: (String? value) {  },
+              ),
+              
+              // const TextField(
+              //   style:
+              //       TextStyle(color: Colors.black), // Set text color to black
+              //   decoration: InputDecoration(
+              //     border: OutlineInputBorder(),
+              //     labelText: ('ที่อยู่'),
+              //     prefixIcon: Icon(Icons.home),
+              //   ),
+              // ),
 
               const TextField(
                 style:
