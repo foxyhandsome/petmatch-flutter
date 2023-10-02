@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petmatch/authenticationsScreen/regisuser.dart';
+import 'package:petmatch/authenticationsScreen/test.dart';
 
 class loginyo extends StatefulWidget {
   const loginyo({super.key});
@@ -43,7 +44,9 @@ class _loginyoState extends State<loginyo> {
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => test())));
+                },
                 child: Text('เข้าสู่ระบบ')
               ),
 

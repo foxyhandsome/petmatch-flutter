@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           .copyWith(scaffoldBackgroundColor: Color.fromARGB(230, 234, 64, 128)
           ),
 
-      home: regisuser(),
+      home: loginyo(),
     );
   }
 }
