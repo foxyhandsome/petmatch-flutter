@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:petmatch/JIB_USER/home.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
 import 'package:petmatch/JIB_USER/profiledog.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
@@ -47,7 +48,7 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
   }
 
   List<Widget> _buildScreens() {
-    return [profileuser(), profiledog(), loginjib()];
+    return [home(), home(), home()];
   }
 @override
   Widget build(BuildContext context) {

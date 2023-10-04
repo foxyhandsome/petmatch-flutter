@@ -2,17 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
+import 'package:petmatch/JIB_USER/profiledog.dart';
+import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:petmatch/JIB_USER/registerdogjib.dart';
 import 'dart:io';
 
 import 'package:petmatch/authenticationsScreen/editdog.dart';
 
-class registeruserjib extends StatefulWidget {
+class editprofileuser extends StatefulWidget {
   @override
-  _registeruserjibState createState() => _registeruserjibState();
+  _editprofileuserState createState() => _editprofileuserState();
 }
 
-class _registeruserjibState extends State<registeruserjib> {
+class _editprofileuserState extends State<editprofileuser> {
   final dio = Dio();
   login(){
     if(usernameController.text.isNotEmpty && passwordController.text.isNotEmpty){
@@ -50,7 +52,7 @@ class _registeruserjibState extends State<registeruserjib> {
           },
         ),
         title: Text(
-          "สมัครสมาชิกเจ้าของ",
+          "แก้ไขข้อมูลตนเอง",
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -90,7 +92,7 @@ class _registeruserjibState extends State<registeruserjib> {
                 SizedBox(height: 20.0),
                 TextField(
                 decoration: InputDecoration(
-                  labelText: 'ชื่อผู้ใช้งาน',
+                  labelText: 'แก้ไขชื่อผู้ใช้งาน',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
@@ -120,11 +122,11 @@ class _registeruserjibState extends State<registeruserjib> {
               SizedBox(height: 20.0), 
               TextField(
                 decoration: InputDecoration(
-                  labelText: 'รหัสผ่าน',
+                  labelText: 'แก้ไขรหัสผ่าน',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
-                      color: Colors.white, // สีเส้นขอบ
+                      color: Color.fromARGB(255, 0, 0, 0), // สีเส้นขอบ
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
@@ -152,7 +154,7 @@ class _registeruserjibState extends State<registeruserjib> {
                 controller: usernameController,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
-                  labelText: 'เบอร์โทรศัพท์',
+                  labelText: 'แก้ไขเบอร์โทรศัพท์',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
@@ -183,7 +185,7 @@ class _registeruserjibState extends State<registeruserjib> {
                 TextField(
                 controller: usernameController,
                 decoration: InputDecoration(
-                  labelText: 'ช่องทางติดต่อออนไลน์',
+                  labelText: 'แก้ไขช่องทางติดต่อออนไลน์',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
@@ -213,7 +215,7 @@ class _registeruserjibState extends State<registeruserjib> {
            SizedBox(height: 20),
             // Dropdown เพศ
             Text(
-              'เขต',
+              'แก้ไขเขต',
               style: TextStyle(fontSize: 16),
             ),
             DropdownButton<String>(
@@ -256,17 +258,6 @@ class _registeruserjibState extends State<registeruserjib> {
               }).toList(),
             ),
 
-              TextButton(
-                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: ((context) => loginjib()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
-                },
-                child: Text(
-                  'หากมีบัญชีผู้ใช้แล้ว กดเพื่อเข้าสู่ระบบ',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white ,
-                  ),
-                ),
-              ),
               
               SizedBox(height: 5.0), 
                ElevatedButton(
@@ -278,9 +269,9 @@ class _registeruserjibState extends State<registeruserjib> {
                       ),
                     ),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: ((context) => registerdogjib())));
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => profileuser())));
                 },
-                child: Text('หน้าต่อไป')
+                child: Text('บันทึก')
               ),
             ],
           ),
@@ -292,6 +283,6 @@ class _registeruserjibState extends State<registeruserjib> {
 
 void main() {
   runApp(MaterialApp(
-    home: registeruserjib(),
+    home: editprofileuser(),
   ));
 }
