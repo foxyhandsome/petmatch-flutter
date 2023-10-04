@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 /// Flutter code sample for [ToggleButtons].
@@ -6,7 +7,6 @@ const List<Widget> fruits = <Widget>[
   Text('เพศผู้'),
   Text('เพศเมีย'),
 ];
-
 
 class Filter extends StatelessWidget {
   const Filter({super.key});
@@ -32,13 +32,15 @@ class ToggleButtonsSample extends StatefulWidget {
 class _ToggleButtonsSampleState extends State<ToggleButtonsSample> {
   final List<bool> _selectedFruits = <bool>[true, false];
 
+  var selectedRange = RangeValues(1, 10);
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
 
     return Scaffold(
-       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255,239,83,80),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 239, 83, 80),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
@@ -51,12 +53,18 @@ class _ToggleButtonsSampleState extends State<ToggleButtonsSample> {
         ),
       ),
       body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20.0),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('เพศ', style: theme.textTheme.titleSmall),
-              const SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: Text(
+                  "เพศ",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
               ToggleButtons(
                 onPressed: (int index) {
                   setState(() {
@@ -78,11 +86,36 @@ class _ToggleButtonsSampleState extends State<ToggleButtonsSample> {
                 children: fruits,
               ),
               const SizedBox(height: 20),
-
+              
+               Padding(
+                padding: const EdgeInsets.fromLTRB(100, 0, 0, 0),
+                child: Text(
+                "อายุสัตว์เลี้ยง",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SliderTheme(
+                data: SliderThemeData(
+                  activeTrackColor: Colors.red[400], // เปลี่ยนสีให้เป็นสีดำที่นี่
+                ),
+                child: RangeSlider(
+                  values: selectedRange,
+                  onChanged: (RangeValues age) {
+                    setState(() => selectedRange = age);
+                  },
+                  min: 0,
+                  max: 10,
+                  divisions: 10,
+                  labels: RangeLabels(
+                    '${selectedRange.start}',
+                    '${selectedRange.end}',
+                  ),
+                ),
+              )
             ],
-          ),       
+          ),
+        ),
       ),
     );
   }
 }
-
