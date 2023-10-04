@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petmatch/JIB_USER/Filter.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:petmatch/JIB_USER/registerdog2jib.dart';
 import 'package:petmatch/JIB_USER/registerdogjib.dart';
@@ -25,10 +26,10 @@ class MyApp extends StatelessWidget {
       title: 'Petmatch',
 
       theme: ThemeData.dark()
-          .copyWith(scaffoldBackgroundColor: Color.fromARGB(255, 175, 122, 197)
+          .copyWith(scaffoldBackgroundColor: Color.fromARGB(255, 240, 92, 161)
           ),
 
-      home: profileuser(),
+      home: Filter(),
     );
   }
 }
