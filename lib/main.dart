@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:petmatch/JIB_USER/Filter.dart';
+import 'package:petmatch/JIB_USER/editprofileuser.dart';
+import 'package:petmatch/JIB_USER/home.dart';
+import 'package:petmatch/JIB_USER/profiledog.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:petmatch/JIB_USER/registerdog2jib.dart';
 import 'package:petmatch/JIB_USER/registerdogjib.dart';
@@ -25,11 +27,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Petmatch',
 
-      theme: ThemeData.dark()
-          .copyWith(scaffoldBackgroundColor: Color.fromARGB(255, 240, 92, 161)
-          ),
 
-      home: Filter(),
+      home: profileuser(),
     );
   }
 }
@@ -46,6 +45,11 @@ class MyApp extends StatelessWidget {
 //               begin: Alignment.topRight,
 //               end: Alignment.bottomLeft,
 //               colors: [Color.fromARGB(255, 238, 128, 95), Color.fromARGB(255, 240, 68, 125)])),
+
+
+//      theme: ThemeData.dark()
+//          .copyWith(scaffoldBackgroundColor: Color.fromARGB(255, 175, 122, 197)
+//          ),
 //     );
 //   }
 // }

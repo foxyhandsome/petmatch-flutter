@@ -65,19 +65,28 @@ class _loginjibState extends State<loginjib> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      body: Padding(
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    body: Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: [Color.fromARGB(255, 234, 64, 128), Color.fromARGB(255, 238, 128, 95)], // เลือกสีที่คุณต้องการ
+        ),
+      ),
+      child: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-              Image.asset(
-                "asset/images/logoji.png",
-                width: 500,
-              ),
+            Image.asset(
+              "asset/images/logoji.png",
+              width: 500,
+            ),
 
                TextField(
                 controller: usernameController,
@@ -108,7 +117,7 @@ class _loginjibState extends State<loginjib> {
                   prefixIcon: Icon(Icons.person),
                 ),
               ),
-
+              SizedBox(height: 20.0), 
               TextField(
                 controller: passwordController,
                 obscureText: true,
@@ -170,6 +179,7 @@ class _loginjibState extends State<loginjib> {
             ],
           ),
         ),
-      );
+      ),
+    );
   }
 }

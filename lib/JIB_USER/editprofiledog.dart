@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:petmatch/JIB_USER/editprofiledog2.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
+import 'package:petmatch/JIB_USER/profiledog.dart';
+import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:petmatch/JIB_USER/registerdog2jib.dart';
 import 'dart:io';
 import 'package:petmatch/authenticationsScreen/editdog.dart';
@@ -10,12 +13,12 @@ List<String> list = <String>['เพศผู้', 'เพศเมีย'];
 List<String> list2 = <String>['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 List<String> list3 = <String>['พันธุ์', 'พันธุ์2', 'พันธุ์3', 'พันธุ์4', 'พันธุ์5', 'พันธุ์6'];
 
-class registerdogjib extends StatefulWidget {
+class editprofiledog extends StatefulWidget {
   @override
-  _registerdogjibState createState() => _registerdogjibState();
+  _editprofiledogState createState() => _editprofiledogState();
 }
 
-class _registerdogjibState extends State<registerdogjib> {
+class _editprofiledogState extends State<editprofiledog> {
   final dio = Dio();
   login(){
     if(usernameController.text.isNotEmpty && passwordController.text.isNotEmpty){
@@ -57,7 +60,7 @@ class _registerdogjibState extends State<registerdogjib> {
           },
         ),
         title: Text(
-          "สมัครสมาชิกสัตว์เลี้ยง",
+          "แก้ไขข้อมูลสัตว์เลี้ยง",
           style: TextStyle(color: Colors.black),
         ),
       ),
@@ -97,7 +100,7 @@ class _registerdogjibState extends State<registerdogjib> {
                 TextField(
                 controller: usernameController,
                 decoration: InputDecoration(
-                  labelText: 'ชื่อสัตว์เลี้ยง',
+                  labelText: 'แก้ไขชื่อสัตว์เลี้ยง',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
@@ -126,7 +129,7 @@ class _registerdogjibState extends State<registerdogjib> {
 
                 SizedBox(height: 20.0),
                     Text (
-                    "เพศ",
+                    "แก้ไขเพศ",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold
@@ -148,7 +151,7 @@ class _registerdogjibState extends State<registerdogjib> {
  
                 SizedBox(height: 20.0),
                     Text (
-                    "อายุ(ปี)",
+                    "แก้ไขอายุ(ปี)",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold
@@ -171,7 +174,7 @@ class _registerdogjibState extends State<registerdogjib> {
 
                     SizedBox(height: 20.0),
                     Text (
-                    "สายพันธุ์",
+                    "แก้ไขสายพันธุ์",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold
@@ -196,7 +199,7 @@ class _registerdogjibState extends State<registerdogjib> {
                 TextField(
                 controller: usernameController,
                 decoration: InputDecoration(
-                  labelText: 'สีขน',
+                  labelText: 'แก้ไขสีขน',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
@@ -223,18 +226,6 @@ class _registerdogjibState extends State<registerdogjib> {
                 ),
               ),
 
-              TextButton(
-                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: ((context) => loginjib()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
-                },
-                child: Text(
-                  'หากมีบัญชีผู้ใช้แล้ว กดเพื่อเข้าสู่ระบบ',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white ,
-                  ),
-                ),
-              ),
-              
               SizedBox(height: 5.0), 
                ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -245,7 +236,7 @@ class _registerdogjibState extends State<registerdogjib> {
                       ),
                     ),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: ((context) => registerdog2jib())));
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => editprofiledog2())));
                 },
                 child: Text('หน้าต่อไป')
               ),

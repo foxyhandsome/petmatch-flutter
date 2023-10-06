@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:petmatch/JIB_USER/editprofileuser.dart';
+import 'package:petmatch/JIB_USER/editprofiledog.dart';
 import 'package:petmatch/JIB_USER/profiledog.dart';
+import 'package:petmatch/JIB_USER/profiledog2.dart';
+import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:petmatch/authenticationsScreen/edituser.dart';
 import 'package:petmatch/authenticationsScreen/navigationbar/navigationbar.dart';
 
 
-class profileuser extends StatefulWidget {
+class profiledog2 extends StatefulWidget {
   @override
-  _profileuserState createState() => _profileuserState();
+  _profiledog2State createState() => _profiledog2State();
 }
 
-class _profileuserState extends State<profileuser> {
+class _profiledog2State extends State<profiledog2> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
@@ -25,11 +27,11 @@ class _profileuserState extends State<profileuser> {
             Navigator.of(context).pop();
           },
         ),
-        title: Text(
-          "โปรไฟล์",
-          style: TextStyle(color: Colors.black),
-        ),
+      title: Text(
+        "โปรไฟล์สัตว์เลี้ยง",
+        style: TextStyle(color: Colors.black),
       ),
+    ),
 
 
     body: SingleChildScrollView(
@@ -54,7 +56,7 @@ class _profileuserState extends State<profileuser> {
                   SizedBox(width: 100.0),
                   FloatingActionButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: ((context) => editprofileuser())));
+                      Navigator.push(context, MaterialPageRoute(builder: ((context) => editprofiledog())));
                     },
                     backgroundColor: Color.fromARGB(255, 255, 255, 255),
                     child: Icon(Icons.edit),
@@ -70,104 +72,64 @@ class _profileuserState extends State<profileuser> {
                 ],
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.white,
-                  width: 5.0,
-                ),
-                shape: BoxShape.circle,
-              ),
-            
-              child:CircleAvatar(
-              radius: 120,
-              backgroundImage: NetworkImage('https://images.lifestyleasia.com/wp-content/uploads/sites/7/2023/05/05185049/Kim-Seon-ho-TV-Shows-2.jpg'),
-            ),
-            ),
-      
+
+                    Text (
+                    "กรุ๊ปเลือด",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+
+                    SizedBox(height: 10.0),
+                    Container(
+                    padding: EdgeInsets.all(10.0), // กำหนด Padding ให้กับ Container
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 2.0), // กำหนดสีและความหนาของเส้นขอบ
+                      borderRadius: BorderRadius.circular(10.0), // กำหนดขนาดของมุมขอบ
+                    ),
+                     child:Text (
+                    "A",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                    ),
+                  ),
+                    ),
 
                     SizedBox(height: 15.0),
                     Text (
-                    "ชื่อผู้ใช้งาน",
+                    "ใบตรวจสุขภาพสัตว์เลี้ยง",
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold
                     ),
                   ),
 
-                    SizedBox(height: 10.0),
-                    Container(
-                    padding: EdgeInsets.all(10.0), // กำหนด Padding ให้กับ Container
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 2.0), // กำหนดสีและความหนาของเส้นขอบ
-                      borderRadius: BorderRadius.circular(10.0), // กำหนดขนาดของมุมขอบ
+                    SizedBox(height: 5.0),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0), // กำหนดขอบเขตของรูปภาพ
+                      child: Container(
+                        width: 400, // กำหนดความกว้างของ Container
+                        height: 600, // กำหนดความสูงของ Container
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 5.0,
+                          ),
+                        ),
+                        child: Image.network(
+                          'https://www.thaiticketmajor.com/imgUpload/images/pic-coupon-RTB.jpg',
+                          fit: BoxFit.cover, // ให้รูปภาพปรับขนาดให้พอดีกับ Container
+                        ),
+                      ),
                     ),
-                     child:Text (
-                    "jib.cnc_101",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    ),
-                  ),
-                 ),
 
-                    SizedBox(height: 10.0),
-                    Text (
-                    "เบอร์โทรศัพท์",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-
-                    SizedBox(height: 10.0),
-                    Container(
-                    padding: EdgeInsets.all(10.0), // กำหนด Padding ให้กับ Container
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 2.0), // กำหนดสีและความหนาของเส้นขอบ
-                      borderRadius: BorderRadius.circular(10.0), // กำหนดขนาดของมุมขอบ
-                    ),
-                     child:Text (
-                    "0970466989",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    ),
-                  ),
-                 ),
-          
-                    SizedBox(height: 10.0),
-                    Text (
-                    "ช่องทางติดต่อออนไลน์",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-
-                    SizedBox(height: 10.0),
-                    Container(
-                    padding: EdgeInsets.all(10.0), // กำหนด Padding ให้กับ Container
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 2.0), // กำหนดสีและความหนาของเส้นขอบ
-                      borderRadius: BorderRadius.circular(10.0), // กำหนดขนาดของมุมขอบ
-                    ),
-                     child:Text (
-                    "FB-Jib Chanokchon,Line-jib.cnc",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 5.0),
                   ElevatedButton(
                     onPressed: () {
-                       Navigator.push(context, MaterialPageRoute(builder: ((context) => profiledog()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+                       Navigator.push(context, MaterialPageRoute(builder: ((context) => profileuser()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Color.fromARGB(255, 26, 188, 156), // เปลี่ยนสีพื้นหลังของปุ่ม
@@ -181,7 +143,7 @@ class _profileuserState extends State<profileuser> {
                           color: Colors.white, // เปลี่ยนสีไอคอน
                         ),
                         Text(
-                          'ไปยังโปรไฟล์สัตว์เลี้ยง',
+                          'ไปยังโปรไฟล์ตนเอง',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.white, // เปลี่ยนสีของข้อความ

@@ -2,18 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
+import 'package:petmatch/JIB_USER/profiledog.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'dart:io';
 import 'package:petmatch/authenticationsScreen/editdog.dart';
 
 List<String> list4 = <String>['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
-class registerdog2jib extends StatefulWidget {
+class editprofiledog2 extends StatefulWidget {
   @override
-  _registerdog2jibState createState() => _registerdog2jibState();
+  _editprofiledog2State createState() => _editprofiledog2State();
 }
 
-class _registerdog2jibState extends State<registerdog2jib> {
+class _editprofiledog2State extends State<editprofiledog2> {
   final dio = Dio();
   login(){
     if(usernameController.text.isNotEmpty && passwordController.text.isNotEmpty){
@@ -77,7 +78,7 @@ class _registerdog2jibState extends State<registerdog2jib> {
 
                 SizedBox(height: 20.0),
                     Text (
-                    "กรุ๊ปเลือด",
+                    "แก้ไขกรุ๊ปเลือด",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold
@@ -99,7 +100,7 @@ class _registerdog2jibState extends State<registerdog2jib> {
                 
                 SizedBox(height: 20.0),
                      Text (
-                    "อัปโหลดใบตรวจสุขภาพสัตว์เลี้ยง",
+                    "แก้ไขใบตรวจสุขภาพสัตว์เลี้ยง",
                     style: TextStyle(
                       fontSize: 18,
                     ),
@@ -141,9 +142,9 @@ class _registerdog2jibState extends State<registerdog2jib> {
                       ),
                     ),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: ((context) => profileuser())));
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => profiledog())));
                 },
-                child: Text('หน้าต่อไป')
+                child: Text('บันทึก')
               ),
           ],
         ),
