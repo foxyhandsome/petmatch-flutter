@@ -149,11 +149,11 @@ class _selectedGenderState extends State<selectedGender> {
                   ),
                 ),
               ),
-              // Text(
-              //   'เลือกพันธุ์สุนัข:',
-              //   style: TextStyle(fontSize: 18),
-              // ),
-              // SizedBox(height: 20),
+              Text(
+                'เลือกพันธุ์สุนัข:',
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 20),
               // Column(
               //   children: [
               //     DropdownButton<String>(
