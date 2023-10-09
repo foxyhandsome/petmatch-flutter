@@ -1,5 +1,28 @@
 import 'package:flutter/material.dart';
 
+List<String> list7 = <String>[
+  'ปอมเมอเรเนียน (Pomeranian)',
+  'ไซบีเรียน ฮัสกี (Siberian Husky)',
+  'ปั๊ก (Pug)',
+  'ชิวาวา (Chihuahua)',
+  'ไทยบางแก้ว (Thai Bangkaew)',
+  'เฟรนช์ บูลด็อก (French Bulldog)',
+  'โกลเด้น รีทรีฟเวอร์ (Golden Retriever)',
+  'ไทยหลังอาน (Thai Ridgeback)',
+  'อเมริกัน บูลลี่ (American Bully)',
+  'พิทบูล (Pitbull)',
+  'ชิสุ (Shih Tzu)',
+  'บีเกิล (Beagle)',
+  'หมาไทย',
+  'ลาบราดอร์รีทรีฟเวอร์ (Labrador Retriever)',
+  'คอร์กี้ (Corgi)',
+  'พุดเดิ้ล (Poodle)',
+  'อิงลิช บูลล์ด็อก (English Bulldogs)',
+  'แจ็ครัสเซลล์เทอร์เรีย (Jack Russell Terrier)',
+  'ยอร์คเชียร์เทอร์เรีย (Yorkshire Terrier)',
+  'ซามอยด์ (Samoyed)',
+];
+
 /// Flutter code sample for [ToggleButtons].
 
 const List<Widget> fruits = <Widget>[
@@ -30,31 +53,10 @@ class selectedGender extends StatefulWidget {
 
 class _selectedGenderState extends State<selectedGender> {
   final List<bool> _selectedFruits = <bool>[true, false];
-  // String selectedBreed = '';
+  // String selectedBreed = '20';
 
-  // List<String> breeds = [
-  //   'ปอมเมอเรเนียน (Pomeranian)',
-  //   'ไซบีเรียน ฮัสกี (Siberian Husky)',
-  //   'ปั๊ก (Pug)',
-  //   'ชิวาวา (Chihuahua)',
-  //   'ไทยบางแก้ว (Thai Bangkaew)',
-  //   'เฟรนช์ บูลด็อก (French Bulldog)',
-  //   'โกลเด้น รีทรีฟเวอร์ (Golden Retriever)',
-  //   'ไทยหลังอาน (Thai Ridgeback)',
-  //   'อเมริกัน บูลลี่ (American Bully)',
-  //   'พิทบูล (Pitbull)',
-  //   'ชิสุ (Shih Tzu)',
-  //   'บีเกิล (Beagle)',
-  //   'หมาไทย',
-  //   'ลาบราดอร์รีทรีฟเวอร์ (Labrador Retriever)',
-  //   'คอร์กี้ (Corgi)',
-  //   'พุดเดิ้ล (Poodle)',
-  //   'อิงลิช บูลล์ด็อก (English Bulldogs)',
-  //   'แจ็ครัสเซลล์เทอร์เรีย (Jack Russell Terrier)',
-  //   'ยอร์คเชียร์เทอร์เรีย (Yorkshire Terrier)',
-  //   'ซามอยด์ (Samoyed)',
-  // ];
- 
+ String dropdownValue7 = list7.first; //กรุ๊ปเลือด
+
   bool isSolidColor = false;
   bool isTwoTone = false;
   bool isThreeColor = false;
@@ -65,7 +67,6 @@ class _selectedGenderState extends State<selectedGender> {
   bool isTigerPattern = false;
   bool isSableColor = false;
   bool isBrindleColor = false;
-
 
   var selectedRange = RangeValues(1, 10);
 
@@ -151,32 +152,22 @@ class _selectedGenderState extends State<selectedGender> {
               ),
               Text(
                 'เลือกพันธุ์สุนัข:',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 20),
-              // Column(
-              //   children: [
-              //     DropdownButton<String>(
-              //       value: selectedBreed,
-              //       onChanged: (String? newValue) {
-              //         setState(() {
-              //           selectedBreed = newValue!;
-              //         });
-              //       },
-              //       items: breeds.map((String breed) {
-              //         return DropdownMenuItem<String>(
-              //           value: breed,
-              //           child: Text(breed),
-              //         );
-              //       }).toList(),
-              //     ),
-              //   ],
-              // ),
-              // SizedBox(height: 20),
-              // Text(
-              //   'พันธุ์สุนัขที่คุณเลือก: $selectedBreed',
-              //   style: TextStyle(fontSize: 18),
-              // ),
+              SizedBox(height: 5.0),
+                  DropdownMenu<String>(
+                        initialSelection: list7.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue7 = value!;
+                          });
+                        },
+                        dropdownMenuEntries: list7.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),
 
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
@@ -186,97 +177,96 @@ class _selectedGenderState extends State<selectedGender> {
                 ),
               ),
 
-               CheckboxListTile(
-              title: Text('สุนัขขนสีเดียวล้วน'),
-              value: isSolidColor,
-              onChanged: (newValue) {
-                setState(() {
-                  isSolidColor = newValue!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text('สุนัขขนสองสี'),
-              value: isTwoTone,
-              onChanged: (newValue) {
-                setState(() {
-                  isTwoTone = newValue!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text('สุนัขขนสามสี'),
-              value: isThreeColor,
-              onChanged: (newValue) {
-                setState(() {
-                  isThreeColor = newValue!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text('สุนัขขนสีลายทักซิโด้'),
-              value: isTuxedoPattern,
-              onChanged: (newValue) {
-                setState(() {
-                  isTuxedoPattern = newValue!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text('สุนัขขนสีลายหินอ่อน'),
-              value: isMerlePattern,
-              onChanged: (newValue) {
-                setState(() {
-                  isMerlePattern = newValue!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text('สุนัขขนสีดำด่าง'),
-              value: isBlackAndTan,
-              onChanged: (newValue) {
-                setState(() {
-                  isBlackAndTan = newValue!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text('สุนัขขนสีลายจุด'),
-              value: isSpotsPattern,
-              onChanged: (newValue) {
-                setState(() {
-                  isSpotsPattern = newValue!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text('สุนัขขนสีลายเสือ'),
-              value: isTigerPattern,
-              onChanged: (newValue) {
-                setState(() {
-                  isTigerPattern = newValue!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text('สุนัขขนสีซาเบิล'),
-              value: isSableColor,
-              onChanged: (newValue) {
-                setState(() {
-                  isSableColor = newValue!;
-                });
-              },
-            ),
-            CheckboxListTile(
-              title: Text('สุนัขขนสีอานม้า'),
-              value: isBrindleColor,
-              onChanged: (newValue) {
-                setState(() {
-                  isBrindleColor = newValue!;
-                });
-              },
-            ),
-
+              CheckboxListTile(
+                title: Text('สุนัขขนสีเดียวล้วน'),
+                value: isSolidColor,
+                onChanged: (newValue) {
+                  setState(() {
+                    isSolidColor = newValue!;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('สุนัขขนสองสี'),
+                value: isTwoTone,
+                onChanged: (newValue) {
+                  setState(() {
+                    isTwoTone = newValue!;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('สุนัขขนสามสี'),
+                value: isThreeColor,
+                onChanged: (newValue) {
+                  setState(() {
+                    isThreeColor = newValue!;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('สุนัขขนสีลายทักซิโด้'),
+                value: isTuxedoPattern,
+                onChanged: (newValue) {
+                  setState(() {
+                    isTuxedoPattern = newValue!;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('สุนัขขนสีลายหินอ่อน'),
+                value: isMerlePattern,
+                onChanged: (newValue) {
+                  setState(() {
+                    isMerlePattern = newValue!;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('สุนัขขนสีดำด่าง'),
+                value: isBlackAndTan,
+                onChanged: (newValue) {
+                  setState(() {
+                    isBlackAndTan = newValue!;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('สุนัขขนสีลายจุด'),
+                value: isSpotsPattern,
+                onChanged: (newValue) {
+                  setState(() {
+                    isSpotsPattern = newValue!;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('สุนัขขนสีลายเสือ'),
+                value: isTigerPattern,
+                onChanged: (newValue) {
+                  setState(() {
+                    isTigerPattern = newValue!;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('สุนัขขนสีซาเบิล'),
+                value: isSableColor,
+                onChanged: (newValue) {
+                  setState(() {
+                    isSableColor = newValue!;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('สุนัขขนสีอานม้า'),
+                value: isBrindleColor,
+                onChanged: (newValue) {
+                  setState(() {
+                    isBrindleColor = newValue!;
+                  });
+                },
+              ),
             ],
           ),
         ),
