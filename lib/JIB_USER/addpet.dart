@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'dart:io';
@@ -603,7 +604,7 @@ class _addpetState extends State<addpet> {
                                 ),
                               ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: ((context) => profileuser())));
+                            Navigator.push(context, MaterialPageRoute(builder: ((context) => allpet())));
                           },
                           child: Text('เพิ่มสัตว์เลี้ยง')
                         ),

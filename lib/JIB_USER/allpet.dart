@@ -4,22 +4,21 @@ import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/profileuser2.dart';
 
+class allpet extends StatefulWidget {
+  const allpet({super.key});
 
+  @override
+  State<allpet> createState() => _allpetState();
+}
 
-class allpet extends StatelessWidget {
-
-      @override
+class _allpetState extends State<allpet> {
+    @override
       Widget build(BuildContext context) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255,239,83,80),
             elevation: 0,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+          
             title: Text(
               "โปรไฟล์",
               style: TextStyle(color: Colors.black),

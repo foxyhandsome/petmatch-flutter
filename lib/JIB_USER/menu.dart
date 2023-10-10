@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/history.dart';
 import 'package:petmatch/JIB_USER/home.dart';
-import 'package:petmatch/JIB_USER/profileuser.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key});
@@ -14,7 +14,7 @@ class _MenuState extends State<Menu> {
   int _selectedIndex = 0;
 
   List<Widget> _screens = [
-    profileuser(),
+    allpet(),
     home(),
     history(),
   ];
