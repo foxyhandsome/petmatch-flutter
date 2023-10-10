@@ -4,7 +4,7 @@ import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/JIB_USER/pecert.dart';
 
 
-class profileuser extends StatelessWidget {
+class profileuser2 extends StatelessWidget {
 
 final dio = Dio();
 
@@ -35,7 +35,6 @@ void getHttp() async {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: ((context) => editprofileuser())));
                 },
-                
               ),
             ],
           ),
@@ -56,19 +55,19 @@ void getHttp() async {
               child: CircleAvatar(
                 radius: 120,
                 backgroundImage: NetworkImage(
-                    'https://images.wagwalkingweb.com/media/daily_wag/blog_articles/hero/1685787498.877709/fun-facts-about-siberian-huskies-1.png'),
+                    'https://www.animalsaroundtheglobe.com/wp-content/uploads/2023/02/corgi-ga0a9055f1_1920-1200x800.jpg'),
               ),
             ),
 
             SizedBox(height: 10.0),
             Text(
-              "โบ้, 1(ปี)",
+              "บี้, 3(ปี)",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             
             SizedBox(height: 10.0),
             Text(
-              "เพศผู้, ไซบีเรียน ฮัสกี , สุนัขขนสองสี , DEA 1.1",
+              "เพศเมีย, คอร์กี้ , สุนัขขนสองสี, DEA 4",
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             

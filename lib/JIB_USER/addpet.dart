@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'dart:io';
@@ -245,13 +244,64 @@ List<String> list2 = <String>[
   '	บางบอน',
 ]; //เขต
 
-class registeruserjib extends StatefulWidget {
+List<String> list3 = <String>['1', '2','3','4','5','6','7','8','9','10',]; //อายุ
+
+List<String> list4 = <String>[
+  'ปอมเมอเรเนียน (Pomeranian)',
+  'ไซบีเรียน ฮัสกี (Siberian Husky)',
+  'ปั๊ก (Pug)',
+  'ชิวาวา (Chihuahua)',
+  'ไทยบางแก้ว (Thai Bangkaew)',
+  'เฟรนช์ บูลด็อก (French Bulldog)',
+  'โกลเด้น รีทรีฟเวอร์ (Golden Retriever)',
+  'ไทยหลังอาน (Thai Ridgeback)',
+  'อเมริกัน บูลลี่ (American Bully)',
+  'พิทบูล (Pitbull)',
+  'ชิสุ (Shih Tzu)',
+  'บีเกิล (Beagle)',
+  'หมาไทย',
+  'ลาบราดอร์รีทรีฟเวอร์ (Labrador Retriever)',
+  'คอร์กี้ (Corgi)',
+  'พุดเดิ้ล (Poodle)',
+  'อิงลิช บูลล์ด็อก (English Bulldogs)',
+  'แจ็ครัสเซลล์เทอร์เรีย (Jack Russell Terrier)',
+  'ยอร์คเชียร์เทอร์เรีย (Yorkshire Terrier)',
+  'ซามอยด์ (Samoyed)',
+]; //พันธุ์
+
+List<String> list5 = <String>[
+  'สุนัขขนสีเดียวล้วน', 
+  'สุนัขขนสองสี' , 
+  'สุนัขขนสามสี', 
+  'สุนัขขนสีลายทักซิโด้', 
+  'สุนัขขนสีลายหินอ่อน', 
+  'สุนัขขนสีดำด่าง', 
+  'สุนัขขนสีลายจุด', 
+  'สุนัขขนสีลายเสือ', 
+  'สุนัขขนสีซาเบิล', 
+  'สุนัขขนสีอานม้า', 
+  
+]; //สีขน
+List<String> list6 = <String>[
+  'DEA 1.1',
+  'DEA 1.2',
+  'DEA 3',
+  'DEA 4',
+  'DEA 5',
+  'DEA 6',
+  'DEA 7',
+  'DEA 8',
+]; //กรุ๊ปเลือด
+
+
+
+class addpet extends StatefulWidget {
   @override
-  _registeruserjibState createState() => _registeruserjibState();
+  _addpetState createState() => _addpetState();
 }
 
 
-class _registeruserjibState extends State<registeruserjib> {
+class _addpetState extends State<addpet> {
   final dio = Dio();
   login(){
     if(usernameController.text.isNotEmpty && passwordController.text.isNotEmpty){
@@ -263,7 +313,10 @@ class _registeruserjibState extends State<registeruserjib> {
   TextEditingController passwordController = TextEditingController();
   String dropdownValue1 = list1.first; //แขวง
   String dropdownValue2 = list2.first; //เขต
-
+  String dropdownValue3 = list3.first; //อายุ
+  String dropdownValue4 = list4.first; //พันธุ์
+  String dropdownValue5 = list5.first; //สีขน
+  String dropdownValue6 = list6.first; //กรุ๊ปเลือด
 
   List<bool> isSelected = [false, false]; // 0 = เพศผู้, 1 = เพศเมีย
   
@@ -307,7 +360,7 @@ class _registeruserjibState extends State<registeruserjib> {
           },
         ),
         title: Text(
-          "สมัครสมาชิก",
+          "เพิ่มสัตว์เลี้ยง",
           style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
         ),
       ),
@@ -326,193 +379,221 @@ class _registeruserjibState extends State<registeruserjib> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
+///////////////////////////สัตว์เลี้ยง//////////////////////////////////////////////////////////////////////////////////////
+                    
                     Text (
-                    "ข้อมูลเจ้าของสัตว์เลี้ยง",
+                    "ข้อมูลสัตว์เลี้ยง",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold
                     ),
                   ),
 
-
-                SizedBox(height: 10.0),
-                TextField(
-                decoration: InputDecoration(
-                  labelText: 'ชื่อผู้ใช้งาน',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.white, // สีเส้นขอบ
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.black, // สีเส้นขอบเมื่อไม่ได้รับการกด
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Color.fromARGB(255,239,83,80), // สีเส้นขอบเมื่อได้รับการกด
-                    ),
-                  ),
-                  // Gradient ขอบของ TextField
-                  contentPadding: EdgeInsets.all(10.0),
-                  hintStyle: TextStyle(color: Colors.white),
-                  hintText: 'ใส่ชื่อผู้ใช้งาน',
-                  prefixIcon: Icon(Icons.person),
-                ),
-              ),
-
-              SizedBox(height: 20.0), 
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'รหัสผ่าน',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.white, // สีเส้นขอบ
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.black, // สีเส้นขอบเมื่อไม่ได้รับการกด
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Color.fromARGB(255,239,83,80), // สีเส้นขอบเมื่อได้รับการกด
-                    ),
-                  ),
-                  // Gradient ขอบของ TextField
-                  contentPadding: EdgeInsets.all(10.0),
-                  hintStyle: TextStyle(color: Colors.white),
-                  hintText: 'ใส่รหัสผ่าน',
-                  prefixIcon: Icon(Icons.lock),
-                ),
-              ),
-
-                SizedBox(height: 20.0),
-                TextField(
-                controller: usernameController,
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  labelText: 'เบอร์โทรศัพท์',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.white, // สีเส้นขอบ
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.black, // สีเส้นขอบเมื่อไม่ได้รับการกด
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Color.fromARGB(255,239,83,80), // สีเส้นขอบเมื่อได้รับการกด
-                    ),
-                  ),
-                  // Gradient ขอบของ TextField
-                  contentPadding: EdgeInsets.all(10.0),
-                  hintStyle: TextStyle(color: Colors.white),
-                  hintText: 'ใส่เบอร์โทรศัพท์',
-                  prefixIcon: Icon(Icons.phone),
-                ),
-              ),
-
-                SizedBox(height: 20.0),
-                TextField(
-                decoration: InputDecoration(
-                  labelText: 'แนะนำเพิ่มเติม',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.white, // สีเส้นขอบ
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.black, // สีเส้นขอบเมื่อไม่ได้รับการกด
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Color.fromARGB(255,239,83,80), // สีเส้นขอบเมื่อได้รับการกด
-                    ),
-                  ),
-                  // Gradient ขอบของ TextField
-                  contentPadding: EdgeInsets.all(10.0),
-                  hintStyle: TextStyle(color: Colors.white),
-                  hintText: '',
-                  prefixIcon: Icon(Icons.chat),
-                ),
-              ),
-
                     SizedBox(height: 10.0),
-                    Text (
-                    "แขวง",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  SizedBox(height: 5.0),
-                  DropdownMenu<String>(
-                        initialSelection: list1.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue1 = value!;
-                          });
-                        },
-                        dropdownMenuEntries: list1.map<DropdownMenuEntry<String>>((String value) {
-                          return DropdownMenuEntry<String>(value: value, label: value);
-                        }).toList(),
-                      ),
-
-                    SizedBox(height: 10.0),
-                    Text (
-                    "เขต",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  SizedBox(height: 5.0),
-                  DropdownMenu<String>(
-                        initialSelection: list2.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue2 = value!;
-                          });
-                        },
-                        dropdownMenuEntries: list2.map<DropdownMenuEntry<String>>((String value) {
-                          return DropdownMenuEntry<String>(value: value, label: value);
-                        }).toList(),
-                      ),
-
-                        TextButton(
-                          onPressed: () {Navigator.push(context, MaterialPageRoute(builder: ((context) => loginjib()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
-                          },
-                          child: Text(
-                            'หากมีบัญชีผู้ใช้แล้ว กดเพื่อเข้าสู่ระบบ',
-                            style: TextStyle(
-                              fontSize: 12,
-                                color: Color.fromARGB(255,239,83,80), // สีเส้นขอบเมื่อได้รับการกด
+                    GestureDetector(
+                    onTap: getImageDog,
+                    child: ClipOval(
+                      child: _image == null
+                          ? CircleAvatar(
+                              radius: 150,
+                              child: Icon(Icons.pets, size: 100),
+                            )
+                          : CircleAvatar(
+                              radius: 150,
+                              backgroundImage: FileImage(_image!),
                             ),
-                          ),
+                    ),
+                  ),
+
+
+                    SizedBox(height: 20.0),
+                    ToggleButtons(
+                      children: <Widget>[
+                        Column(
+                          children: [
+                            Icon(Icons.male,size: 35.0,),
+                            Text('เพศผู้'),
+                          ],
                         ),
-                        
+                        Column(
+                          children: [
+                            Icon(Icons.female,size: 35.0,),
+                            Text('เพศเมีย'),
+                          ],
+                        ),
+                      ],
+                      isSelected: isSelected,
+                      onPressed: (int index) {
+                        setState(() {
+                          for (int i = 0; i < isSelected.length; i++) {
+                            isSelected[i] = i == index;
+                          }
+                        });
+                      },
+                        constraints: BoxConstraints.tightFor(
+                        width: 60.0, // ปรับความกว้างตามต้องการ
+                        height: 60.0,
+                    ),
+                  ),
+
+                SizedBox(height: 20.0),
+                TextField(
+                decoration: InputDecoration(
+                  labelText: 'ชื่อสัตว์เลี้ยง',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(
+                      color: Colors.white, // สีเส้นขอบ
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(
+                      color: Colors.black, // สีเส้นขอบเมื่อไม่ได้รับการกด
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255,239,83,80), // สีเส้นขอบเมื่อได้รับการกด
+                    ),
+                  ),
+                  // Gradient ขอบของ TextField
+                  contentPadding: EdgeInsets.all(10.0),
+                  hintStyle: TextStyle(color: Colors.white),
+                  hintText: 'ใส่ชื่อสัตว์เลี้ยง',
+                  prefixIcon: Icon(Icons.pets),
+                ),
+              ),
+
+                    SizedBox(height: 10.0),
+                    Text (
+                    "อายุ(ปี)",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  DropdownMenu<String>(
+                        initialSelection: list3.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue3 = value!;
+                          });
+                        },
+                        dropdownMenuEntries: list3.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),
+
+                    SizedBox(height: 10.0),
+                    Text (
+                    "สายพันธุ์",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  DropdownMenu<String>(
+                        initialSelection: list4.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue4 = value!;
+                          });
+                        },
+                        dropdownMenuEntries: list4.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),
+
+                    SizedBox(height: 10.0),
+                    Text (
+                    "สีขน",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  DropdownMenu<String>(
+                        initialSelection: list5.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue5 = value!;
+                          });
+                        },
+                        dropdownMenuEntries: list5.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),
+
+                    SizedBox(height: 10.0),
+                    Text (
+                    "กรุ๊ปเลือด",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  DropdownMenu<String>(
+                        initialSelection: list6.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue6 = value!;
+                          });
+                        },
+                        dropdownMenuEntries: list6.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),
+
+                SizedBox(height: 20.0),
+                     Text (
+                    "อัปโหลดใบตรวจสุขภาพสัตว์เลี้ยง",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+
+                    SizedBox(height: 10.0),
+                    GestureDetector(
+                      onTap: getImagePetCert,
+                      child: Container(
+                        width: 400,  // Set the desired width
+                        height: 600, // Set the desired height
+                        decoration: BoxDecoration(
+                        border: Border.all(
+                        color: Colors.black, // สีขอบ
+                        width: 2.0, // ความหนาขอบ
+                        ),
+                          color: Color.fromARGB(255, 255, 255, 255), // Change to the desired background color
+                          borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
+                        ),
+                        child: ClipRect(
+                          child: _image == null
+                              ? Icon(
+                                  Icons.local_hospital,
+                                  size: 100,
+                                  color: Color.fromARGB(255, 236, 112, 99), // Change to desired color
+                                )
+                              : Image.file(
+                                  _image!,
+                                  fit: BoxFit.cover,
+                                  width: 200, // Set width to match the container width
+                                  height: 400, // Set height to match the container height
+                                ),
+                        ),
+                      ),
+                    ),
+
+                      SizedBox(height: 10.0),
                         ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Color.fromARGB(255,239,83,80),
@@ -522,9 +603,9 @@ class _registeruserjibState extends State<registeruserjib> {
                                 ),
                               ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: ((context) => allpet())));
+                            Navigator.push(context, MaterialPageRoute(builder: ((context) => profileuser())));
                           },
-                          child: Text('สมัครสมาชิก')
+                          child: Text('เพิ่มสัตว์เลี้ยง')
                         ),
                       ],
                     ),
@@ -536,6 +617,6 @@ class _registeruserjibState extends State<registeruserjib> {
 
 void main() {
   runApp(MaterialApp(
-    home: registeruserjib(),
+    home: addpet(),
   ));
 }

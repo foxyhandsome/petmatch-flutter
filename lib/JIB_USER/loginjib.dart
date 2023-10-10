@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/registeruserjib.dart';
 import '../constant/domain.dart';
 
@@ -68,29 +69,26 @@ class _loginjibState extends State<loginjib> {
 @override
 Widget build(BuildContext context) {
   return Scaffold(
-    body: Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-            colors: [Color.fromARGB(255, 234, 64, 128), Color.fromARGB(255, 238, 128, 95)], // เลือกสีที่คุณต้องการ
-        ),
-      ),
-      child: Padding(
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 255, 255, 255), // Set your desired color here
+          ),
+      child: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset(
-              "asset/images/logoji.png",
-              width: 500,
+              'asset/images/petmatchlogo.png',
+              height: 400,
+              width: 500, // ปรับขนาดของโลโก้ตามต้องการ
             ),
-
-               TextField(
-                controller: usernameController,
-                decoration: InputDecoration(
+            
+            TextField(
+              controller: usernameController,
+              decoration: InputDecoration(
                   labelText: 'ชื่อผู้ใช้งาน',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -101,13 +99,13 @@ Widget build(BuildContext context) {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
-                      color: Colors.white, // สีเส้นขอบเมื่อไม่ได้รับการกด
+                      color: Color.fromARGB(255, 0, 0, 0), // สีเส้นขอบเมื่อไม่ได้รับการกด
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
-                      color: Color.fromARGB(255, 72, 201, 176), // สีเส้นขอบเมื่อได้รับการกด
+                      color: Color.fromARGB(255,239,83,80), // สีเส้นขอบเมื่อได้รับการกด
                     ),
                   ),
                   // Gradient ขอบของ TextField
@@ -132,13 +130,13 @@ Widget build(BuildContext context) {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
-                      color: Colors.white, // สีเส้นขอบเมื่อไม่ได้รับการกด
+                      color: Color.fromARGB(255, 0, 0, 0), // สีเส้นขอบเมื่อไม่ได้รับการกด
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
-                      color: Color.fromARGB(255, 72, 201, 176), // สีเส้นขอบเมื่อได้รับการกด
+                      color: Color.fromARGB(255,239,83,80), // สีเส้นขอบเมื่อได้รับการกด
                     ),
                   ),
                   // Gradient ขอบของ TextField
@@ -157,7 +155,7 @@ Widget build(BuildContext context) {
                   'เพิ่งเคยเข้ามาใน Pet Match ใช่หรือไม่? กดเพื่อสมัครสมาชิก',
                   style: TextStyle(
                     fontSize: 12,
-                    color: Colors.white ,
+                    color:Color.fromARGB(255,239,83,80),
                   ),
                 ),
               ),
@@ -165,7 +163,7 @@ Widget build(BuildContext context) {
               SizedBox(height: 5.0), 
                ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 72, 201, 176),
+                      backgroundColor: Color.fromARGB(255,239,83,80),
                       minimumSize: const Size.fromHeight(50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -179,7 +177,7 @@ Widget build(BuildContext context) {
             ],
           ),
         ),
-      ),
-    );
+    ),
+  );
   }
 }

@@ -65,7 +65,10 @@ flutter:
   assets:
     - asset/images/logoji.png
     - asset/images/profile.png
-   
+    - asset/images/petmatch1.png
+    - asset/images/petmatch2.png
+    - asset/images/petmatchlogo.png
+    - asset/images/pet1.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

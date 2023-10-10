@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/JIB_USER/home.dart';
-import 'package:petmatch/JIB_USER/profiledog.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
-import 'package:petmatch/JIB_USER/registerdog2jib.dart';
-import 'package:petmatch/JIB_USER/registerdogjib.dart';
+import 'package:petmatch/JIB_USER/registeruserjib.dart';
 import 'package:petmatch/authenticationsScreen/edituser.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
+import 'package:petmatch/JIB_USER/pecert.dart';
 import 'package:petmatch/authenticationsScreen/petbreed.dart';
 import 'package:petmatch/authenticationsScreen/regisuser_kaou.dart';
 import 'package:petmatch/authenticationsScreen/regpet.dart';
 import 'package:petmatch/authenticationsScreen/test.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'Petmatch',
 
 
-      home: profileuser(),
+      home: loginjib(),
     );
   }
 }
