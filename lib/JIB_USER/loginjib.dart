@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/allpet.dart';
+import 'package:petmatch/JIB_USER/menu.dart';
 import 'package:petmatch/JIB_USER/registeruserjib.dart';
 import '../constant/domain.dart';
 
@@ -56,7 +57,7 @@ class _loginjibState extends State<loginjib> {
     Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return registeruserjib();
+          return Menu();
         },
       ),
       (_) => false,
