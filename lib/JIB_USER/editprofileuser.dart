@@ -110,7 +110,9 @@ class _editprofileuserState extends State<editprofileuser> {
 
 
                 SizedBox(height: 10.0),
-                TextField(
+              Container(
+                width: 300, // ปรับความกว้างตามที่ต้องการ
+                child: TextField(
                 decoration: InputDecoration(
                   labelText: 'แก้ไขชื่อผู้ใช้งาน',
                   border: OutlineInputBorder(
@@ -138,9 +140,12 @@ class _editprofileuserState extends State<editprofileuser> {
                   prefixIcon: Icon(Icons.person),
                 ),
               ),
+              ),
 
               SizedBox(height: 20.0), 
-              TextField(
+              Container(
+                width: 300, // ปรับความกว้างตามที่ต้องการ
+                child: TextField(
                 decoration: InputDecoration(
                   labelText: 'แก้ไขรหัสผ่าน',
                   border: OutlineInputBorder(
@@ -168,9 +173,12 @@ class _editprofileuserState extends State<editprofileuser> {
                   prefixIcon: Icon(Icons.lock),
                 ),
               ),
+              ),
 
                 SizedBox(height: 20.0),
-                TextField(
+              Container(
+                width: 300, // ปรับความกว้างตามที่ต้องการ
+                child: TextField(
                 controller: usernameController,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
@@ -200,11 +208,14 @@ class _editprofileuserState extends State<editprofileuser> {
                   prefixIcon: Icon(Icons.phone),
                 ),
               ),
+              ),
 
                 SizedBox(height: 20.0),
-                TextField(
+              Container(
+                width: 300, // ปรับความกว้างตามที่ต้องการ
+                child: TextField(
                 decoration: InputDecoration(
-                  labelText: 'แก้ไขช่องทางการติดต่ออื่นๆ',
+                  labelText: 'แก้ไขแนะนำเพิ่มเติม',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: BorderSide(
@@ -230,6 +241,7 @@ class _editprofileuserState extends State<editprofileuser> {
                   prefixIcon: Icon(Icons.chat),
                 ),
               ),
+              ),
 
                     SizedBox(height: 10.0),
                     Text (
@@ -251,6 +263,7 @@ class _editprofileuserState extends State<editprofileuser> {
                         dropdownMenuEntries: list1.map<DropdownMenuEntry<String>>((String value) {
                           return DropdownMenuEntry<String>(value: value, label: value);
                         }).toList(),
+                        width: 300,
                       ),
 
                     SizedBox(height: 10.0),
@@ -273,6 +286,7 @@ class _editprofileuserState extends State<editprofileuser> {
                         dropdownMenuEntries: list2.map<DropdownMenuEntry<String>>((String value) {
                           return DropdownMenuEntry<String>(value: value, label: value);
                         }).toList(),
+                        width: 300,
                       ),
 
 
@@ -337,7 +351,9 @@ class _editprofileuserState extends State<editprofileuser> {
                   ),
 
                 SizedBox(height: 20.0),
-                TextField(
+              Container(
+                width: 250, // ปรับความกว้างตามที่ต้องการ
+                child: TextField(
                 decoration: InputDecoration(
                   labelText: 'แก้ไขชื่อสัตว์เลี้ยง',
                   border: OutlineInputBorder(
@@ -364,6 +380,7 @@ class _editprofileuserState extends State<editprofileuser> {
                   hintText: 'ใส่ชื่อสัตว์เลี้ยง',
                   prefixIcon: Icon(Icons.pets),
                 ),
+              ),
               ),
 
                     SizedBox(height: 10.0),

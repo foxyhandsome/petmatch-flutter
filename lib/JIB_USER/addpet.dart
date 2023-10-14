@@ -7,9 +7,7 @@ import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'dart:io';
 import 'package:petmatch/authenticationsScreen/editdog.dart';
 
-
-List<String> list1 = 
-<String>[
+List<String> list1 = <String>[
   '	พระบรมมหาราชวัง ',
   '	วังบูรพาภิรมย์',
   ' วัดราชบพิธ',
@@ -190,7 +188,7 @@ List<String> list1 =
   '	บางบอนใต้',
   ' คลองบางพราน',
   ' คลองบางบอน',
-  ]; //แขวง
+]; //แขวง
 
 List<String> list2 = <String>[
   '	พระนคร',
@@ -245,7 +243,18 @@ List<String> list2 = <String>[
   '	บางบอน',
 ]; //เขต
 
-List<String> list3 = <String>['1', '2','3','4','5','6','7','8','9','10',]; //อายุ
+List<String> list3 = <String>[
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+]; //อายุ
 
 List<String> list4 = <String>[
   'ปอมเมอเรเนียน (Pomeranian)',
@@ -271,17 +280,16 @@ List<String> list4 = <String>[
 ]; //พันธุ์
 
 List<String> list5 = <String>[
-  'สุนัขขนสีเดียวล้วน', 
-  'สุนัขขนสองสี' , 
-  'สุนัขขนสามสี', 
-  'สุนัขขนสีลายทักซิโด้', 
-  'สุนัขขนสีลายหินอ่อน', 
-  'สุนัขขนสีดำด่าง', 
-  'สุนัขขนสีลายจุด', 
-  'สุนัขขนสีลายเสือ', 
-  'สุนัขขนสีซาเบิล', 
-  'สุนัขขนสีอานม้า', 
-  
+  'สุนัขขนสีเดียวล้วน',
+  'สุนัขขนสองสี',
+  'สุนัขขนสามสี',
+  'สุนัขขนสีลายทักซิโด้',
+  'สุนัขขนสีลายหินอ่อน',
+  'สุนัขขนสีดำด่าง',
+  'สุนัขขนสีลายจุด',
+  'สุนัขขนสีลายเสือ',
+  'สุนัขขนสีซาเบิล',
+  'สุนัขขนสีอานม้า',
 ]; //สีขน
 List<String> list6 = <String>[
   'DEA 1.1',
@@ -294,21 +302,18 @@ List<String> list6 = <String>[
   'DEA 8',
 ]; //กรุ๊ปเลือด
 
-
-
 class addpet extends StatefulWidget {
   @override
   _addpetState createState() => _addpetState();
 }
 
-
 class _addpetState extends State<addpet> {
   final dio = Dio();
-  login(){
-    if(usernameController.text.isNotEmpty && passwordController.text.isNotEmpty){
-      
-    }
+  login() {
+    if (usernameController.text.isNotEmpty &&
+        passwordController.text.isNotEmpty) {}
   }
+
   File? _image;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -320,9 +325,8 @@ class _addpetState extends State<addpet> {
   String dropdownValue6 = list6.first; //กรุ๊ปเลือด
 
   List<bool> isSelected = [false, false]; // 0 = เพศผู้, 1 = เพศเมีย
-  
 
-    Future getImageDog() async {
+  Future getImageDog() async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
@@ -334,7 +338,7 @@ class _addpetState extends State<addpet> {
     });
   }
 
-    Future getImagePetCert() async {
+  Future getImagePetCert() async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
@@ -345,17 +349,15 @@ class _addpetState extends State<addpet> {
       }
     });
   }
-
-
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        backgroundColor: Color.fromARGB(255,239,83,80),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 239, 83, 80),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
+          icon:
+              Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -367,254 +369,260 @@ class _addpetState extends State<addpet> {
       ),
       // backgroundColor: Color.fromARGB(255, 255, 255, 255),
 
-
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 255, 255, 255), // Set your desired color here
-          ),
-      child: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color:
+              Color.fromARGB(255, 255, 255, 255), // Set your desired color here
+        ),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
 ///////////////////////////สัตว์เลี้ยง//////////////////////////////////////////////////////////////////////////////////////
-                    
-                    Text (
-                    "ข้อมูลสัตว์เลี้ยง",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
 
-                    SizedBox(height: 10.0),
-                    GestureDetector(
-                    onTap: getImageDog,
-                    child: ClipOval(
-                      child: _image == null
-                          ? CircleAvatar(
-                              radius: 150,
-                              child: Icon(Icons.pets, size: 100),
-                            )
-                          : CircleAvatar(
-                              radius: 150,
-                              backgroundImage: FileImage(_image!),
-                            ),
-                    ),
-                  ),
+              Text(
+                "ข้อมูลสัตว์เลี้ยง",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
 
-
-                    SizedBox(height: 20.0),
-                    ToggleButtons(
-                      children: <Widget>[
-                        Column(
-                          children: [
-                            Icon(Icons.male,size: 35.0,),
-                            Text('เพศผู้'),
-                          ],
+              SizedBox(height: 10.0),
+              GestureDetector(
+                onTap: getImageDog,
+                child: ClipOval(
+                  child: _image == null
+                      ? CircleAvatar(
+                          radius: 150,
+                          child: Icon(Icons.pets, size: 100),
+                        )
+                      : CircleAvatar(
+                          radius: 150,
+                          backgroundImage: FileImage(_image!),
                         ),
-                        Column(
-                          children: [
-                            Icon(Icons.female,size: 35.0,),
-                            Text('เพศเมีย'),
-                          ],
-                        ),
-                      ],
-                      isSelected: isSelected,
-                      onPressed: (int index) {
-                        setState(() {
-                          for (int i = 0; i < isSelected.length; i++) {
-                            isSelected[i] = i == index;
-                          }
-                        });
-                      },
-                        constraints: BoxConstraints.tightFor(
-                        width: 60.0, // ปรับความกว้างตามต้องการ
-                        height: 60.0,
-                    ),
-                  ),
-
-                SizedBox(height: 20.0),
-                TextField(
-                decoration: InputDecoration(
-                  labelText: 'ชื่อสัตว์เลี้ยง',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.white, // สีเส้นขอบ
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Colors.black, // สีเส้นขอบเมื่อไม่ได้รับการกด
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(
-                      color: Color.fromARGB(255,239,83,80), // สีเส้นขอบเมื่อได้รับการกด
-                    ),
-                  ),
-                  // Gradient ขอบของ TextField
-                  contentPadding: EdgeInsets.all(10.0),
-                  hintStyle: TextStyle(color: Colors.white),
-                  hintText: 'ใส่ชื่อสัตว์เลี้ยง',
-                  prefixIcon: Icon(Icons.pets),
                 ),
               ),
 
-                    SizedBox(height: 10.0),
-                    Text (
-                    "อายุ(ปี)",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  SizedBox(height: 5.0),
-                  DropdownMenu<String>(
-                        initialSelection: list3.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue3 = value!;
-                          });
-                        },
-                        dropdownMenuEntries: list3.map<DropdownMenuEntry<String>>((String value) {
-                          return DropdownMenuEntry<String>(value: value, label: value);
-                        }).toList(),
+              SizedBox(height: 20.0),
+              ToggleButtons(
+                children: <Widget>[
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.male,
+                        size: 35.0,
                       ),
-
-                    SizedBox(height: 10.0),
-                    Text (
-                    "สายพันธุ์",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                    ),
+                      Text('เพศผู้'),
+                    ],
                   ),
-                  SizedBox(height: 5.0),
-                  DropdownMenu<String>(
-                        initialSelection: list4.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue4 = value!;
-                          });
-                        },
-                        dropdownMenuEntries: list4.map<DropdownMenuEntry<String>>((String value) {
-                          return DropdownMenuEntry<String>(value: value, label: value);
-                        }).toList(),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.female,
+                        size: 35.0,
                       ),
-
-                    SizedBox(height: 10.0),
-                    Text (
-                    "สีขน",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                    ),
+                      Text('เพศเมีย'),
+                    ],
                   ),
-                  SizedBox(height: 5.0),
-                  DropdownMenu<String>(
-                        initialSelection: list5.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue5 = value!;
-                          });
-                        },
-                        dropdownMenuEntries: list5.map<DropdownMenuEntry<String>>((String value) {
-                          return DropdownMenuEntry<String>(value: value, label: value);
-                        }).toList(),
-                      ),
+                ],
+                isSelected: isSelected,
+                onPressed: (int index) {
+                  setState(() {
+                    for (int i = 0; i < isSelected.length; i++) {
+                      isSelected[i] = i == index;
+                    }
+                  });
+                },
+                constraints: BoxConstraints.tightFor(
+                  width: 60.0, // ปรับความกว้างตามต้องการ
+                  height: 60.0,
+                ),
+              ),
 
-                    SizedBox(height: 10.0),
-                    Text (
-                    "กรุ๊ปเลือด",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  SizedBox(height: 5.0),
-                  DropdownMenu<String>(
-                        initialSelection: list6.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue6 = value!;
-                          });
-                        },
-                        dropdownMenuEntries: list6.map<DropdownMenuEntry<String>>((String value) {
-                          return DropdownMenuEntry<String>(value: value, label: value);
-                        }).toList(),
-                      ),
-
-                SizedBox(height: 20.0),
-                     Text (
-                    "อัปโหลดใบตรวจสุขภาพสัตว์เลี้ยง",
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-
-                    SizedBox(height: 10.0),
-                    GestureDetector(
-                      onTap: getImagePetCert,
-                      child: Container(
-                        width: 400,  // Set the desired width
-                        height: 600, // Set the desired height
-                        decoration: BoxDecoration(
-                        border: Border.all(
-                        color: Colors.black, // สีขอบ
-                        width: 2.0, // ความหนาขอบ
-                        ),
-                          color: Color.fromARGB(255, 255, 255, 255), // Change to the desired background color
-                          borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
-                        ),
-                        child: ClipRect(
-                          child: _image == null
-                              ? Icon(
-                                  Icons.local_hospital,
-                                  size: 100,
-                                  color: Color.fromARGB(255, 236, 112, 99), // Change to desired color
-                                )
-                              : Image.file(
-                                  _image!,
-                                  fit: BoxFit.cover,
-                                  width: 200, // Set width to match the container width
-                                  height: 400, // Set height to match the container height
-                                ),
-                        ),
+              SizedBox(height: 20.0),
+              Container(
+                width: 250, // ปรับความกว้างตามที่ต้องการ
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'ชื่อสัตว์เลี้ยง',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.white, // สีเส้นขอบ
                       ),
                     ),
-
-                      SizedBox(height: 10.0),
-                        ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromARGB(255,239,83,80),
-                                minimumSize: const Size.fromHeight(50),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: ((context) => allpet())));
-                          },
-                          child: Text('เพิ่มสัตว์เลี้ยง')
-                        ),
-                      ],
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.black, // สีเส้นขอบเมื่อไม่ได้รับการกด
+                      ),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(
+                            255, 239, 83, 80), // สีเส้นขอบเมื่อได้รับการกด
+                      ),
+                    ),
+                    // Gradient ขอบของ TextField
+                    contentPadding: EdgeInsets.all(10.0),
+                    hintStyle: TextStyle(color: Colors.white),
+                    hintText: 'ใส่ชื่อสัตว์เลี้ยง',
+                    prefixIcon: Icon(Icons.pets),
                   ),
                 ),
-              );
-            }
-          }
+              ),
+
+              SizedBox(height: 10.0),
+              Text(
+                "อายุ(ปี)",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.0),
+              DropdownMenu<String>(
+                initialSelection: list3.first,
+                onSelected: (String? value) {
+                  // This is called when the user selects an item.
+                  setState(() {
+                    dropdownValue3 = value!;
+                  });
+                },
+                dropdownMenuEntries:
+                    list3.map<DropdownMenuEntry<String>>((String value) {
+                  return DropdownMenuEntry<String>(value: value, label: value);
+                }).toList(),
+                width: 250,
+              ),
+
+              SizedBox(height: 10.0),
+              Text(
+                "สายพันธุ์",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.0),
+              DropdownMenu<String>(
+                initialSelection: list4.first,
+                onSelected: (String? value) {
+                  // This is called when the user selects an item.
+                  setState(() {
+                    dropdownValue4 = value!;
+                  });
+                },
+                dropdownMenuEntries:
+                    list4.map<DropdownMenuEntry<String>>((String value) {
+                  return DropdownMenuEntry<String>(value: value, label: value);
+                }).toList(),
+                width: 250,
+              ),
+
+              SizedBox(height: 10.0),
+              Text(
+                "สีขน",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.0),
+              DropdownMenu<String>(
+                initialSelection: list5.first,
+                onSelected: (String? value) {
+                  // This is called when the user selects an item.
+                  setState(() {
+                    dropdownValue5 = value!;
+                  });
+                },
+                dropdownMenuEntries:
+                    list5.map<DropdownMenuEntry<String>>((String value) {
+                  return DropdownMenuEntry<String>(value: value, label: value);
+                }).toList(),
+                width: 250,
+              ),
+
+              SizedBox(height: 10.0),
+              Text(
+                "กรุ๊ปเลือด",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.0),
+              DropdownMenu<String>(
+                initialSelection: list6.first,
+                onSelected: (String? value) {
+                  // This is called when the user selects an item.
+                  setState(() {
+                    dropdownValue6 = value!;
+                  });
+                },
+                dropdownMenuEntries:
+                    list6.map<DropdownMenuEntry<String>>((String value) {
+                  return DropdownMenuEntry<String>(value: value, label: value);
+                }).toList(),
+                width: 250,
+              ),
+
+              SizedBox(height: 20.0),
+              Text(
+                "อัปโหลดใบตรวจสุขภาพสัตว์เลี้ยง",
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+
+              SizedBox(height: 10.0),
+              GestureDetector(
+                onTap: getImagePetCert,
+                child: Container(
+                  width: 400, // Set the desired width
+                  height: 600, // Set the desired height
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black, // สีขอบ
+                      width: 2.0, // ความหนาขอบ
+                    ),
+                    color: Color.fromARGB(255, 255, 255,
+                        255), // Change to the desired background color
+                    borderRadius: BorderRadius.circular(
+                        10.0), // Adjust the border radius as needed
+                  ),
+                  child: ClipRect(
+                    child: _image == null
+                        ? Icon(
+                            Icons.local_hospital,
+                            size: 100,
+                            color: Color.fromARGB(
+                                255, 236, 112, 99), // Change to desired color
+                          )
+                        : Image.file(
+                            _image!,
+                            fit: BoxFit.cover,
+                            width:
+                                200, // Set width to match the container width
+                            height:
+                                400, // Set height to match the container height
+                          ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 10.0),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => allpet())));
+                  },
+                  child: Text('เพิ่มสัตว์เลี้ยง')),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 void main() {
   runApp(MaterialApp(
