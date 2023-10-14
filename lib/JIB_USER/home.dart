@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:petmatch/JIB_USER/Filter.dart';
 
 class home extends StatefulWidget {
   const home({super.key});
@@ -10,45 +11,40 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  get assets => null;
+  
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 239, 83, 80),
+        title: Text(
+          "             PET MATCH",
+          style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
+        ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.search_rounded, color: Color.fromARGB(255, 245, 243, 243)),
           onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: ((context) => Filter())));
           },
         ),
-      title: Text(
-        "โปรไฟล์สัตว์เลี้ยง",
-        style: TextStyle(color: Colors.black),
       ),
-    ),
+      body: SingleChildScrollView(
+        child: Container(     
+          child : Image.asset(
+              'asset/images/dukdik.jpg',
+              height: 600,
+              width: 1000, // ปรับขนาดของโลโก้ตามต้องการ
+            ),
+      
 
 
-    body: SingleChildScrollView(
-      child: Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-            colors: [Color.fromARGB(255, 234, 64, 128), Color.fromARGB(255, 238, 128, 95)], // เลือกสีที่คุณต้องการ
-        ),
-      ),
-      child: Center(
-        child: Column(
-          children:  [
-            SizedBox(
-            height: 5,
             
-            ),
-          ],
         ),
-            ),
-      ),
       ),
     );
   }
 }
-  
