@@ -19,7 +19,7 @@ class _allpetState extends State<allpet> {
         backgroundColor: Color.fromARGB(255, 239, 83, 80),
         elevation: 0,
         title: Text(
-          "โปรไฟล์",
+          "โปรไฟล์ทั้งหมด",
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -36,105 +36,121 @@ class _allpetState extends State<allpet> {
           ),
         ],
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          color:
-              Color.fromARGB(255, 255, 255, 255), // Set your desired color here
-        ),
-        child: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Color.fromARGB(
-                        255, 239, 83, 80), // Set the border color
-                    width: 5.0, // Set the border width
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 15,
+            ),
+            Center(
+              child: Container(
+                width: 350, // ปรับความกว้างตามที่ต้องการ
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(
+                      10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
+                  tileColor: Colors.white, // สีพื้นหลังของ ListTile
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        color: Colors.red,
+                        width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
+                    borderRadius:
+                        BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
                   ),
-                ),
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundImage: NetworkImage(
-                      'https://images.wagwalkingweb.com/media/daily_wag/blog_articles/hero/1685787498.877709/fun-facts-about-siberian-huskies-1.png'),
+                  leading: CircleAvatar(
+                    radius: 30,
+                    backgroundImage: NetworkImage(
+                        'https://images.wagwalkingweb.com/media/daily_wag/blog_articles/hero/1685787498.877709/fun-facts-about-siberian-huskies-1.png'),
+                  ),
+                  title: Text(
+                    "โบ้",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => profileuser())));
+                        },
+                        icon: Icon(
+                          Icons.pets,
+                          color: Colors.white, // สีไอคอน
+                        ),
+                        label: Text(
+                          'เข้าสู่โปรไฟล์',
+                          style: TextStyle(color: Colors.white), // สีของข้อความ
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255,80,239,181), // สีพื้นหลังของปุ่ม
+                          minimumSize:
+                              Size(100, 35), // ปรับขนาดปุ่มตามที่ต้องการ
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 10.0),
-              Text("โบ้",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                  )),
-              SizedBox(height: 0.0),
-              Container(
-                width: 120, // ปรับความยาวตามที่ต้องการ
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
-                    minimumSize: const Size.fromHeight(40),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+            ),
+
+                        SizedBox(
+              height: 15,
+            ),
+            Center(
+              child: Container(
+                width: 350, // ปรับความกว้างตามที่ต้องการ
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(
+                      10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
+                  tileColor: Colors.white, // สีพื้นหลังของ ListTile
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        color: Colors.red,
+                        width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
+                    borderRadius:
+                        BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => profileuser())));
-                  },
-                  child: Text('เข้าสู่โปรไฟล์'),
+                  leading: CircleAvatar(
+                    radius: 30,
+                    backgroundImage: NetworkImage(
+                        'https://www.animalsaroundtheglobe.com/wp-content/uploads/2023/02/corgi-ga0a9055f1_1920-1200x800.jpg'),
+                  ),
+                  title: Text(
+                    "บี้",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => profileuser2())));
+                        },
+                        icon: Icon(
+                          Icons.pets,
+                          color: Colors.white, // สีไอคอน
+                        ),
+                        label: Text(
+                          'เข้าสู่โปรไฟล์',
+                          style: TextStyle(color: Colors.white), // สีของข้อความ
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255,80,239,181), // สีพื้นหลังของปุ่ม
+                          minimumSize:
+                              Size(100, 35), // ปรับขนาดปุ่มตามที่ต้องการ
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: 20.0),
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Color.fromARGB(
-                        255, 239, 83, 80), // Set the border color
-                    width: 5.0, // Set the border width
-                  ),
-                ),
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundImage: NetworkImage(
-                      'https://www.animalsaroundtheglobe.com/wp-content/uploads/2023/02/corgi-ga0a9055f1_1920-1200x800.jpg'),
-                ),
-              ),
-              SizedBox(height: 10.0),
-              Text("บี้",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.underline,
-                  )),
-              SizedBox(height: 0.0),
-              Container(
-                width: 120, // ปรับความยาวตามที่ต้องการ
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
-                    minimumSize: const Size.fromHeight(40),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => profileuser2())));
-                  },
-                  child: Text('เข้าสู่โปรไฟล์'),
-                ),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

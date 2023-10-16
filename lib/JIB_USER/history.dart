@@ -36,38 +36,55 @@ class _historyState extends State<history> {
         ],
       ),
       body: SingleChildScrollView(
-        child: ListTile(
-          leading: CircleAvatar(
-            radius: 30,
-            backgroundImage: NetworkImage(
-                'https://www.animalsaroundtheglobe.com/wp-content/uploads/2023/02/corgi-ga0a9055f1_1920-1200x800.jpg'),
-          ),
-          title: Text("บี้, 3(ปี)"),
-          subtitle: Text("ปทุมวัน"),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ElevatedButton(
-                onPressed: () {
-                  // ไปยังหน้าโปรไฟล์
-                },
-                child: Text('ดูโปรไฟล์'),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Container(
+                width: 350, // ปรับความกว้างตามที่ต้องการ
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(
+                      10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
+                  tileColor: Colors.white, // สีพื้นหลังของ ListTile
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        color: Colors.red,
+                        width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
+                    borderRadius:
+                        BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
+                  ),
+                  leading: CircleAvatar(
+                    radius: 30,
+                    backgroundImage: NetworkImage(
+                        'https://www.animalsaroundtheglobe.com/wp-content/uploads/2023/02/corgi-ga0a9055f1_1920-1200x800.jpg'),
+                  ),
+                  title: Text("บี้, 3(ปี)"),
+                  subtitle: Text("ปทุมวัน"),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.star), // ไอคอนของโปรไฟล์
+                        onPressed: () {
+                          // ไปยังหน้าโปรไฟล์
+                        },
+                      ),
+                      SizedBox(width: 8),
+                      IconButton(
+                        icon: Icon(Icons.info), // ไอคอนของรีวิว
+                        onPressed: () {
+                          // ไปยังหน้ารีวิว
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () {
-                  // ไปยังหน้ารีวิว
-                },
-                child: Text('ดูรีวิว'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-
-        
-
-
-
       ),
     );
   }

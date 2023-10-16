@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/JIB_USER/pecert.dart';
+import 'package:petmatch/JIB_USER/review.dart';
 
 class profileuser2 extends StatelessWidget {
   final dio = Dio();
@@ -28,6 +29,13 @@ class profileuser2 extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
+            IconButton(
+            icon: Icon(Icons.star, color: Colors.yellow),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: ((context) => review())));
+            },
+          ),
           IconButton(
             icon: Icon(Icons.edit, color: Colors.black),
             onPressed: () {
