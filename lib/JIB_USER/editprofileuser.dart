@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
+import 'package:petmatch/JIB_USER/menu.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'dart:io';
 import 'package:petmatch/authenticationsScreen/editdog.dart';
@@ -351,6 +352,118 @@ class _editprofileuserState extends State<editprofileuser> {
                 constraints: BoxConstraints.tightFor(
                   width: 60.0, // ปรับความกว้างตามต้องการ
                   height: 60.0,
+                  SizedBox(height: 5.0),
+                  DropdownMenu<String>(
+                        initialSelection: list4.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue4 = value!;
+                          });
+                        },
+                        dropdownMenuEntries: list4.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),
+
+                    SizedBox(height: 10.0),
+                    Text (
+                    "แก้ไขสีขน",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  SizedBox(height: 5.0),
+                  DropdownMenu<String>(
+                        initialSelection: list5.first,
+                        onSelected: (String? value) {
+                          // This is called when the user selects an item.
+                          setState(() {
+                            dropdownValue5 = value!;
+                          });
+                        },
+                        dropdownMenuEntries: list5.map<DropdownMenuEntry<String>>((String value) {
+                          return DropdownMenuEntry<String>(value: value, label: value);
+                        }).toList(),
+                      ),
+
+                    SizedBox(height: 10.0),
+                    Text (
+                    "แก้ไขกรุ๊ปเลือด",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                    SizedBox(height: 5.0),
+                    DropdownMenu<String>(
+                          initialSelection: list6.first,
+                          onSelected: (String? value) {
+                            // This is called when the user selects an item.
+                            setState(() {
+                              dropdownValue6 = value!;
+                            });
+                          },
+                          dropdownMenuEntries: list6.map<DropdownMenuEntry<String>>((String value) {
+                            return DropdownMenuEntry<String>(value: value, label: value);
+                          }).toList(),
+                        ),
+
+                    SizedBox(height: 20.0),
+                    Text (
+                        "แก้ไขใบตรวจสุขภาพสัตว์เลี้ยง",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+
+                    SizedBox(height: 10.0),
+                    GestureDetector(
+                      onTap: getImagePetCert,
+                      child: Container(
+                        width: 400,  // Set the desired width
+                        height: 600, // Set the desired height
+                        decoration: BoxDecoration(
+                        border: Border.all(
+                        color: Colors.black, // สีขอบ
+                        width: 2.0, // ความหนาขอบ
+                        ),
+                          color: Color.fromARGB(255, 255, 255, 255), // Change to the desired background color
+                          borderRadius: BorderRadius.circular(10.0), // Adjust the border radius as needed
+                        ),
+                        child: ClipRect(
+                          child: _image == null
+                              ? Icon(
+                                  Icons.local_hospital,
+                                  size: 100,
+                                  color: Color.fromARGB(255, 236, 112, 99), // Change to desired color
+                                )
+                              : Image.file(
+                                  _image!,
+                                  fit: BoxFit.cover,
+                                  width: 200, // Set width to match the container width
+                                  height: 400, // Set height to match the container height
+                                ),
+                        ),
+                      ),
+                    ),
+
+
+
+                SizedBox(height: 10.0),
+                ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255,239,83,80),
+                        minimumSize: const Size.fromHeight(50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => Menu())));
+                  },
+                  child: Text('บันทึก')
                 ),
               ),
 

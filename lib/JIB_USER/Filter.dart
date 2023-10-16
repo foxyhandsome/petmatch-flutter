@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:petmatch/JIB_USER/home.dart';
+import 'package:petmatch/JIB_USER/menu.dart';
 
 List<String> list7 = <String>[
   'ปอมเมอเรเนียน (Pomeranian)',
@@ -82,7 +84,7 @@ class _selectedGenderState extends State<selectedGender> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.of(context).pop();
+             Navigator.push(context, MaterialPageRoute(builder: ((context) => Menu())));;
           },
         ),
         title: Text(

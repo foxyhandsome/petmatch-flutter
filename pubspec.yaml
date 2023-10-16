@@ -69,6 +69,12 @@ flutter:
     - asset/images/petmatch2.png
     - asset/images/petmatchlogo.png
     - asset/images/pet1.jpg
+    - asset/images/frenchbulldog.jpg
+    - asset/images/dukdik.jpg
+    - asset/images/poodle.jpg
+  
+    
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
