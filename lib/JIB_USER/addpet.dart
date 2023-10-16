@@ -600,22 +600,6 @@ class _addpetState extends State<addpet> {
                               height:
                                   500, // Set height to match the container height
                             ),
-
-                      SizedBox(height: 10.0),
-                        ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromARGB(255,239,83,80),
-                                minimumSize: const Size.fromHeight(50),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: ((context) => Menu())));
-                          },
-                          child: Text('เพิ่มสัตว์เลี้ยง')
-                        ),
-                      ],
                     ),
                   ),
                 ),
@@ -632,19 +616,13 @@ class _addpetState extends State<addpet> {
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => allpet())));
+                        MaterialPageRoute(builder: ((context) => Menu())));
                   },
-                  child: Text('เพิ่มสัตว์เลี้ยง')),
+                  child: Text('บันทึก')), // <-- Check this comma
             ],
           ),
         ),
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: addpet(),
-  ));
 }
