@@ -560,44 +560,46 @@ class _addpetState extends State<addpet> {
 
               SizedBox(height: 20.0),
               Text(
-                "อัปโหลดใบตรวจสุขภาพสัตว์เลี้ยง",
+                "อัปโหลดใบพันธุ์ประวัติสุนัข",
                 style: TextStyle(
                   fontSize: 18,
                 ),
               ),
 
-              SizedBox(height: 10.0),
-              GestureDetector(
-                onTap: getImagePetCert,
-                child: Container(
-                  width: 400, // Set the desired width
-                  height: 600, // Set the desired height
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black, // สีขอบ
-                      width: 2.0, // ความหนาขอบ
+              SizedBox(height: 15.0),
+              SizedBox(
+                height: 500, // กำหนดความสูงของ Container
+                child: GestureDetector(
+                  onTap: getImagePetCert,
+                  child: Container(
+                    width: 600, // กำหนดความกว้างของ Container
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black, // สีขอบ
+                        width: 2.0, // ความหนาขอบ
+                      ),
+                      color: Color.fromARGB(255, 255, 255,
+                          255), // Change to the desired background color
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Adjust the border radius as needed
                     ),
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Change to the desired background color
-                    borderRadius: BorderRadius.circular(
-                        10.0), // Adjust the border radius as needed
-                  ),
-                  child: ClipRect(
-                    child: _image == null
-                        ? Icon(
-                            Icons.local_hospital,
-                            size: 100,
-                            color: Color.fromARGB(
-                                255, 236, 112, 99), // Change to desired color
-                          )
-                        : Image.file(
-                            _image!,
-                            fit: BoxFit.cover,
-                            width:
-                                200, // Set width to match the container width
-                            height:
-                                400, // Set height to match the container height
-                          ),
+                    child: ClipRect(
+                      child: _image == null
+                          ? Icon(
+                              Icons.local_hospital,
+                              size: 100,
+                              color: Color.fromARGB(
+                                  255, 236, 112, 99), // Change to desired color
+                            )
+                          : Image.file(
+                              _image!,
+                              fit: BoxFit.fill,
+                              width:
+                                  600, // Set width to match the container width
+                              height:
+                                  500, // Set height to match the container height
+                            ),
+                    ),
                   ),
                 ),
               ),

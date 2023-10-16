@@ -1,21 +1,19 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:petmatch/JIB_USER/editprofileuser.dart';
-import 'package:petmatch/JIB_USER/pecert.dart';
 
+import '../../JIB_USER/editprofileuser.dart';
+import '../../JIB_USER/pecert.dart';
 
-class profileuser extends StatelessWidget {
+class _profileother extends StatefulWidget {
+  const _profileother({super.key});
 
-final dio = Dio();
-
-void getHttp() async {
-  final response = await dio.get('https://dart.dev');
-  print(response);
+  @override
+  State<_profileother> createState() => __profileotherState();
 }
 
-      @override
-      Widget build(BuildContext context) {
-        return Scaffold(
+class __profileotherState extends State<_profileother> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255,239,83,80),
             elevation: 0,
@@ -261,3 +259,4 @@ void getHttp() async {
     );
   }
 }
+
