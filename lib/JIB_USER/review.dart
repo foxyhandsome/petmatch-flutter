@@ -21,74 +21,118 @@ class _reviewState extends State<review> {
         ),
         title: Text(
           "รีวิว",
-          style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
+          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
       ),
-body: Align(
-  alignment: Alignment.topCenter,
-  child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[
-      SizedBox(height: 20.0),
-      Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: Color.fromARGB(255, 239, 83, 80),
-            width: 5.0,
-          ),
-        ),
-        child: CircleAvatar(
-          radius: 60,
-          backgroundImage: NetworkImage(
-              'https://images.wagwalkingweb.com/media/daily_wag/blog_articles/hero/1685787498.877709/fun-facts-about-siberian-huskies-1.png'),
-        ),
-      ),
-          SizedBox(height: 16.0),
-          Text( 'ชื่อสัตว์เลี้ยง: โบ้',
-        style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-      ),
-    SizedBox(width: 8.0),
-        Icon(Icons.star, color: Colors.yellow),
-        SizedBox(width: 8.0),
-        Text(
-          '4.5',
-          style: TextStyle(fontSize: 18.0),
-        ),
-          SizedBox(height: 10),
-          Container(
-            padding: EdgeInsets.all(12.0),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black,
-                width: 1.0,
-              ),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'ชื่อผู้ใช้งาน: Kaoukungza',
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 20.0),
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Color.fromARGB(255, 239, 83, 80),
+                    width: 5.0,
+                  ),
                 ),
-                SizedBox(height: 8.0),
-                Text(
-                  'น่ารักมากครับ',
-                  style: TextStyle(fontSize: 16.0),
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: NetworkImage(
+                      'https://images.wagwalkingweb.com/media/daily_wag/blog_articles/hero/1685787498.877709/fun-facts-about-siberian-huskies-1.png'),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "รีวิวของ",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(width: 10.0),
+                  Text(
+                    "โบ้",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Row(
+              children: [
+                SizedBox(width: 20.0), // เพิ่มระยะห่าง
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(
+                        0, 0, 20.0, 0), // เพิ่มค่าขอบด้านขวา
+                    padding: EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Color.fromARGB(255, 239, 83, 80), width: 1.0),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Foxyhandsome:",
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          "น่ารัก ขี้เล่นมากครับ",
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
-    
             ),
-          ),
-    ],
-  ),
-),
+            SizedBox(height: 10.0),
+            Row(
+              children: [
+                SizedBox(width: 20.0), // เพิ่มระยะห่าง
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(
+                        0, 0, 20.0, 0), // เพิ่มค่าขอบด้านขวา
+                    padding: EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Color.fromARGB(255, 239, 83, 80), width: 1.0),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "KaouKungZa:",
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10.0),
+                        Text(
+                          "น่ารักมากเลยครับ",
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
-
-      
-
-
   }
 }

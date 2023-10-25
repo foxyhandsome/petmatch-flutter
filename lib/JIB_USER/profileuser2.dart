@@ -127,7 +127,7 @@ class profileuser2 extends StatelessWidget {
                   padding: EdgeInsets.all(5.0), // กำหนดการเว้นระยะ
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.black, // กำหนดสีขอบ
+                      color: Color.fromARGB(255, 239, 83, 80),// กำหนดสีขอบ
                       width: 1.0, // กำหนดความหนาขอบ
                     ),
                     borderRadius: BorderRadius.circular(8.0), // กำหนดมุมขอบ
@@ -172,7 +172,7 @@ class profileuser2 extends StatelessWidget {
                   padding: EdgeInsets.all(5.0), // กำหนดการเว้นระยะ
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.black, // กำหนดสีขอบ
+                      color: Color.fromARGB(255, 239, 83, 80), // กำหนดสีขอบ
                       width: 1.0, // กำหนดความหนาขอบ
                     ),
                     borderRadius: BorderRadius.circular(8.0), // กำหนดมุมขอบ
@@ -217,7 +217,7 @@ class profileuser2 extends StatelessWidget {
                   padding: EdgeInsets.all(5.0), // กำหนดการเว้นระยะ
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.black, // กำหนดสีขอบ
+                      color: Color.fromARGB(255, 239, 83, 80), // กำหนดสีขอบ
                       width: 1.0, // กำหนดความหนาขอบ
                     ),
                     borderRadius: BorderRadius.circular(8.0), // กำหนดมุมขอบ

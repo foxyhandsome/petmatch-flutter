@@ -19,7 +19,7 @@ class _allpetState extends State<allpet> {
         backgroundColor: Color.fromARGB(255, 239, 83, 80),
         elevation: 0,
         title: Text(
-          "โปรไฟล์ทั้งหมด",
+          "สัตว์เลี้ยงทั้งหมด",
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -51,7 +51,7 @@ class _allpetState extends State<allpet> {
                   tileColor: Colors.white, // สีพื้นหลังของ ListTile
                   shape: RoundedRectangleBorder(
                     side: BorderSide(
-                        color: Colors.red,
+                        color: Color.fromARGB(255, 239, 83, 80),
                         width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
                     borderRadius:
                         BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
@@ -84,7 +84,7 @@ class _allpetState extends State<allpet> {
                           style: TextStyle(color: Colors.white), // สีของข้อความ
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255,80,239,181), // สีพื้นหลังของปุ่ม
+                          primary: Color.fromARGB(255, 239, 83, 80), // สีพื้นหลังของปุ่ม
                           minimumSize:
                               Size(100, 35), // ปรับขนาดปุ่มตามที่ต้องการ
                         ),
@@ -107,7 +107,7 @@ class _allpetState extends State<allpet> {
                   tileColor: Colors.white, // สีพื้นหลังของ ListTile
                   shape: RoundedRectangleBorder(
                     side: BorderSide(
-                        color: Colors.red,
+                        color: Color.fromARGB(255, 239, 83, 80),
                         width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
                     borderRadius:
                         BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
@@ -140,7 +140,7 @@ class _allpetState extends State<allpet> {
                           style: TextStyle(color: Colors.white), // สีของข้อความ
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255,80,239,181), // สีพื้นหลังของปุ่ม
+                          primary: Color.fromARGB(255, 239, 83, 80), // สีพื้นหลังของปุ่ม
                           minimumSize:
                               Size(100, 35), // ปรับขนาดปุ่มตามที่ต้องการ
                         ),

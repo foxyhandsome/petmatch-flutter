@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/editprofileuser.dart';
+import 'package:petmatch/authenticationsScreen/navigationbar/profileother.dart';
+import 'package:petmatch/authenticationsScreen/navigationbar/reviewother.dart';
 
 class history extends StatefulWidget {
   const history({super.key});
@@ -22,18 +24,10 @@ class _historyState extends State<history> {
           },
         ),
         title: Text(
-          "ประวัติ",
+          "ประวัติสัตว์เลี้ยงที่ถูกใจ",
           style: TextStyle(color: Colors.black),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.edit, color: Colors.black),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => editprofileuser())));
-            },
-          ),
-        ],
+        actions: [],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -50,7 +44,7 @@ class _historyState extends State<history> {
                   tileColor: Colors.white, // สีพื้นหลังของ ListTile
                   shape: RoundedRectangleBorder(
                     side: BorderSide(
-                        color: Colors.red,
+                        color: Color.fromARGB(255, 239, 83, 80),
                         width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
                     borderRadius:
                         BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
@@ -58,24 +52,43 @@ class _historyState extends State<history> {
                   leading: CircleAvatar(
                     radius: 30,
                     backgroundImage: NetworkImage(
-                        'https://www.animalsaroundtheglobe.com/wp-content/uploads/2023/02/corgi-ga0a9055f1_1920-1200x800.jpg'),
+                        'https://img.kapook.com/u/2022/Jarosphan/Pet/Dog/159/p01.jpg'),
                   ),
-                  title: Text("บี้, 3(ปี)"),
-                  subtitle: Text("ปทุมวัน"),
+                  title: Text(
+                    "เขี้ยว",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ), 
+                  subtitle: Row(
+                    children: <Widget>[
+                      Icon(Icons.location_on,
+                          color: Colors.grey), // ไอคอนของที่อยู่
+                      SizedBox(width: 4), // ระยะห่างระหว่างไอคอนกับข้อความ
+                      Text("สีลม, บางรัก"),
+                    ],
+                  ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       IconButton(
-                        icon: Icon(Icons.star), // ไอคอนของโปรไฟล์
+                        icon: Icon(Icons.star),
+                        color: Colors.yellow, // ไอคอนของโปรไฟล์
                         onPressed: () {
-                          // ไปยังหน้าโปรไฟล์
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => reviewother())));
                         },
                       ),
                       SizedBox(width: 8),
                       IconButton(
-                        icon: Icon(Icons.info), // ไอคอนของรีวิว
+                        icon: Icon(Icons.pets),
+                        color:
+                            Color.fromARGB(255, 239, 83, 80), // ไอคอนของรีวิว
                         onPressed: () {
-                          // ไปยังหน้ารีวิว
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => profileother())));
                         },
                       ),
                     ],

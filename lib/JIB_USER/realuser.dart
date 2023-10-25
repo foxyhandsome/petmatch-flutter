@@ -12,25 +12,44 @@ class _realuserState extends State<realuser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 700.0),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 239, 83, 80),
-              minimumSize: const Size.fromHeight(40),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => loginjib())));
-            },
-            child: Text('ออกจากระบบ'),
-          ),
-        ),
+      appBar: AppBar(
+        title: Text('โปรไฟล์ของฉัน'),
+        backgroundColor: Color.fromARGB(255, 239, 83, 80), // เพิ่มสีพื้นหลังของ app bar
       ),
+      body: Center(
+        child: ProfileInfo(),
+      ),
+      backgroundColor: Colors.white, // เพิ่มสีพื้นหลังของ body
+    );
+  }
+}
+
+class ProfileInfo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'ชื่อ: ชื่อของคุณ',
+          style: TextStyle(fontSize: 20),
+        ),
+        SizedBox(height: 10),
+        Text(
+          'ที่อยู่: ที่อยู่ของคุณ',
+          style: TextStyle(fontSize: 20),
+        ),
+        SizedBox(height: 10),
+        Text(
+          'เบอร์โทร: เบอร์โทรของคุณ',
+          style: TextStyle(fontSize: 20),
+        ),
+        SizedBox(height: 10),
+        Text(
+          'คำแนะนำเพิ่มเติม: คำแนะนำเพิ่มเติมของคุณ',
+          style: TextStyle(fontSize: 20),
+        ),
+      ],
     );
   }
 }

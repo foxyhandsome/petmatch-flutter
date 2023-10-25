@@ -246,7 +246,7 @@ List<String> list2 = <String>[
 
 class registeruserjib extends StatefulWidget {
   @override
-  _registeruserjibState createState() => _registeruserjibState();
+  State<registeruserjib> createState() => _registeruserjibState();
 }
 
 class _registeruserjibState extends State<registeruserjib> {
@@ -537,10 +537,4 @@ class _registeruserjibState extends State<registeruserjib> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: registeruserjib(),
-  ));
 }
