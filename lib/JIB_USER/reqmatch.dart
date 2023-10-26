@@ -3,6 +3,7 @@ import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/history.dart';
 import 'package:petmatch/JIB_USER/home.dart';
 import 'package:petmatch/JIB_USER/realuser.dart';
+import 'package:petmatch/authenticationsScreen/navigationbar/profileother.dart';
 
 class reqmatch extends StatefulWidget {
   const reqmatch({super.key});
@@ -17,115 +18,106 @@ class _reqmatchState extends State<reqmatch> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 239, 83, 80),
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Text(
           "ข้อเสนอการจับคู่",
-          style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
+          style: TextStyle(color: Colors.black),
         ),
+        actions: [],
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 255, 255),
-        ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Column(
-              children: <Widget>[
-                Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(
-                      
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Color.fromARGB(255, 239, 83, 80),
-                          width: 5.0,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Container(
+                width: 350, // ปรับความกว้างตามที่ต้องการ
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(
+                      10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
+                  tileColor: Colors.white, // สีพื้นหลังของ ListTile
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        color: Color.fromARGB(255, 239, 83, 80),
+                        width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
+                    borderRadius:
+                        BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
+                  ),
+                  leading: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => profileother()),
+                      );
+                    },
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(
+                          'https://img.kapook.com/u/2022/Jarosphan/Pet/Dog/159/p01.jpg'),
+                    ),
+                  ),
+                  title: Row(
+                    children: <Widget>[
+                      Text(
+                        "เขี้ยว",
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  subtitle: Row(
+                    children: <Widget>[
+                      Icon(Icons.location_on,
+                          color: Colors.grey), // ไอคอนของที่อยู่
+                      SizedBox(width: 4), // ระยะห่างระหว่างไอคอนกับข้อความ
+                      Text("สีลม, บางรัก"),
+                    ],
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Color.fromARGB(255, 0, 128, 0),
+                            width: 2.0,
+                          ),
+                        ),
+                        child: IconButton(
+                          icon: Icon(Icons.check), // ไอคอนของยอมรับ
+                          color: Color.fromARGB(255, 0, 128, 0),
+                          onPressed: () {},
                         ),
                       ),
-                      child: CircleAvatar(
-                        radius: 70,
-                        backgroundImage: NetworkImage(
-                            'https://images.wagwalkingweb.com/media/daily_wag/blog_articles/hero/1685787498.877709/fun-facts-about-siberian-huskies-1.png'),
+                      SizedBox(width: 15.0), // ระยะห่างระหว่างกรอบวงกลม
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Color.fromARGB(255, 255, 0, 0),
+                          ),
+                        ),
+                        child: IconButton(
+                          icon: Icon(Icons.close), // ไอคอนของปฏิเสธ
+                          color: Color.fromARGB(255, 255, 0, 0),
+                          onPressed: () {},
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Text(
-                            "ข้อมูลสัตว์เลี้ยง",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                          const Text(
-                            "น้องโกโก้",
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                          const Text(
-                            "เพศผู้, ไซบีเรียน ฮัสกี้ ",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          const Text(
-                            " สุนักขนสองสี , กรุ้ปเลือด DEA 1.1 ",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          const Text(
-                            " ชื่อผู้ใช้งาน   kaou",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                           const Text(
-                            " เบอร์โทร   0950018558",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                           const Text(
-                            " แนะนำเพิ่มเติม   Line: kaouk9",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          ElevatedButton.icon(
-                            onPressed: () {
-                              // ทำอะไรสักอย่างเมื่อคลิกที่ปุ่มดูข้อมูล
-                            },
-                            icon: Icon(Icons.check_outlined, color: Color.fromARGB(255, 255, 255, 255)),
-                            label: Text('ยอมรับ'),
-                            style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 67, 212, 62),
-                            ),
-                          ),
-                          ElevatedButton.icon(
-                            onPressed: () {
-                              // ทำอะไรสักอย่างเมื่อคลิกที่ปุ่มดูรีวิว
-                            },
-                            icon: Icon(Icons.cancel_outlined , color: Color.fromARGB(255, 255, 255, 255)),
-                            label: Text('ปฐิเสธ'),
-                            style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 255, 0, 0),
-                            ),
-                          ),
-                          
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
