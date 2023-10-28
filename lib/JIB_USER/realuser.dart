@@ -14,7 +14,8 @@ class _realuserState extends State<realuser> {
     return Scaffold(
       appBar: AppBar(
         title: Text('โปรไฟล์ของฉัน'),
-        backgroundColor: Color.fromARGB(255, 239, 83, 80), // เพิ่มสีพื้นหลังของ app bar
+        backgroundColor:
+            Color.fromARGB(255, 239, 83, 80), // เพิ่มสีพื้นหลังของ app bar
       ),
       body: Center(
         child: ProfileInfo(),
@@ -48,6 +49,24 @@ class ProfileInfo extends StatelessWidget {
         Text(
           'คำแนะนำเพิ่มเติม: คำแนะนำเพิ่มเติมของคุณ',
           style: TextStyle(fontSize: 20),
+        ),
+        ElevatedButton.icon(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: ((context) => loginjib())));
+          },
+          icon: Icon(
+            Icons.pets,
+            color: Colors.white, // สีไอคอน
+          ),
+          label: Text(
+            'เข้าสู่โปรไฟล์',
+            style: TextStyle(color: Colors.white), // สีของข้อความ
+          ),
+          style: ElevatedButton.styleFrom(
+            primary: Color.fromARGB(255, 239, 83, 80), // สีพื้นหลังของปุ่ม
+            minimumSize: Size(100, 35), // ปรับขนาดปุ่มตามที่ต้องการ
+          ),
         ),
       ],
     );

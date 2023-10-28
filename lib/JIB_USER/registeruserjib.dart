@@ -7,6 +7,9 @@ import 'package:petmatch/JIB_USER/menu.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'dart:io';
 import 'package:petmatch/authenticationsScreen/editdog.dart';
+import 'package:petmatch/model/district.model.dart';
+
+import '../constant/domain.dart';
 
 List<String> list1 = <String>[
   '	พระบรมมหาราชวัง ',
@@ -256,8 +259,42 @@ class _registeruserjibState extends State<registeruserjib> {
         passwordController.text.isNotEmpty) {}
   }
 
+  final List<DropdownMenuEntry<Districtmodel>> dataList=
+        <DropdownMenuEntry<Districtmodel>>[];
+  Future<void> getData() async {
+  try {
+    final response = await dio.get(url_api + '/district/get-district');
+    if (response.statusCode == 200) {
+      final responseData = response.data;
+      for (var element in responseData) {
+        // dataList.add(Districtmodel.fromJson(element));
+        dataList.add(DropdownMenuEntry<Districtmodel>(
+          value: element["id_district"],
+          label: element["name_district"],
+        ));
+      }
+      setState(() {
+        
+      });
+      // Call setState or update your UI here if needed
+    } else {
+      // Handle error if the response status code is not 200
+      print('Request failed with status: ${response.statusCode}');
+    }
+  } catch (e) {
+    // Handle any exceptions that may occur during the request
+    print('Error: $e');
+  }
+}
+@override
+  void initState() {
+  getData();
+    super.initState();
+  }
+
   File? _image;
   TextEditingController usernameController = TextEditingController();
+  // TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String dropdownValue1 = list1.first; //แขวง
   String dropdownValue2 = list2.first; //เขต
@@ -459,27 +496,21 @@ class _registeruserjibState extends State<registeruserjib> {
               ),
               SizedBox(height: 10.0),
               Text(
-                "แขวง",
+                "เขต",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 5.0),
-              DropdownMenu<String>(
-                initialSelection: list1.first,
-                onSelected: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue1 = value!;
-                  });
-                },
-                dropdownMenuEntries:
-                    list1.map<DropdownMenuEntry<String>>((String value) {
-                  return DropdownMenuEntry<String>(value: value, label: value);
-                }).toList(),
-                width: 300,
-              ),
+              DropdownMenu<Districtmodel>(
+                      // controller: colorController,
+                      label: const Text('Color'),
+                      dropdownMenuEntries: dataList,
+                      onSelected: (Districtmodel? data) {
+                        print(data);
+                      },
+                    ),
               SizedBox(height: 10.0),
               Text(
-                "เขต",
+                "แขวง",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 5.0),

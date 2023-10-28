@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/menu.dart';
 import 'package:petmatch/JIB_USER/registeruserjib.dart';
@@ -14,6 +15,7 @@ class loginjib extends StatefulWidget {
 }
 
 class _loginjibState extends State<loginjib> {
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   final dio = Dio();
   Login() async {
     print("123");
@@ -29,6 +31,10 @@ class _loginjibState extends State<loginjib> {
           },
         );
         print(response);
+        await storageToken.write(
+          key: 'username',
+          value: response.data["id_user"],
+        );
         GotoHome();
         // Handle the response here as needed
       } else {
