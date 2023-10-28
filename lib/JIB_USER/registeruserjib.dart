@@ -8,244 +8,9 @@ import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'dart:io';
 import 'package:petmatch/authenticationsScreen/editdog.dart';
 import 'package:petmatch/model/district.model.dart';
+import 'package:petmatch/model/district_sub.model.dart';
 
 import '../constant/domain.dart';
-
-List<String> list1 = <String>[
-  '	พระบรมมหาราชวัง ',
-  '	วังบูรพาภิรมย์',
-  ' วัดราชบพิธ',
-  '	สำราญราษฎร์',
-  '	ศาลเจ้าพ่อเสือ',
-  ' เสาชิงช้า',
-  '	บวรนิเวศ',
-  '	ตลาดยอด',
-  '	ชนะสงคราม',
-  '	บ้านพานถม',
-  '	บ้านพานถม',
-  '	วัดสามพระยา',
-  '	ดุสิต',
-  '	วชิรพยาบาล',
-  ' สวนจิตรลดา',
-  ' สี่แยกมหานาค',
-  '	ถนนนครไชยศรี',
-  ' กระทุ่มราย',
-  ' หนองจอก',
-  ' คลองสิบ',
-  '	คลองสิบสอง',
-  ' โคกแฝด',
-  ' คู้ฝั่งเหนือ',
-  '	ลำผักชี',
-  '	ลำต้อยติ่ง',
-  '	มหาพฤฒาราม',
-  ' สีลม',
-  '	สุริยวงศ์',
-  '	บางรัก',
-  '	สี่พระยา',
-  '	อนุสาวรีย์',
-  '	ท่าแร้ง',
-  '	คลองจั่น',
-  '	หัวหมาก',
-  '	รองเมือง',
-  '	วังใหม่',
-  '	ปทุมวัน',
-  '	ลุมพินี',
-  '	ป้อมปราบ',
-  '	วัดเทพศิรินทร์',
-  '	คลองมหานาค',
-  '	บ้านบาตร',
-  '	วัดโสมนัส',
-  ' บางจาก',
-  '	พระโขนงใต้',
-  '	มีนบุรี',
-  '	แสนแสบ',
-  '	ลาดกระบัง',
-  '	คลองสองต้นนุ่น',
-  '	คลองสามประเวศ',
-  ' ลำปลาทิว',
-  '	ทับยาว',
-  '	ขุมทอง',
-  '	ช่องนนทรี',
-  '	บางโพงพาง',
-  '	จักรวรรดิ',
-  '	สัมพันธวงศ์',
-  '	ตลาดน้อย',
-  '	สามเสนใน',
-  '	พญาไท',
-  '	วัดกัลยาณ์',
-  '	หิรัญรูจี',
-  '	บางยี่เรือ',
-  '	บุคคโล',
-  '	ตลาดพลู',
-  '	ดาวคะนอง',
-  '	สำเหร่',
-  '	วัดอรุณ',
-  '	วัดท่าพระ',
-  '	ห้วยขวาง',
-  '	บางกะปิ',
-  '	สามเสนนอก',
-  '	สมเด็จเจ้าพระยา',
-  ' คลองสาน',
-  '	บางลำภูล่าง',
-  '	คลองต้นไทร',
-  '	คลองชักพระ',
-  ' ตลิ่งชัน',
-  '	ฉิมพลี',
-  ' บางพรม',
-  '	บางระมาด',
-  ' บางเชือกหนัง',
-  '	ศิริราช',
-  '	บ้านช่างหล่อ',
-  '	บางขุนนนท์',
-  ' บางขุนศรี',
-  ' อรุณอมรินทร์',
-  '	ท่าข้าม',
-  ' แสมดำ',
-  ' บางหว้า',
-  '	บางด้วน',
-  '	บางจาก',
-  '	บางแวก',
-  '	คลองขวาง',
-  '	ปากคลองภาษีเจริญ',
-  '	คูหาสวรรค์',
-  '	หนองแขม',
-  '	หนองค้างพลู',
-  ' ราษฎร์บูรณะ',
-  '	บางปะกอก',
-  '	บางพลัด',
-  ' บางอ้อ',
-  '	บางบำหรุ',
-  '	บางยี่ขัน',
-  '	ดินแดง',
-  '	รัชดาภิเษก',
-  ' คลองกุ่ม',
-  '	นวมินทร์',
-  '	นวลจันทร์',
-  '	ทุ่งวัดดอน',
-  '	ยานนาวา',
-  '	ทุ่งมหาเมฆ',
-  '	บางซื่อ',
-  '	วงศ์สว่าง',
-  '	ลาดยาว',
-  '	เสนานิคม',
-  '	จันทรเกษม',
-  '	จอมพล',
-  '	จตุจักร',
-  '	บางคอแหลม',
-  '	วัดพระยาไกร',
-  ' บางโคล่',
-  ' ประเวศ',
-  ' หนองบอน',
-  ' ดอกไม้',
-  ' คลองเตย',
-  ' คลองตัน',
-  ' พระโขนง',
-  ' สวนหลวง',
-  '	อ่อนนุช',
-  '	พัฒนาการ',
-  ' บางขุนเทียน',
-  '	บางค้อ',
-  ' บางมด',
-  '	จอมทอง',
-  '	สีกัน',
-  '	ดอนเมือง',
-  ' สนามบิน',
-  ' ทุ่งพญาไท',
-  '	ถนนพญาไท',
-  '	ถนนเพชรบุรี',
-  '	มักกะสัน',
-  '	ลาดพร้าว',
-  ' จรเข้บัว',
-  '	คลองเตยเหนือ',
-  '	คลองตันเหนือ',
-  '	พระโขนงเหนือ',
-  '	บางแค',
-  '	บางแคเหนือ',
-  ' บางไผ่',
-  '	หลักสอง',
-  '	ทุ่งสองห้อง',
-  '	ตลาดบางเขน',
-  ' สายไหม',
-  '	ออเงิน',
-  '	คลองถนน',
-  '	คันนายาว',
-  '	รามอินทรา',
-  ' สะพานสูง',
-  ' ราษฎร์พัฒนา',
-  '	ทับช้าง',
-  '	วังทองหลาง',
-  ' สะพานสอง',
-  '	คลองเจ้าคุณสิงห์',
-  '	พลับพลา',
-  '	สามวาตะวันตก',
-  ' สามวาตะวันออก',
-  ' บางชัน',
-  ' ทรายกองดิน',
-  '	ทรายกองดินใต้',
-  '	บางนาเหนือ',
-  ' บางนาใต้',
-  ' ทวีวัฒนา',
-  '	ศาลาธรรมสพน์',
-  '	บางมด',
-  '	ทุ่งครุ',
-  ' บางบอนเหนือ',
-  '	บางบอนใต้',
-  ' คลองบางพราน',
-  ' คลองบางบอน',
-]; //แขวง
-
-List<String> list2 = <String>[
-  '	พระนคร',
-  '	ดุสิต',
-  ' หนองจอก',
-  ' บางรัก',
-  '	บางเขน',
-  '	บางกะปิ',
-  '	ปทุมวัน',
-  '	ป้อมปราบศัตรูพ่าย',
-  ' พระโขนง',
-  ' มีนบุรี',
-  '	ลาดกระบัง',
-  '	ยานนาวา',
-  '	สัมพันธวงศ์',
-  ' พญาไท',
-  ' ธนบุรี',
-  ' บางกอกใหญ่',
-  ' ห้วยขวาง',
-  ' คลองสาน',
-  '	ตลิ่งชัน',
-  '	บางกอกน้อย',
-  '	บางขุนเทียน',
-  '	ภาษีเจริญ',
-  ' หนองแขม',
-  '	ราษฎร์บูรณะ',
-  '	บางพลัด',
-  '	ดินแดง',
-  '	บึงกุ่ม',
-  '	สาทร',
-  '	บางซื่อ',
-  ' จตุจักร',
-  '	บางคอแหลม',
-  '	ประเวศ',
-  '	คลองเตย',
-  '	สวนหลวง',
-  '	จอมทอง',
-  '	ดอนเมือง',
-  '	ราชเทวี',
-  '	ลาดพร้าว',
-  ' วัฒนา',
-  ' บางแค',
-  '	หลักสี่',
-  '	สายไหม',
-  ' คันนายาว',
-  ' สะพานสูง',
-  '	วังทองหลาง',
-  ' คลองสามวา',
-  '	บางนา',
-  '	ทวีวัฒนา',
-  '	ทุ่งครุ',
-  '	บางบอน',
-]; //เขต
 
 class registeruserjib extends StatefulWidget {
   @override
@@ -254,50 +19,92 @@ class registeruserjib extends StatefulWidget {
 
 class _registeruserjibState extends State<registeruserjib> {
   final dio = Dio();
-  login() {
-    if (usernameController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty) {}
+
+  List<DropdownMenuEntry<Districtmodel>> dataList =
+      <DropdownMenuEntry<Districtmodel>>[];
+  Future<void> getData() async {
+    try {
+      dataList = [];
+      final response = await dio.get(url_api + '/district/get-district');
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          dataList.add(DropdownMenuEntry<Districtmodel>(
+            value: Districtmodel.fromJson(element),
+            label: element["name_district"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
   }
 
-  final List<DropdownMenuEntry<Districtmodel>> dataList=
-        <DropdownMenuEntry<Districtmodel>>[];
-  Future<void> getData() async {
-  try {
-    final response = await dio.get(url_api + '/district/get-district');
-    if (response.statusCode == 200) {
-      final responseData = response.data;
-      for (var element in responseData) {
-        // dataList.add(Districtmodel.fromJson(element));
-        dataList.add(DropdownMenuEntry<Districtmodel>(
-          value: element["id_district"],
-          label: element["name_district"],
-        ));
+  List<DropdownMenuEntry<DistrictSubModel>> dataSubList =
+      <DropdownMenuEntry<DistrictSubModel>>[];
+  Future<void> getDataSub(int id) async {
+    try {
+      final response = await dio.get(url_api +
+          '/subdistrict/get-subdistrictbydistrictid/' +
+          id.toString());
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        // dataSubList = [];
+        for (var element in responseData) {
+          dataSubList.add(DropdownMenuEntry<DistrictSubModel>(
+            value: DistrictSubModel.fromJson(element),
+            label: element["name_subdistrict"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
       }
-      setState(() {
-        
-      });
-      // Call setState or update your UI here if needed
-    } else {
-      // Handle error if the response status code is not 200
-      print('Request failed with status: ${response.statusCode}');
+      setState(() {});
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
     }
-  } catch (e) {
-    // Handle any exceptions that may occur during the request
-    print('Error: $e');
   }
-}
-@override
+
+  Future<void> register(BuildContext context) async {
+    try {
+      final response = await dio.post(url_api + '/user/create-user', data: {
+        "username": username.text,
+        "password": password.text,
+        "contact": contact.text,
+        "information": information.text,
+        "id_district": id_district,
+        "id_subdistrict": id_subdistrict,
+        "id_typeuser": 1
+      });
+      if (response.statusCode == 200) {
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+  @override
   void initState() {
-  getData();
+    getData();
     super.initState();
   }
 
   File? _image;
-  TextEditingController usernameController = TextEditingController();
-  // TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  String dropdownValue1 = list1.first; //แขวง
-  String dropdownValue2 = list2.first; //เขต
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController contact = TextEditingController();
+  TextEditingController information = TextEditingController();
+  int? id_district;
+  int? id_subdistrict;
 
   List<bool> isSelected = [false, false]; // 0 = เพศผู้, 1 = เพศเมีย
 
@@ -364,6 +171,7 @@ class _registeruserjibState extends State<registeruserjib> {
               Container(
                 width: 300, // ปรับความกว้างตามที่ต้องการ
                 child: TextField(
+                  controller: username,
                   decoration: InputDecoration(
                     labelText: 'ชื่อผู้ใช้งาน',
                     border: OutlineInputBorder(
@@ -397,6 +205,8 @@ class _registeruserjibState extends State<registeruserjib> {
               Container(
                 width: 300, // ปรับความกว้างตามที่ต้องการ
                 child: TextField(
+                  obscureText: true,
+                  controller: password,
                   decoration: InputDecoration(
                     labelText: 'รหัสผ่าน',
                     border: OutlineInputBorder(
@@ -430,7 +240,7 @@ class _registeruserjibState extends State<registeruserjib> {
               Container(
                 width: 300, // ปรับความกว้างตามที่ต้องการ
                 child: TextField(
-                  controller: usernameController,
+                  controller: contact,
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
                     labelText: 'เบอร์โทรศัพท์',
@@ -465,6 +275,7 @@ class _registeruserjibState extends State<registeruserjib> {
               Container(
                 width: 300, // ปรับความกว้างตามที่ต้องการ
                 child: TextField(
+                  controller: information,
                   decoration: InputDecoration(
                     labelText: 'แนะนำเพิ่มเติม',
                     border: OutlineInputBorder(
@@ -501,33 +312,33 @@ class _registeruserjibState extends State<registeruserjib> {
               ),
               SizedBox(height: 5.0),
               DropdownMenu<Districtmodel>(
-                      // controller: colorController,
-                      label: const Text('Color'),
-                      dropdownMenuEntries: dataList,
-                      onSelected: (Districtmodel? data) {
-                        print(data);
-                      },
-                    ),
-              SizedBox(height: 10.0),
-              Text(
-                "แขวง",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 5.0),
-              DropdownMenu<String>(
-                initialSelection: list2.first,
-                onSelected: (String? value) {
-                  // This is called when the user selects an item.
+                hintText: 'เลือกเขต',
+                dropdownMenuEntries: dataList,
+                onSelected: (Districtmodel? data) {
                   setState(() {
-                    dropdownValue2 = value!;
+                    dataSubList = [];
                   });
+                  id_district = data!.idDistrict!;
+                  getDataSub(data.idDistrict!);
                 },
-                dropdownMenuEntries:
-                    list2.map<DropdownMenuEntry<String>>((String value) {
-                  return DropdownMenuEntry<String>(value: value, label: value);
-                }).toList(),
                 width: 300,
               ),
+              SizedBox(height: 10.0),
+              if (dataSubList.length > 0)
+                Text(
+                  "แขวง",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              SizedBox(height: 5.0),
+              if (dataSubList.length > 0)
+                DropdownMenu<DistrictSubModel>(
+                  hintText: 'เลือกแขวง',
+                  dropdownMenuEntries: dataSubList,
+                  onSelected: (DistrictSubModel? data) {
+                    id_subdistrict = data!.idSubdistrict!;
+                  },
+                  width: 300,
+                ),
               SizedBox(height: 15.0),
               TextButton(
                 onPressed: () {
@@ -557,8 +368,8 @@ class _registeruserjibState extends State<registeruserjib> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) => allpet())));
+                      register(context).then((value) => Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) => allpet()))));
                     },
                     child: Text('สมัครสมาชิก')),
               ),
