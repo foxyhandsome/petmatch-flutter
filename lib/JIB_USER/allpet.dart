@@ -1,8 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:petmatch/JIB_USER/addpet.dart';
 import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/profileuser2.dart';
+
+import '../constant/domain.dart';
+import '../model/pet.model.dart';
 
 class allpet extends StatefulWidget {
   const allpet({super.key});
@@ -12,6 +17,48 @@ class allpet extends StatefulWidget {
 }
 
 class _allpetState extends State<allpet> {
+  final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  List<Pet> pets = [];
+  Future<void> getData() async {
+    try {
+      pets = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response =
+          await dio.get(url_api + '/pet/get-pet-by-userid/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          pets.add(Pet(
+              agePet: element["age_pet"],
+              healthPet: element["health_pet"],
+              idBlood: element["id_blood"],
+              idBreed: element["id_breed"],
+              idPet: element["id_pet"],
+              idSkin: element["id_skin"],
+              idUser: element["id_user"],
+              namePet: element["name_pet"],
+              picturePet: element["picture_pet"],
+              sexPet: element["sex_pet"]));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,122 +83,62 @@ class _allpetState extends State<allpet> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 15,
-            ),
-            Center(
-              child: Container(
-                width: 350, // ปรับความกว้างตามที่ต้องการ
-                child: ListTile(
-                  contentPadding: EdgeInsets.all(
-                      10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
-                  tileColor: Colors.white, // สีพื้นหลังของ ListTile
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                        color: Color.fromARGB(255, 239, 83, 80),
-                        width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
-                    borderRadius:
-                        BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
-                  ),
-                  leading: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: NetworkImage(
-                        'https://images.wagwalkingweb.com/media/daily_wag/blog_articles/hero/1685787498.877709/fun-facts-about-siberian-huskies-1.png'),
-                  ),
-                  title: Text(
-                    "โบ้",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => profileuser())));
-                        },
-                        icon: Icon(
-                          Icons.pets,
-                          color: Colors.white, // สีไอคอน
-                        ),
-                        label: Text(
-                          'เข้าสู่โปรไฟล์',
-                          style: TextStyle(color: Colors.white), // สีของข้อความ
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 239, 83, 80), // สีพื้นหลังของปุ่ม
-                          minimumSize:
-                              Size(100, 35), // ปรับขนาดปุ่มตามที่ต้องการ
-                        ),
+      body: ListView.builder(
+        itemCount: pets.length,
+        itemBuilder: (context, index) {
+          return Container(
+            child: Container(
+              width: 350, // ปรับความกว้างตามที่ต้องการ
+              child: ListTile(
+                contentPadding:
+                    EdgeInsets.all(10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
+                tileColor: Colors.white, // สีพื้นหลังของ ListTile
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                      color: Color.fromARGB(255, 239, 83, 80),
+                      width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
+                  borderRadius:
+                      BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
+                ),
+                leading: CircleAvatar(
+                  radius: 30,
+                  backgroundImage: NetworkImage(
+                      'https://images.wagwalkingweb.com/media/daily_wag/blog_articles/hero/1685787498.877709/fun-facts-about-siberian-huskies-1.png'),
+                ),
+                title: Text(
+                  "โบ้",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => profileuser())));
+                      },
+                      icon: Icon(
+                        Icons.pets,
+                        color: Colors.white, // สีไอคอน
                       ),
-                    ],
-                  ),
+                      label: Text(
+                        'เข้าสู่โปรไฟล์',
+                        style: TextStyle(color: Colors.white), // สีของข้อความ
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(
+                            255, 239, 83, 80), // สีพื้นหลังของปุ่ม
+                        minimumSize: Size(100, 35), // ปรับขนาดปุ่มตามที่ต้องการ
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-
-                        SizedBox(
-              height: 15,
-            ),
-            Center(
-              child: Container(
-                width: 350, // ปรับความกว้างตามที่ต้องการ
-                child: ListTile(
-                  contentPadding: EdgeInsets.all(
-                      10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
-                  tileColor: Colors.white, // สีพื้นหลังของ ListTile
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                        color: Color.fromARGB(255, 239, 83, 80),
-                        width: 1), // กำหนดสีและความกว้างของเส้นกรอบ
-                    borderRadius:
-                        BorderRadius.circular(10), // กำหนดรูปร่างของกรอบ
-                  ),
-                  leading: CircleAvatar(
-                    radius: 30,
-                    backgroundImage: NetworkImage(
-                        'https://www.animalsaroundtheglobe.com/wp-content/uploads/2023/02/corgi-ga0a9055f1_1920-1200x800.jpg'),
-                  ),
-                  title: Text(
-                    "บี้",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => profileuser2())));
-                        },
-                        icon: Icon(
-                          Icons.pets,
-                          color: Colors.white, // สีไอคอน
-                        ),
-                        label: Text(
-                          'เข้าสู่โปรไฟล์',
-                          style: TextStyle(color: Colors.white), // สีของข้อความ
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 239, 83, 80), // สีพื้นหลังของปุ่ม
-                          minimumSize:
-                              Size(100, 35), // ปรับขนาดปุ่มตามที่ต้องการ
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

@@ -30,10 +30,10 @@ class _loginjibState extends State<loginjib> {
             'type_name': 'ผู้ใช้ทั่วไป',
           },
         );
-        print(response);
+
         await storageToken.write(
-          key: 'username',
-          value: response.data["id_user"],
+          key: 'id_user',
+          value: response.data["id_user"].toString(),
         );
         GotoHome();
         // Handle the response here as needed
