@@ -60,7 +60,7 @@ class ProfileInfo extends StatelessWidget {
             color: Colors.white, // สีไอคอน
           ),
           label: Text(
-            'เข้าสู่โปรไฟล์',
+            'ออกจากระบบ',
             style: TextStyle(color: Colors.white), // สีของข้อความ
           ),
           style: ElevatedButton.styleFrom(

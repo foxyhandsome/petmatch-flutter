@@ -369,7 +369,7 @@ class _registeruserjibState extends State<registeruserjib> {
                     ),
                     onPressed: () {
                       register(context).then((value) => Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) => allpet()))));
+                          MaterialPageRoute(builder: ((context) => Menu()))));
                     },
                     child: Text('สมัครสมาชิก')),
               ),
