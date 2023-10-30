@@ -7,14 +7,14 @@ import 'package:petmatch/JIB_USER/menu.dart';
 import 'package:petmatch/JIB_USER/registeruserjib.dart';
 import '../constant/domain.dart';
 
-class loginjib extends StatefulWidget {
-  const loginjib({super.key});
+class Loginjib extends StatefulWidget {
+  const Loginjib({super.key});
 
   @override
-  State<loginjib> createState() => _loginjibState();
+  State<Loginjib> createState() => _LoginjibState();
 }
 
-class _loginjibState extends State<loginjib> {
+class _LoginjibState extends State<Loginjib> {
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   final dio = Dio();
   Login() async {
@@ -172,7 +172,7 @@ class _loginjibState extends State<loginjib> {
                       context,
                       MaterialPageRoute(
                           builder: ((context) =>
-                              registeruserjib()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+                              Registeruserjib()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
                 },
                 child: Text(
                   'เพิ่งเคยเข้ามาใน Pet Match ใช่หรือไม่? กดเพื่อสมัครสมาชิก',

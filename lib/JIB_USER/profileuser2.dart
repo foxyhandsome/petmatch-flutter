@@ -33,7 +33,7 @@ class profileuser2 extends StatelessWidget {
             icon: Icon(Icons.star, color: Colors.yellow),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: ((context) => review())));
+                  context, MaterialPageRoute(builder: ((context) => Review())));
             },
           ),
           IconButton(
@@ -94,7 +94,7 @@ class profileuser2 extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: ((context) =>
-                            pedcert()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+                            Petcert()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
               },
               style: ElevatedButton.styleFrom(
                 primary: Color.fromARGB(255, 80, 239, 181),

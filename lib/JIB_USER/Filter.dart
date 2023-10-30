@@ -32,7 +32,7 @@ const List<Widget> fruits = <Widget>[
   Text('เพศเมีย'),
 ];
 
-class Filter extends StatelessWidget {
+class Filter extends StatefulWidget {
   const Filter({super.key});
 
   @override
@@ -41,6 +41,12 @@ class Filter extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       home: const selectedGender(title: 'ToggleButtons Sample'),
     );
+  }
+  
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 

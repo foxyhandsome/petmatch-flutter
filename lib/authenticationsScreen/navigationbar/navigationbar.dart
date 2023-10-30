@@ -47,7 +47,7 @@ class _NavigationMenuBarState extends State<NavigationMenuBar> {
   }
 
   List<Widget> _buildScreens() {
-    return [home(), home(), home()];
+    return [Home(), Home(), Home()];
   }
 @override
   Widget build(BuildContext context) {

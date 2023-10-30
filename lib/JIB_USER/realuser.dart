@@ -53,7 +53,7 @@ class ProfileInfo extends StatelessWidget {
         ElevatedButton.icon(
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: ((context) => loginjib())));
+                context, MaterialPageRoute(builder: ((context) => Loginjib())));
           },
           icon: Icon(
             Icons.pets,

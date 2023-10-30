@@ -79,7 +79,7 @@ class _profileotherState extends State<profileother> {
                   context,
                   MaterialPageRoute(
                       builder: ((context) =>
-                          pedcert()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+                          Petcert()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
             },
             style: ElevatedButton.styleFrom(
               primary: Color.fromARGB(255, 80, 239, 181),

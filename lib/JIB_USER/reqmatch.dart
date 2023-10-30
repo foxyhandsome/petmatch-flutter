@@ -5,14 +5,14 @@ import 'package:petmatch/JIB_USER/home.dart';
 import 'package:petmatch/JIB_USER/realuser.dart';
 import 'package:petmatch/authenticationsScreen/navigationbar/profileother.dart';
 
-class reqmatch extends StatefulWidget {
-  const reqmatch({super.key});
+class Reqmatch extends StatefulWidget {
+  const Reqmatch({super.key});
 
   @override
-  State<reqmatch> createState() => _reqmatchState();
+  State<Reqmatch> createState() => _ReqmatchState();
 }
 
-class _reqmatchState extends State<reqmatch> {
+class _ReqmatchState extends State<Reqmatch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

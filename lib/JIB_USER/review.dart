@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class review extends StatefulWidget {
-  const review({super.key});
+class Review extends StatefulWidget {
+  const Review({super.key});
 
   @override
-  State<review> createState() => _reviewState();
+  State<Review> createState() => _ReviewState();
 }
 
-class _reviewState extends State<review> {
+class _ReviewState extends State<Review> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,14 +3,14 @@ import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/authenticationsScreen/navigationbar/profileother.dart';
 import 'package:petmatch/authenticationsScreen/navigationbar/reviewother.dart';
 
-class history extends StatefulWidget {
-  const history({super.key});
+class History extends StatefulWidget {
+  const History({super.key});
 
   @override
-  State<history> createState() => _historyState();
+  State<History> createState() => _HistoryState();
 }
 
-class _historyState extends State<history> {
+class _HistoryState extends State<History> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

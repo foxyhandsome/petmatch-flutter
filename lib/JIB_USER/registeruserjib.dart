@@ -12,12 +12,12 @@ import 'package:petmatch/model/district_sub.model.dart';
 
 import '../constant/domain.dart';
 
-class registeruserjib extends StatefulWidget {
+class Registeruserjib extends StatefulWidget {
   @override
-  State<registeruserjib> createState() => _registeruserjibState();
+  State<Registeruserjib> createState() => _RegisteruserjibState();
 }
 
-class _registeruserjibState extends State<registeruserjib> {
+class _RegisteruserjibState extends State<Registeruserjib> {
   final dio = Dio();
 
   List<DropdownMenuEntry<Districtmodel>> dataList =
@@ -346,7 +346,7 @@ class _registeruserjibState extends State<registeruserjib> {
                       context,
                       MaterialPageRoute(
                           builder: ((context) =>
-                              loginjib()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+                              Loginjib()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
                 },
                 child: Text(
                   'หากมีบัญชีผู้ใช้แล้ว กดเพื่อเข้าสู่ระบบ',

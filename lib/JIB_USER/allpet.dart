@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -9,14 +11,14 @@ import 'package:petmatch/JIB_USER/profileuser2.dart';
 import '../constant/domain.dart';
 import '../model/pet.model.dart';
 
-class allpet extends StatefulWidget {
-  const allpet({super.key});
+class Allpet extends StatefulWidget {
+  const Allpet({super.key});
 
   @override
-  State<allpet> createState() => _allpetState();
+  State<Allpet> createState() => _AllpetState();
 }
 
-class _allpetState extends State<allpet> {
+class _AllpetState extends State<Allpet> {
   final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
@@ -88,7 +90,8 @@ class _allpetState extends State<allpet> {
         itemBuilder: (context, index) {
           return Container(
             child: Container(
-              width: 350, // ปรับความกว้างตามที่ต้องการ
+              margin: EdgeInsets.all(10),
+              width: double.infinity, // ปรับความกว้างตามที่ต้องการ
               child: ListTile(
                 contentPadding:
                     EdgeInsets.all(10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
@@ -102,13 +105,16 @@ class _allpetState extends State<allpet> {
                 ),
                 leading: CircleAvatar(
                   radius: 30,
-                  backgroundImage: NetworkImage(
-                      'https://images.wagwalkingweb.com/media/daily_wag/blog_articles/hero/1685787498.877709/fun-facts-about-siberian-huskies-1.png'),
+                  backgroundImage: "${pets[index].picturePet}" != null
+                      ? MemoryImage(base64Decode("${pets[index].picturePet}"))
+                      : null,
                 ),
+
                 title: Text(
-                  "โบ้",
+                  "${pets[index].namePet}",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
+
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -117,7 +123,7 @@ class _allpetState extends State<allpet> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => profileuser())));
+                                builder: ((context) => Profileuser(pet:pets[index]))));
                       },
                       icon: Icon(
                         Icons.pets,

@@ -1,12 +1,13 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/JIB_USER/pecert.dart';
 import 'package:petmatch/JIB_USER/review.dart';
+import 'package:petmatch/model/pet.model.dart';
 
-class profileuser extends StatelessWidget {
+class Profileuser extends StatelessWidget {
+  Profileuser({Key? key, required this.pet}) : super(key: key);
+  final Pet pet;
   final dio = Dio();
 
   void getHttp() async {
@@ -35,14 +36,21 @@ class profileuser extends StatelessWidget {
             icon: Icon(Icons.star, color: Colors.yellow),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: ((context) => review())));
+                  context, MaterialPageRoute(builder: ((context) => Review())));
             },
           ),
           IconButton(
-            icon: Icon(Icons.edit, color: Colors.black),
+            icon: Icon(Icons.edit, color: Color.fromARGB(255, 245, 244, 244)),
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: ((context) => editprofileuser())));
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.delete_forever, color: Colors.black),
+            onPressed: () {
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: ((context) => editprofileuser())));
             },
           ),
         ],
@@ -68,24 +76,24 @@ class profileuser extends StatelessWidget {
           ),
           SizedBox(height: 10.0),
           Text(
-            "โบ้, 1(ปี)",
+            " ${pet.namePet} , ${pet.agePet} ปี",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10.0),
           Text(
-            "เพศผู้, ไซบีเรียน ฮัสกี , สุนัขขนสองสี , DEA 1.1",
+            "เพศ${pet.sexPet} , ${pet.idBreed} , ${pet.idSkin} , ${pet.idBlood}",
             style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
           SizedBox(height: 20.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(Icons.location_on, color: Colors.grey),
-              SizedBox(width: 5.0),
-              Text(
-                "รองเมือง, ปทุมวัน",
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
+              // Icon(Icons.location_on, color: Colors.grey),
+              // SizedBox(width: 5.0),
+              // Text(
+              //   "รองเมือง, ปทุมวัน",
+              //   style: TextStyle(fontSize: 16, color: Colors.grey),
+              // ),
             ],
           ),
           SizedBox(height: 20.0),
@@ -95,7 +103,7 @@ class profileuser extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: ((context) =>
-                          pedcert()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+                          Petcert()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
             },
             style: ElevatedButton.styleFrom(
               primary: Color.fromARGB(255, 80, 239, 181),
@@ -118,147 +126,6 @@ class profileuser extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          SizedBox(height: 10.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              SizedBox(height: 20.0),
-              Container(
-                padding: EdgeInsets.all(5.0), // กำหนดการเว้นระยะ
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 239, 83, 80), // กำหนดสีขอบ
-                    width: 1.0, // กำหนดความหนาขอบ
-                  ),
-                  borderRadius: BorderRadius.circular(8.0), // กำหนดมุมขอบ
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.person,
-                          color: Color.fromARGB(
-                              255, 239, 83, 80), // กำหนดสีของไอคอน
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(width: 8.0),
-                    Text(
-                      'ชื่อผู้ใช้งาน', // ข้อความชื่อผู้ใช้งาน
-                      style: TextStyle(
-                        fontSize: 16.0,
-                      ),
-                    ),
-
-                    SizedBox(height: 8.0), // กำหนดระยะห่างระหว่างบรรทัด
-                    Row(
-                      children: [
-                        Text(
-                          'jib.cnc_101', // ข้อความ "jib.cnc 101"
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            decoration: TextDecoration.underline, // เส้นใต้
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20.0),
-              Container(
-                padding: EdgeInsets.all(5.0), // กำหนดการเว้นระยะ
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 239, 83, 80), // กำหนดสีขอบ
-                    width: 1.0, // กำหนดความหนาขอบ
-                  ),
-                  borderRadius: BorderRadius.circular(8.0), // กำหนดมุมขอบ
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.phone,
-                          color: Color.fromARGB(
-                              255, 239, 83, 80), // กำหนดสีของไอคอน
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(width: 8.0),
-                    Text(
-                      'เบอร์โทรศัพท์', // ข้อความชื่อผู้ใช้งาน
-                      style: TextStyle(
-                        fontSize: 16.0,
-                      ),
-                    ),
-
-                    SizedBox(height: 8.0), // กำหนดระยะห่างระหว่างบรรทัด
-                    Row(
-                      children: [
-                        Text(
-                          '0970466989', // ข้อความ "jib.cnc 101"
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            decoration: TextDecoration.underline, // เส้นใต้
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20.0),
-              Container(
-                padding: EdgeInsets.all(5.0), // กำหนดการเว้นระยะ
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 239, 83, 80), // กำหนดสีขอบ
-                    width: 1.0, // กำหนดความหนาขอบ
-                  ),
-                  borderRadius: BorderRadius.circular(8.0), // กำหนดมุมขอบ
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.chat,
-                          color: Color.fromARGB(
-                              255, 239, 83, 80), // กำหนดสีของไอคอน
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(width: 8.0),
-                    Text(
-                      'แนะนำเพิ่มเติม', // ข้อความชื่อผู้ใช้งาน
-                      style: TextStyle(
-                        fontSize: 16.0,
-                      ),
-                    ),
-
-                    SizedBox(height: 8.0), // กำหนดระยะห่างระหว่างบรรทัด
-                    Row(
-                      children: [
-                        Text(
-                          'FB:Jib Chanokchon', // ข้อความ "jib.cnc 101"
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            decoration: TextDecoration.underline, // เส้นใต้
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
           ),
         ],
       )),

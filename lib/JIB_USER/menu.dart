@@ -17,10 +17,10 @@ class _MenuState extends State<Menu> {
   int _selectedIndex = 0;
 
   List<Widget> _screens = [
-    allpet(),
-    home(),
-    reqmatch(),
-    history(),
+    Allpet(),
+    Home(),
+    Reqmatch(),
+    History(),
     realuser(),
   ];
 

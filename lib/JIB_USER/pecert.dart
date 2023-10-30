@@ -7,12 +7,12 @@ import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:petmatch/authenticationsScreen/edituser.dart';
 import 'package:petmatch/authenticationsScreen/navigationbar/navigationbar.dart';
 
-class pedcert extends StatefulWidget {
+class Petcert extends StatefulWidget {
   @override
-  _pedcertState createState() => _pedcertState();
+  _PetcertState createState() => _PetcertState();
 }
 
-class _pedcertState extends State<pedcert> {
+class _PetcertState extends State<Petcert> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
