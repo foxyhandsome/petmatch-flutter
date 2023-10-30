@@ -10,6 +10,7 @@ import 'package:petmatch/JIB_USER/profileuser2.dart';
 
 import '../constant/domain.dart';
 import '../model/pet.model.dart';
+import 'Profiledog.dart';
 
 class Allpet extends StatefulWidget {
   const Allpet({super.key});
@@ -123,7 +124,8 @@ class _AllpetState extends State<Allpet> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => Profileuser(pet:pets[index]))));
+                                builder: ((context) =>
+                                    Profiledog(pet: pets[index]))));
                       },
                       icon: Icon(
                         Icons.pets,
