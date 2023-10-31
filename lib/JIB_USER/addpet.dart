@@ -178,7 +178,7 @@ class _addpetState extends State<addpet> {
         "name_pet": nameControl.text,
         "age_pet": dropdownValue3,
         "id_user": id_user,
-        "health_pet": "1111",
+        "health_pet": imageBreed,
         "sex_pet": sex_pet == 0 ? "ผู้" : "เมีย"
       };
 
