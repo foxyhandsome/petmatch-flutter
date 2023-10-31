@@ -187,7 +187,7 @@ class _addpetState extends State<addpet> {
       printJson(petData);
       Response response =
           await dio.post(url_api + '/pet/create-pet', data: petData);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         Navigator.of(context).pop();
       } else {
         print("HTTP Error: ${response.statusCode}");
@@ -590,7 +590,7 @@ class _addpetState extends State<addpet> {
                   ),
                 ),
               ),
-
+              SizedBox(height: 10.0),
               if (image != null)
                 CircleAvatar(
                     radius: 120,
