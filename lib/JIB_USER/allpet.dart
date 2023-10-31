@@ -124,10 +124,12 @@ class _AllpetState extends State<Allpet> {
                     ElevatedButton.icon(
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) =>
-                                    Profiledog(pet: pets[index]))));
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) =>
+                                        Profiledog(pet: pets[index]))))
+                            .then((value) => {getData()});
+                        ;
                       },
                       icon: Icon(
                         Icons.pets,

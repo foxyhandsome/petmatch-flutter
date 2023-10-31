@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/pecert.dart';
 import 'package:petmatch/JIB_USER/review.dart';
@@ -28,7 +29,8 @@ class _ProfiledogState extends State<Profiledog> {
   deletePet(int id) async {
     try {
       Response response = await dio.delete(url_api + '/pet/delete-Pet/$id');
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
+        Navigator.pop(context);
         Navigator.pop(context);
         print('Pet with ID $id deleted successfully');
       } else {
@@ -39,6 +41,65 @@ class _ProfiledogState extends State<Profiledog> {
       // Handle any other exceptions
       print('Error: $e');
     }
+  }
+
+  void notifacontionCustom(BuildContext context, String text) {
+    showCupertinoDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return CupertinoAlertDialog(
+            title: Text(
+              'ลบสัตว์เลี้ยง?',
+              style: TextStyle(
+                  color: Color.fromARGB(255, 65, 57, 52),
+                  fontFamily: 'prompt',
+                  fontWeight: FontWeight.w900,
+                  fontSize: 21),
+            ),
+            content: Text(
+              text,
+              style: TextStyle(
+                  color: Color.fromARGB(255, 55, 48, 43),
+                  fontFamily: 'prompt',
+                  fontSize: 15),
+            ),
+            actions: [
+              CupertinoDialogAction(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context).pop();
+                  });
+                },
+                child: Text(
+                  'ยกเลิก',
+                  style: TextStyle(
+                    fontFamily: 'prompt',
+                    fontWeight: FontWeight.w800,
+                    color: Color.fromARGB(255, 223, 40, 8),
+                  ),
+                ),
+                isDefaultAction: true,
+                isDestructiveAction: true,
+              ),
+              CupertinoDialogAction(
+                onPressed: () {
+                  deletePet(widget.pet.idPet!);
+                },
+                child: Text(
+                  'ตกลง',
+                  style: TextStyle(
+                    fontFamily: 'prompt',
+                    fontWeight: FontWeight.w800,
+                    color: Color.fromARGB(255, 1, 75, 107),
+                  ),
+                ),
+                isDefaultAction: true,
+                isDestructiveAction: true,
+              ),
+              // The "No" button
+            ],
+          );
+        });
   }
 
   @override
@@ -75,7 +136,8 @@ class _ProfiledogState extends State<Profiledog> {
           IconButton(
             icon: Icon(Icons.delete_forever, color: Colors.black),
             onPressed: () {
-              deletePet(widget.pet.idPet!);
+              notifacontionCustom(context, "ต้องการลบสัตว์เลี้ยงใช่หรือไม่");
+
               // Navigator.push(context,
               //     MaterialPageRoute(builder: ((context) => editprofileuser())));
             },
