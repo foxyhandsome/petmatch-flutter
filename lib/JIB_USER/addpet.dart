@@ -30,12 +30,12 @@ List<String> list3 = <String>[
   '10',
 ]; //อายุ
 
-class addpet extends StatefulWidget {
+class Addpet extends StatefulWidget {
   @override
-  _addpetState createState() => _addpetState();
+  _AddpetState createState() => _AddpetState();
 }
 
-class _addpetState extends State<addpet> {
+class _AddpetState extends State<Addpet> {
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   final dio = Dio();
 
@@ -412,22 +412,30 @@ class _addpetState extends State<addpet> {
 
               SizedBox(height: 10.0),
               if (image != null)
-                CircleAvatar(
-                    radius: 120,
-                    backgroundImage: MemoryImage(base64Decode("${image}"))),
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Color.fromARGB(
+                          255, 239, 83, 80), // Set the border color
+                      width: 5.0, // Set the border width
+                    ),
+                  ),
+                  child: CircleAvatar(
+                      radius: 120,
+                      backgroundImage: MemoryImage(base64Decode("${image}"))),
+                ),
 
               SizedBox(height: 20.0),
               Text(
                 "รูปสัตว์เลี้ยง",
-                style: TextStyle(
-                  fontSize: 18,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
               SizedBox(height: 15.0),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 125, 152, 91),
+                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
                     minimumSize: const Size.fromHeight(50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -696,23 +704,33 @@ class _addpetState extends State<addpet> {
               ),
               SizedBox(height: 10.0),
               if (imageBreed != null)
-                CircleAvatar(
-                    radius: 120,
-                    backgroundImage:
-                        MemoryImage(base64Decode("${imageBreed}"))),
-
+                Container(
+                  width: 400, // กำหนดความกว้างของ Container
+                  height: 300, // กำหนดความสูงของ Container
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, // กำหนดให้เป็นสี่เหลี่ยม
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: MemoryImage(base64Decode("${imageBreed}")),
+                    ),
+                    border: Border.all(
+                      // เพิ่ม border
+                      color: Colors.black, // สีของ border
+                      width: 2.0, // ความหนาของ border
+                    ),
+                  ),
+                ),
+             
               SizedBox(height: 20.0),
               Text(
-                "ใบยืนยันพันธุ์",
-                style: TextStyle(
-                  fontSize: 18,
-                ),
+                "ใบยืนยันสายพันธุ์สัตว์เลี้ยง",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
               SizedBox(height: 15.0),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 228, 151, 150),
+                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
                     minimumSize: const Size.fromHeight(50),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),

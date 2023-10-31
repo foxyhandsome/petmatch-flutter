@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 import 'package:petmatch/authenticationsScreen/editdog.dart';
-import 'package:petmatch/authenticationsScreen/test.dart';
+
 
 class editdogtest extends StatefulWidget {
   @override
@@ -232,17 +232,17 @@ class _editdogtestState extends State<editdogtest> {
               }).toList(),
             ),
 
-              TextButton(
-                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: ((context) => test()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
-                },
-                child: Text(
-                  'หากมีบัญชีผู้ใช้แล้ว กดเพื่อเข้าสู่ระบบ',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white ,
-                  ),
-                ),
-              ),
+              // TextButton(
+              //   onPressed: () {Navigator.push(context, MaterialPageRoute(builder: ((context) => test()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+              //   },
+              //   child: Text(
+              //     'หากมีบัญชีผู้ใช้แล้ว กดเพื่อเข้าสู่ระบบ',
+              //     style: TextStyle(
+              //       fontSize: 12,
+              //       color: Colors.white ,
+              //     ),
+              //   ),
+              // ),
               
               SizedBox(height: 5.0), 
                ElevatedButton(

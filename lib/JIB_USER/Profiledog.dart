@@ -149,21 +149,41 @@ class _ProfiledogState extends State<Profiledog> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           SizedBox(height: 20.0),
-          CircleAvatar(
-            radius: 120,
-            backgroundImage: "${widget.pet.picturePet}" != null
-                ? MemoryImage(base64Decode("${widget.pet.picturePet}"))
-                : null,
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: Color.fromARGB(255, 239, 83, 80), // Set the border color
+                width: 5.0, // Set the border width
+              ),
+            ),
+            child: CircleAvatar(
+              radius: 120,
+              backgroundImage: "${widget.pet.picturePet}" != null
+                  ? MemoryImage(base64Decode("${widget.pet.picturePet}"))
+                  : null,
+            ),
           ),
-          SizedBox(height: 10.0),
-          Text(
-            " ${widget.pet.namePet} , ${widget.pet.agePet} ปี",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 10.0),
-          Text(
-            "เพศ${widget.pet.sexPet} , ${widget.pet.nameBreed} , ${widget.pet.typeSkin} , ${widget.pet.typeBlood}",
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: 10.0),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 14.0),
+                child: Text(
+                  " ${widget.pet.namePet} , ${widget.pet.agePet} ปี",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  "เพศ${widget.pet.sexPet} , ${widget.pet.nameBreed} , ${widget.pet.typeSkin} , ${widget.pet.typeBlood}",
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 20.0),
           Row(

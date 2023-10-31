@@ -90,7 +90,7 @@ class _AllpetState extends State<Allpet> {
             icon: Icon(Icons.add, color: Colors.black),
             onPressed: () {
               Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => addpet())))
+                      MaterialPageRoute(builder: ((context) => Addpet())))
                   .then((value) => {getData()});
             },
           ),
