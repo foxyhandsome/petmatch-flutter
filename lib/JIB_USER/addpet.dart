@@ -297,7 +297,7 @@ class _addpetState extends State<addpet> {
 
   void _showImageSourceActionSheetBreed(BuildContext context) {
     Function(ImageSource) selectImageSource = (imageSource) {
-      chooseFile(imageSource);
+      chooseFileBreed(imageSource);
     };
 
     if (Platform.isIOS) {
