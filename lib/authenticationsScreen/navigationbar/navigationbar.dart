@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:petmatch/JIB_USER/home.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
-import 'package:petmatch/JIB_USER/profileuser.dart';
 
 class NavigationMenuBar extends StatefulWidget {
   final String? selectPage;
