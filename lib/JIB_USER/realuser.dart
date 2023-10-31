@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
 
 class realuser extends StatefulWidget {
@@ -13,62 +14,242 @@ class _realuserState extends State<realuser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('โปรไฟล์ของฉัน'),
-        backgroundColor:
-            Color.fromARGB(255, 239, 83, 80), // เพิ่มสีพื้นหลังของ app bar
-      ),
-      body: Center(
-        child: ProfileInfo(),
-      ),
-      backgroundColor: Colors.white, // เพิ่มสีพื้นหลังของ body
-    );
-  }
-}
-
-class ProfileInfo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'ชื่อ: ชื่อของคุณ',
-          style: TextStyle(fontSize: 20),
-        ),
-        SizedBox(height: 10),
-        Text(
-          'ที่อยู่: ที่อยู่ของคุณ',
-          style: TextStyle(fontSize: 20),
-        ),
-        SizedBox(height: 10),
-        Text(
-          'เบอร์โทร: เบอร์โทรของคุณ',
-          style: TextStyle(fontSize: 20),
-        ),
-        SizedBox(height: 10),
-        Text(
-          'คำแนะนำเพิ่มเติม: คำแนะนำเพิ่มเติมของคุณ',
-          style: TextStyle(fontSize: 20),
-        ),
-        ElevatedButton.icon(
+        backgroundColor: Color.fromARGB(255, 239, 83, 80),
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: ((context) => Loginjib())));
+            Navigator.of(context).pop();
           },
-          icon: Icon(
-            Icons.pets,
-            color: Colors.white, // สีไอคอน
+        ),
+        title: Text(
+          "โปรไฟล์ตัวเอง",
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit, color: Colors.black),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => editprofileuser())));
+            },
           ),
-          label: Text(
-            'ออกจากระบบ',
-            style: TextStyle(color: Colors.white), // สีของข้อความ
-          ),
-          style: ElevatedButton.styleFrom(
-            primary: Color.fromARGB(255, 239, 83, 80), // สีพื้นหลังของปุ่ม
-            minimumSize: Size(100, 35), // ปรับขนาดปุ่มตามที่ต้องการ
+        ],
+      ),
+      // backgroundColor: Color.fromARGB(255, 255, 255, 255),
+
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color:
+              Color.fromARGB(255, 255, 255, 255), // Set your desired color here
+        ),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: 15.0),
+              Container(
+                width: 200.0,
+                height: 200.0,
+                decoration: BoxDecoration(
+                  color: Colors.white, // สีพื้นหลังเป็นสีขาว
+                  borderRadius: BorderRadius.circular(100.0), // ครึ่งขอบวงกลม
+                  border: Border.all(
+                    color: Color.fromARGB(255, 239, 83, 80), // สีขอบเป็นสีขาว
+                    width: 2.0, // ความหนาขอบเป็น 2 พิกเซล
+                  ),
+                ),
+                child: Icon(
+                  Icons.person,
+                  size: 150.0,
+                  color: Colors.black, // สีของ icon
+                ),
+              ),
+              SizedBox(height: 30.0),
+              Container(
+                padding: EdgeInsets.all(15.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromARGB(255, 239, 83, 80),
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.person,
+                          size: 25.0,
+                          color: Color.fromARGB(255, 239, 83, 80),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'ชื่อ:',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'jib.cnc',
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15.0),
+              Container(
+                padding: EdgeInsets.all(15.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromARGB(255, 239, 83, 80),
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.phone,
+                          size: 25.0,
+                          color: Color.fromARGB(255, 239, 83, 80),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'เบอร์โทร:',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          '0970466989',
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15.0),
+              Container(
+                padding: EdgeInsets.all(15.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromARGB(255, 239, 83, 80),
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.location_on,
+                          size: 25.0,
+                          color: Color.fromARGB(255, 239, 83, 80),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'แขวง:',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'รองเมือง',
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'เขต:',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'ปทุมวัน',
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15.0),
+              Container(
+                padding: EdgeInsets.all(15.0),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color.fromARGB(255, 239, 83, 80),
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.chat,
+                          size: 25.0,
+                          color: Color.fromARGB(255, 239, 83, 80),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'คำแนะนำเพิ่มเติม:',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'line jib.cnc',
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 30.0),
+              Container(
+                width: 250,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.exit_to_app), // ไอคอน
+                      SizedBox(width: 10), // ระยะห่างระหว่างไอคอนกับข้อความ
+                      Text(
+                        'ออกจากระบบ',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
