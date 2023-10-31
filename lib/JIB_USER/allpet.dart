@@ -32,6 +32,7 @@ class _AllpetState extends State<Allpet> {
 
   List<Pet> pets = [];
   Future<void> getData() async {
+    print("qqqqqqqqqqqqqqqq");
     try {
       pets = [];
       idUser = await storageToken.read(key: 'id_user');
@@ -80,8 +81,9 @@ class _AllpetState extends State<Allpet> {
           IconButton(
             icon: Icon(Icons.add, color: Colors.black),
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: ((context) => addpet())));
+              Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => addpet())))
+                  .then((value) => {getData()});
             },
           ),
         ],

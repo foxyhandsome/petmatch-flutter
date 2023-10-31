@@ -183,7 +183,7 @@ class _addpetState extends State<addpet> {
       };
 
       {}
-      printJson(petData);
+      // printJson(petData);
       Response response =
           await dio.post(url_api + '/pet/create-pet', data: petData);
       if (response.statusCode == 201) {
