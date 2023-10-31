@@ -283,6 +283,93 @@ class _addpetState extends State<addpet> {
     }
   }
 
+  String? imageBreed;
+  Future<void> chooseFileBreed(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(
+      source: source,
+      maxWidth: 500,
+      imageQuality: 100,
+    );
+    if (pickedFile == null) return;
+    final bytes = await pickedFile.readAsBytes();
+    final String base64String = base64Encode(bytes);
+    imageBreed = base64String;
+    setState(() {});
+  }
+
+  void _showImageSourceActionSheetBreed(BuildContext context) {
+    Function(ImageSource) selectImageSource = (imageSource) {
+      chooseFile(imageSource);
+    };
+
+    if (Platform.isIOS) {
+      showCupertinoModalPopup(
+        context: context,
+        builder: (context) => CupertinoActionSheet(
+          actions: [
+            CupertinoActionSheetAction(
+              child: Text(
+                'ถ่ายภาพ',
+                style: TextStyle(
+                  fontFamily: 'anupark',
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                selectImageSource(ImageSource.camera);
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: Text(
+                'เลือกภาพถ่าย',
+                style: TextStyle(
+                  fontFamily: 'anupark',
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                selectImageSource(ImageSource.gallery);
+              },
+            )
+          ],
+        ),
+      );
+    } else {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => Wrap(children: [
+          ListTile(
+            leading: Icon(Icons.camera_alt),
+            title: Text(
+              'ถ่ายภาพ',
+              style: TextStyle(
+                fontFamily: 'anupark',
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSource(ImageSource.camera);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.photo_album),
+            title: Text(
+              'เลือกภาพถ่าย',
+              style: TextStyle(
+                fontFamily: 'anupark',
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSource(ImageSource.gallery);
+            },
+          ),
+        ]),
+      );
+    }
+  }
+
   TextEditingController nameControl = TextEditingController();
 
   String dropdownValue3 = list3.first; //อายุ
@@ -292,13 +379,6 @@ class _addpetState extends State<addpet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showImageSourceActionSheet(context);
-        },
-        tooltip: 'Pick Image',
-        child: const Icon(Icons.add_a_photo),
-      ),
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 239, 83, 80),
         leading: IconButton(
@@ -333,6 +413,36 @@ class _addpetState extends State<addpet> {
                 "ข้อมูลสัตว์เลี้ยง",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
+
+              SizedBox(height: 10.0),
+              if (imageBreed != null)
+                CircleAvatar(
+                    radius: 120,
+                    backgroundImage:
+                        MemoryImage(base64Decode("${imageBreed}"))),
+
+              SizedBox(height: 20.0),
+              Text(
+                "รูปสัตว์เลี้ยง",
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+
+              SizedBox(height: 15.0),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 125, 152, 91),
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    _showImageSourceActionSheetBreed(context);
+                  },
+                  child: Text('อัปโหลดรูปสัตว์เลี้ยง')),
+              SizedBox(height: 20.0),
 
               SizedBox(height: 20.0),
               ToggleButtons(
@@ -597,15 +707,26 @@ class _addpetState extends State<addpet> {
 
               SizedBox(height: 20.0),
               Text(
-                "อัปโหลดใบพันธุ์ประวัติสุนัข",
+                "ใบยืนยันพันธุ์",
                 style: TextStyle(
                   fontSize: 18,
                 ),
               ),
 
               SizedBox(height: 15.0),
-
-              SizedBox(height: 10.0),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 228, 151, 150),
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    _showImageSourceActionSheetBreed(context);
+                  },
+                  child: Text('อัปโหลดใบยืนยันพันธุ์')),
+              SizedBox(height: 20.0),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 239, 83, 80),
@@ -616,8 +737,6 @@ class _addpetState extends State<addpet> {
                   ),
                   onPressed: () {
                     addPet(context);
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: ((context) => Menu())));
                   },
                   child: Text('บันทึก')), // <-- Check this comma
             ],
