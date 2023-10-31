@@ -181,9 +181,6 @@ class _addpetState extends State<addpet> {
         "health_pet": imageBreed,
         "sex_pet": sex_pet == 0 ? "ผู้" : "เมีย"
       };
-
-      {}
-      // printJson(petData);
       Response response =
           await dio.post(url_api + '/pet/create-pet', data: petData);
       if (response.statusCode == 201) {
@@ -439,7 +436,7 @@ class _addpetState extends State<addpet> {
                     ),
                   ),
                   onPressed: () {
-                    _showImageSourceActionSheetBreed(context);
+                    _showImageSourceActionSheet(context);
                   },
                   child: Text('อัปโหลดรูปสัตว์เลี้ยง')),
               SizedBox(height: 20.0),
