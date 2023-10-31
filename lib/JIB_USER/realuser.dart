@@ -18,8 +18,8 @@ class _RealuserState extends State<Realuser> {
   final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
-  
- @override
+
+  @override
   void initState() {
     getData();
     super.initState();
@@ -30,8 +30,7 @@ class _RealuserState extends State<Realuser> {
     try {
       list = [];
       idUser = await storageToken.read(key: 'id_user');
-      final response =
-          await dio.get(url_api + '/user/get-user/' + idUser!);
+      final response = await dio.get(url_api + '/user/get-user/' + idUser!);
       if (response.statusCode == 200) {
         final responseData = response.data;
         for (var element in responseData) {
@@ -105,10 +104,10 @@ class _RealuserState extends State<Realuser> {
                     width: 2.0, // ความหนาขอบเป็น 2 พิกเซล
                   ),
                 ),
-                child: Icon(
-                  Icons.person,
-                  size: 150.0,
-                  color: Colors.black, // สีของ icon
+                child: Image.asset(
+                  'asset/images/petmatchlogo.png',
+                  height: 500,
+                  width: 500, // ปรับขนาดของโลโก้ตามต้องการ
                 ),
               ),
               SizedBox(height: 30.0),
@@ -141,7 +140,8 @@ class _RealuserState extends State<Realuser> {
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                            color: Color.fromARGB(255, 5, 5,
+                                5), // Replace with your desired text color
                           ),
                         )
                       ],
@@ -179,7 +179,8 @@ class _RealuserState extends State<Realuser> {
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                            color: Color.fromARGB(255, 5, 5,
+                                5), // Replace with your desired text color
                           ),
                         ),
                       ],
@@ -217,7 +218,8 @@ class _RealuserState extends State<Realuser> {
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                            color: Color.fromARGB(255, 5, 5,
+                                5), // Replace with your desired text color
                           ),
                         ),
                         SizedBox(width: 10.0),
@@ -226,12 +228,13 @@ class _RealuserState extends State<Realuser> {
                           style: TextStyle(fontSize: 20.0),
                         ),
                         SizedBox(width: 10.0),
-                       Text(
+                        Text(
                           ' ${list.isNotEmpty ? list[0].idDistrict : ""}',
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                            color: Color.fromARGB(255, 5, 5,
+                                5), // Replace with your desired text color
                           ),
                         ),
                       ],
@@ -269,7 +272,8 @@ class _RealuserState extends State<Realuser> {
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                            color: Color.fromARGB(255, 5, 5,
+                                5), // Replace with your desired text color
                           ),
                         )
                       ],
@@ -288,7 +292,10 @@ class _RealuserState extends State<Realuser> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => Loginjib())));
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

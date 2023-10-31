@@ -56,7 +56,8 @@ class _PetcertState extends State<Petcert> {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: 500.0, // กำหนดความสูงของ Container
+                  width: 400, // กำหนดความกว้างของ Container
+                  height: 300, // กำหนดความสูงของ Container
                 child: ClipRRect(
                   child: Container(
                     width: double.infinity, // กำหนดความกว้างให้เต็มรูปแบบ

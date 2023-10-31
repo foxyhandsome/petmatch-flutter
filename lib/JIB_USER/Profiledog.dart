@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:petmatch/JIB_USER/editprofiledog.dart';
 import 'package:petmatch/JIB_USER/pecert.dart';
 import 'package:petmatch/JIB_USER/review.dart';
 
@@ -130,7 +131,7 @@ class _ProfiledogState extends State<Profiledog> {
             icon: Icon(Icons.edit, color: Color.fromARGB(255, 245, 244, 244)),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => editprofileuser())));
+                  MaterialPageRoute(builder: ((context) => Editprofiledog())));
             },
           ),
           IconButton(
@@ -144,93 +145,234 @@ class _ProfiledogState extends State<Profiledog> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(height: 20.0),
-          Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Color.fromARGB(255, 239, 83, 80), // Set the border color
-                width: 5.0, // Set the border width
-              ),
-            ),
-            child: CircleAvatar(
-              radius: 120,
-              backgroundImage: "${widget.pet.picturePet}" != null
-                  ? MemoryImage(base64Decode("${widget.pet.picturePet}"))
-                  : null,
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 10.0),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 14.0),
-                child: Text(
-                  " ${widget.pet.namePet} , ${widget.pet.agePet} ปี",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(height: 10.0),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  "เพศ${widget.pet.sexPet} , ${widget.pet.nameBreed} , ${widget.pet.typeSkin} , ${widget.pet.typeBlood}",
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Icon(Icons.location_on, color: Colors.grey),
-              // SizedBox(width: 5.0),
-              // Text(
-              //   "รองเมือง, ปทุมวัน",
-              //   style: TextStyle(fontSize: 16, color: Colors.grey),
-              // ),
-            ],
-          ),
-          SizedBox(height: 20.0),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => Petcert(
-                            pet: widget.pet,
-                          )))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
-            },
-            style: ElevatedButton.styleFrom(
-              primary: Color.fromARGB(255, 80, 239, 181),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color:
+              Color.fromARGB(255, 255, 255, 255), // Set your desired color here
+        ),
+        child: SingleChildScrollView(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(
-                  Icons.local_hospital,
-                  size: 32.0,
-                  color: Colors.white,
+                SizedBox(height: 20.0),
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Color.fromARGB(
+                          255, 239, 83, 80), // Set the border color
+                      width: 5.0, // Set the border width
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    radius: 120,
+                    backgroundImage: "${widget.pet.picturePet}" != null
+                        ? MemoryImage(base64Decode("${widget.pet.picturePet}"))
+                        : null,
+                  ),
                 ),
-                SizedBox(width: 10.0),
-                Text(
-                  'ใบพันธุ์ประวัติสุนัข',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 15.0),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 14.0),
+                      child: Text(
+                        " ${widget.pet.namePet} , ${widget.pet.agePet} ปี",
+                        style: TextStyle(
+                            fontSize: 26, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+
+                    SizedBox(height: 15.0),
+                    Container(
+                      padding: EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 239, 83, 80),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              //Icon(
+                              //Icons.person,
+                              // size: 25.0,
+                              //color: Color.fromARGB(255, 239, 83, 80),
+                              //),
+                              SizedBox(width: 10.0),
+                              Text(
+                                'เพศ: ${widget.pet.sexPet}',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 5, 5, 5),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 10.0),
+                    Container(
+                      padding: EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 239, 83, 80),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              SizedBox(width: 10.0),
+                              Text(
+                                'พันธุ์: ${widget.pet.nameBreed}',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 5, 5, 5),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 10.0),
+                    Container(
+                      padding: EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 239, 83, 80),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              SizedBox(width: 10.0),
+                              Text(
+                                'สีขน: ${widget.pet.typeSkin}',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 5, 5, 5),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 10.0),
+                    Container(
+                      padding: EdgeInsets.all(15.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 239, 83, 80),
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              SizedBox(width: 10.0),
+                              Text(
+                                ' กรุ๊ปเลือด: ${widget.pet.typeBlood}',
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromARGB(255, 5, 5, 5),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    //SizedBox(height: 10.0),
+                    //Container(
+                    //padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    //child: Text(
+                    //"เพศ${widget.pet.sexPet} , ${widget.pet.nameBreed} , ${widget.pet.typeSkin} , ${widget.pet.typeBlood}",
+                    // style: TextStyle(fontSize: 16, color: Colors.grey),
+                    //),
+                    // ),
+                  ],
+                ),
+                SizedBox(height: 30.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    // Icon(Icons.location_on, color: Colors.grey),
+                    // SizedBox(width: 5.0),
+                    // Text(
+                    //   "รองเมือง, ปทุมวัน",
+                    //   style: TextStyle(fontSize: 16, color: Colors.grey),
+                    // ),
+                  ],
+                ),
+                Container(
+                  width: 300, // กำหนดความกว้างของปุ่ม
+                  height: 50, // กำหนดความสูงของปุ่ม
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => Petcert(pet: widget.pet)),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 80, 239, 181),
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(20.0), // ปรับความโค้งมน
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Icon(
+                          Icons.local_hospital,
+                          size: 32.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          'ดูใบพันธุ์ประวัติสุนัข',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
+            )
             ),
-          ),
-        ],
-      )),
+      ),
     );
   }
 }

@@ -113,7 +113,6 @@ class _editprofileuserState extends State<editprofileuser> {
                 "ข้อมูลเจ้าของสัตว์เลี้ยง",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-
               SizedBox(height: 10.0),
               Container(
                 width: 300, // ปรับความกว้างตามที่ต้องการ
@@ -147,7 +146,6 @@ class _editprofileuserState extends State<editprofileuser> {
                   ),
                 ),
               ),
-
               SizedBox(height: 20.0),
               Container(
                 width: 300, // ปรับความกว้างตามที่ต้องการ
@@ -181,7 +179,6 @@ class _editprofileuserState extends State<editprofileuser> {
                   ),
                 ),
               ),
-
               SizedBox(height: 20.0),
               Container(
                 width: 300, // ปรับความกว้างตามที่ต้องการ
@@ -217,7 +214,6 @@ class _editprofileuserState extends State<editprofileuser> {
                   ),
                 ),
               ),
-
               SizedBox(height: 20.0),
               Container(
                 width: 300, // ปรับความกว้างตามที่ต้องการ
@@ -251,7 +247,6 @@ class _editprofileuserState extends State<editprofileuser> {
                   ),
                 ),
               ),
-
               SizedBox(height: 10.0),
               Text(
                 "แก้ไขแขวง",
@@ -272,7 +267,6 @@ class _editprofileuserState extends State<editprofileuser> {
                 }).toList(),
                 width: 300,
               ),
-
               SizedBox(height: 10.0),
               Text(
                 "แก้ไขเขต",
@@ -293,179 +287,43 @@ class _editprofileuserState extends State<editprofileuser> {
                 }).toList(),
                 width: 300,
               ),
-
-///////////////////////////สัตว์เลี้ยง//////////////////////////////////////////////////////////////////////////////////////
-
-              SizedBox(height: 25.0),
-              Text(
-                "ข้อมูลของสัตว์เลี้ยง",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-
-              SizedBox(height: 10.0),
-              GestureDetector(
-                onTap: getImageDog,
-                child: ClipOval(
-                  child: _image == null
-                      ? CircleAvatar(
-                          radius: 150,
-                          child: Icon(Icons.pets, size: 100),
-                        )
-                      : CircleAvatar(
-                          radius: 150,
-                          backgroundImage: FileImage(_image!),
+              SizedBox(height: 30.0),
+                Container(
+                  width: 250, // กำหนดความกว้างของปุ่ม
+                  height: 50, // กำหนดความสูงของปุ่ม
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) => Menu())));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 80, 239, 181),
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(20.0), // ปรับความโค้งมน
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Icon(
+                          Icons.save,
+                          size: 32.0,
+                          color: Colors.white,
                         ),
-                ),
-              ),
-
-              SizedBox(height: 20.0),
-              ToggleButtons(
-                children: <Widget>[
-                  Column(
-                    children: [
-                      Icon(
-                        Icons.male,
-                        size: 35.0,
-                      ),
-                      Text('เพศผู้'),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Icon(
-                        Icons.female,
-                        size: 35.0,
-                      ),
-                      Text('เพศเมีย'),
-                    ],
-                  ),
-                ],
-                isSelected: isSelected,
-                onPressed: (int index) {
-                  setState(() {
-                    for (int i = 0; i < isSelected.length; i++) {
-                      isSelected[i] = i == index;
-                    }
-                  });
-                },
-                constraints: BoxConstraints.tightFor(
-                  width: 60.0, // ปรับความกว้างตามต้องการ
-                  height: 60.0,
-                ),
-              ),
-              SizedBox(height: 5.0),
-              DropdownMenu<String>(
-                initialSelection: list4.first,
-                onSelected: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue4 = value!;
-                  });
-                },
-                dropdownMenuEntries:
-                    list4.map<DropdownMenuEntry<String>>((String value) {
-                  return DropdownMenuEntry<String>(value: value, label: value);
-                }).toList(),
-              ),
-
-              SizedBox(height: 10.0),
-              Text(
-                "แก้ไขสีขน",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 5.0),
-              DropdownMenu<String>(
-                initialSelection: list5.first,
-                onSelected: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue5 = value!;
-                  });
-                },
-                dropdownMenuEntries:
-                    list5.map<DropdownMenuEntry<String>>((String value) {
-                  return DropdownMenuEntry<String>(value: value, label: value);
-                }).toList(),
-              ),
-
-              SizedBox(height: 10.0),
-              Text(
-                "แก้ไขกรุ๊ปเลือด",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 5.0),
-              DropdownMenu<String>(
-                initialSelection: list6.first,
-                onSelected: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue6 = value!;
-                  });
-                },
-                dropdownMenuEntries:
-                    list6.map<DropdownMenuEntry<String>>((String value) {
-                  return DropdownMenuEntry<String>(value: value, label: value);
-                }).toList(),
-              ),
-
-              SizedBox(height: 20.0),
-              Text(
-                "แก้ไขใบตรวจสุขภาพสัตว์เลี้ยง",
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-
-              SizedBox(height: 10.0),
-              GestureDetector(
-                onTap: getImagePetCert,
-                child: Container(
-                  width: 400, // Set the desired width
-                  height: 600, // Set the desired height
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black, // สีขอบ
-                      width: 2.0, // ความหนาขอบ
-                    ),
-                    color: Color.fromARGB(255, 255, 255,
-                        255), // Change to the desired background color
-                    borderRadius: BorderRadius.circular(
-                        10.0), // Adjust the border radius as needed
-                  ),
-                  child: ClipRect(
-                    child: _image == null
-                        ? Icon(
-                            Icons.local_hospital,
-                            size: 100,
-                            color: Color.fromARGB(
-                                255, 236, 112, 99), // Change to desired color
-                          )
-                        : Image.file(
-                            _image!,
-                            fit: BoxFit.cover,
-                            width:
-                                200, // Set width to match the container width
-                            height:
-                                400, // Set height to match the container height
+                        SizedBox(width: 10.0),
+                        Text(
+                          'บันทึก',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold
                           ),
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 10.0),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
-                    minimumSize: const Size.fromHeight(50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                        ),
+                      ],
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => Menu())));
-                  },
-                  child: Text('บันทึก')),
+                ),
             ],
           ),
         ),
