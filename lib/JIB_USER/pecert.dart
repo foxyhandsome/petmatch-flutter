@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
-import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:petmatch/JIB_USER/pecert.dart';
-import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:petmatch/authenticationsScreen/edituser.dart';
 import 'package:petmatch/authenticationsScreen/navigationbar/navigationbar.dart';
 

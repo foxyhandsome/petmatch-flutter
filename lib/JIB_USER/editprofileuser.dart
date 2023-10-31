@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
 import 'package:petmatch/JIB_USER/menu.dart';
-import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'dart:io';
 import 'package:petmatch/authenticationsScreen/editdog.dart';
 
