@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
@@ -7,7 +9,12 @@ import 'package:petmatch/JIB_USER/profileuser.dart';
 import 'package:petmatch/authenticationsScreen/edituser.dart';
 import 'package:petmatch/authenticationsScreen/navigationbar/navigationbar.dart';
 
+import '../model/pet.model.dart';
+
 class Petcert extends StatefulWidget {
+  final Pet? pet;
+
+  Petcert({Key? key, this.pet}) : super(key: key);
   @override
   _PetcertState createState() => _PetcertState();
 }
@@ -61,9 +68,9 @@ class _PetcertState extends State<Petcert> {
                         width: 5.0,
                       ),
                     ),
-                    child: Image.network(
-                      'https://f.ptcdn.info/597/021/000/1406209439-1006201264-o.jpg',
-                      fit: BoxFit.fill, // ให้รูปภาพปรับขนาดให้พอดีกับ Container
+                    child: Image.memory(
+                      base64Decode(widget.pet!.healthPet!),
+                      // You can specify other properties like width, height, fit, etc.
                     ),
                   ),
                 ),

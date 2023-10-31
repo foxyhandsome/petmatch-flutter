@@ -32,7 +32,6 @@ class _AllpetState extends State<Allpet> {
 
   List<Pet> pets = [];
   Future<void> getData() async {
-    print("qqqqqqqqqqqqqqqq");
     try {
       pets = [];
       idUser = await storageToken.read(key: 'id_user');
@@ -42,6 +41,16 @@ class _AllpetState extends State<Allpet> {
         final responseData = response.data;
         for (var element in responseData) {
           pets.add(Pet(
+              username: element["username"],
+              typeSkin: element["type_skin"],
+              typeBlood: element["type_blood"],
+              password: element["password"],
+              nameBreed: element["name_breed"],
+              information: element["information"],
+              idTypeuser: element["id_typeuser"],
+              idSubdistrict: element["id_subdistrict"],
+              idDistrict: element["id_district"],
+              contact: element["contact"],
               agePet: element["age_pet"],
               healthPet: element["health_pet"],
               idBlood: element["id_blood"],

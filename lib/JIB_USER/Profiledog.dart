@@ -162,7 +162,7 @@ class _ProfiledogState extends State<Profiledog> {
           ),
           SizedBox(height: 10.0),
           Text(
-            "เพศ${widget.pet.sexPet} , ${widget.pet.idBreed} , ${widget.pet.idSkin} , ${widget.pet.idBlood}",
+            "เพศ${widget.pet.sexPet} , ${widget.pet.nameBreed} , ${widget.pet.typeSkin} , ${widget.pet.typeBlood}",
             style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
           SizedBox(height: 20.0),
@@ -183,8 +183,9 @@ class _ProfiledogState extends State<Profiledog> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: ((context) =>
-                          Petcert()))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
+                      builder: ((context) => Petcert(
+                            pet: widget.pet,
+                          )))); // โค้ดที่ต้องการให้ทำงานเมื่อปุ่มถูกกด
             },
             style: ElevatedButton.styleFrom(
               primary: Color.fromARGB(255, 80, 239, 181),
