@@ -239,7 +239,7 @@ class _ProfiledogState extends State<Profiledog> {
                               Text(
                                 'พันธุ์: ${widget.pet.nameBreed}',
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
                                   color: Color.fromARGB(255, 5, 5, 5),
                                 ),

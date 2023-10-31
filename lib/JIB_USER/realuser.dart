@@ -209,32 +209,35 @@ class _RealuserState extends State<Realuser> {
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          'แขวง:',
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                        SizedBox(width: 10.0),
-                        Text(
-                          ' ${list.isNotEmpty ? list[0].idSubdistrict : ""}',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 5, 5,
-                                5), // Replace with your desired text color
-                          ),
-                        ),
-                        SizedBox(width: 10.0),
-                        Text(
                           'เขต:',
                           style: TextStyle(fontSize: 20.0),
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          ' ${list.isNotEmpty ? list[0].idDistrict : ""}',
+                          ' ${list.isNotEmpty ? list[0].nameDistrict : ""}',
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 5, 5,
-                                5), // Replace with your desired text color
+                            color: Color.fromARGB(255, 5, 5, 5),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10.0), // เพิ่มระยะห่างระหว่างบรรทัด
+                    Row(
+                      children: <Widget>[
+                        SizedBox(width: 35.0), // เพิ่มระยะห่างด้านซ้าย
+                        Text(
+                          'แขวง:',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        SizedBox(width: 10.0),
+                        Text(
+                          ' ${list.isNotEmpty ? list[0].nameSubdistrict : ""}',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 5, 5, 5),
                           ),
                         ),
                       ],
