@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:petmatch/JIB_USER/pecert.dart';
 import 'package:petmatch/JIB_USER/review.dart';
 
+import '../constant/domain.dart';
 import '../model/pet.model.dart';
 import 'editprofileuser.dart';
 
@@ -23,6 +24,23 @@ class Profiledog extends StatefulWidget {
 }
 
 class _ProfiledogState extends State<Profiledog> {
+  final dio = Dio();
+  deletePet(int id) async {
+    try {
+      Response response = await dio.delete(url_api + '/pet/delete-Pet/$id');
+      if (response.statusCode == 201) {
+        Navigator.pop(context);
+        print('Pet with ID $id deleted successfully');
+      } else {
+        // Handle errors here
+        print('HTTP Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any other exceptions
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +75,7 @@ class _ProfiledogState extends State<Profiledog> {
           IconButton(
             icon: Icon(Icons.delete_forever, color: Colors.black),
             onPressed: () {
+              deletePet(widget.pet.idPet!);
               // Navigator.push(context,
               //     MaterialPageRoute(builder: ((context) => editprofileuser())));
             },

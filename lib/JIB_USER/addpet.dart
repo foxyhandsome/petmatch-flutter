@@ -412,11 +412,10 @@ class _addpetState extends State<addpet> {
               ),
 
               SizedBox(height: 10.0),
-              if (imageBreed != null)
+              if (image != null)
                 CircleAvatar(
                     radius: 120,
-                    backgroundImage:
-                        MemoryImage(base64Decode("${imageBreed}"))),
+                    backgroundImage: MemoryImage(base64Decode("${image}"))),
 
               SizedBox(height: 20.0),
               Text(
@@ -697,10 +696,11 @@ class _addpetState extends State<addpet> {
                 ),
               ),
               SizedBox(height: 10.0),
-              if (image != null)
+              if (imageBreed != null)
                 CircleAvatar(
                     radius: 120,
-                    backgroundImage: MemoryImage(base64Decode("${image}"))),
+                    backgroundImage:
+                        MemoryImage(base64Decode("${imageBreed}"))),
 
               SizedBox(height: 20.0),
               Text(
