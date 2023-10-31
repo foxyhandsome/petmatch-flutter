@@ -167,7 +167,7 @@ class _addpetState extends State<addpet> {
 
   int? sex_pet;
   String? id_user;
-  void addPet() async {
+  void addPet(BuildContext context) async {
     id_user = await storageToken.read(key: 'id_user');
     try {
       final Map<String, dynamic> petData = {
@@ -188,7 +188,7 @@ class _addpetState extends State<addpet> {
       Response response =
           await dio.post(url_api + '/pet/create-pet', data: petData);
       if (response.statusCode == 200) {
-        print("Maid work saved successfully");
+        Navigator.of(context).pop();
       } else {
         print("HTTP Error: ${response.statusCode}");
       }
@@ -591,6 +591,11 @@ class _addpetState extends State<addpet> {
                 ),
               ),
 
+              if (image != null)
+                CircleAvatar(
+                    radius: 120,
+                    backgroundImage: MemoryImage(base64Decode("${image}"))),
+
               SizedBox(height: 20.0),
               Text(
                 "อัปโหลดใบพันธุ์ประวัติสุนัข",
@@ -611,7 +616,7 @@ class _addpetState extends State<addpet> {
                     ),
                   ),
                   onPressed: () {
-                    addPet();
+                    addPet(context);
                     // Navigator.push(context,
                     //     MaterialPageRoute(builder: ((context) => Menu())));
                   },
