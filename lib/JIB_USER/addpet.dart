@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
@@ -15,242 +17,6 @@ import '../constant/domain.dart';
 import '../model/petblood.model.dart';
 import '../model/petbreed.model.dart';
 import '../model/petskin.model.dart';
-
-List<String> list1 = <String>[
-  '	พระบรมมหาราชวัง ',
-  '	วังบูรพาภิรมย์',
-  ' วัดราชบพิธ',
-  '	สำราญราษฎร์',
-  '	ศาลเจ้าพ่อเสือ',
-  ' เสาชิงช้า',
-  '	บวรนิเวศ',
-  '	ตลาดยอด',
-  '	ชนะสงคราม',
-  '	บ้านพานถม',
-  '	บ้านพานถม',
-  '	วัดสามพระยา',
-  '	ดุสิต',
-  '	วชิรพยาบาล',
-  ' สวนจิตรลดา',
-  ' สี่แยกมหานาค',
-  '	ถนนนครไชยศรี',
-  ' กระทุ่มราย',
-  ' หนองจอก',
-  ' คลองสิบ',
-  '	คลองสิบสอง',
-  ' โคกแฝด',
-  ' คู้ฝั่งเหนือ',
-  '	ลำผักชี',
-  '	ลำต้อยติ่ง',
-  '	มหาพฤฒาราม',
-  ' สีลม',
-  '	สุริยวงศ์',
-  '	บางรัก',
-  '	สี่พระยา',
-  '	อนุสาวรีย์',
-  '	ท่าแร้ง',
-  '	คลองจั่น',
-  '	หัวหมาก',
-  '	รองเมือง',
-  '	วังใหม่',
-  '	ปทุมวัน',
-  '	ลุมพินี',
-  '	ป้อมปราบ',
-  '	วัดเทพศิรินทร์',
-  '	คลองมหานาค',
-  '	บ้านบาตร',
-  '	วัดโสมนัส',
-  ' บางจาก',
-  '	พระโขนงใต้',
-  '	มีนบุรี',
-  '	แสนแสบ',
-  '	ลาดกระบัง',
-  '	คลองสองต้นนุ่น',
-  '	คลองสามประเวศ',
-  ' ลำปลาทิว',
-  '	ทับยาว',
-  '	ขุมทอง',
-  '	ช่องนนทรี',
-  '	บางโพงพาง',
-  '	จักรวรรดิ',
-  '	สัมพันธวงศ์',
-  '	ตลาดน้อย',
-  '	สามเสนใน',
-  '	พญาไท',
-  '	วัดกัลยาณ์',
-  '	หิรัญรูจี',
-  '	บางยี่เรือ',
-  '	บุคคโล',
-  '	ตลาดพลู',
-  '	ดาวคะนอง',
-  '	สำเหร่',
-  '	วัดอรุณ',
-  '	วัดท่าพระ',
-  '	ห้วยขวาง',
-  '	บางกะปิ',
-  '	สามเสนนอก',
-  '	สมเด็จเจ้าพระยา',
-  ' คลองสาน',
-  '	บางลำภูล่าง',
-  '	คลองต้นไทร',
-  '	คลองชักพระ',
-  ' ตลิ่งชัน',
-  '	ฉิมพลี',
-  ' บางพรม',
-  '	บางระมาด',
-  ' บางเชือกหนัง',
-  '	ศิริราช',
-  '	บ้านช่างหล่อ',
-  '	บางขุนนนท์',
-  ' บางขุนศรี',
-  ' อรุณอมรินทร์',
-  '	ท่าข้าม',
-  ' แสมดำ',
-  ' บางหว้า',
-  '	บางด้วน',
-  '	บางจาก',
-  '	บางแวก',
-  '	คลองขวาง',
-  '	ปากคลองภาษีเจริญ',
-  '	คูหาสวรรค์',
-  '	หนองแขม',
-  '	หนองค้างพลู',
-  ' ราษฎร์บูรณะ',
-  '	บางปะกอก',
-  '	บางพลัด',
-  ' บางอ้อ',
-  '	บางบำหรุ',
-  '	บางยี่ขัน',
-  '	ดินแดง',
-  '	รัชดาภิเษก',
-  ' คลองกุ่ม',
-  '	นวมินทร์',
-  '	นวลจันทร์',
-  '	ทุ่งวัดดอน',
-  '	ยานนาวา',
-  '	ทุ่งมหาเมฆ',
-  '	บางซื่อ',
-  '	วงศ์สว่าง',
-  '	ลาดยาว',
-  '	เสนานิคม',
-  '	จันทรเกษม',
-  '	จอมพล',
-  '	จตุจักร',
-  '	บางคอแหลม',
-  '	วัดพระยาไกร',
-  ' บางโคล่',
-  ' ประเวศ',
-  ' หนองบอน',
-  ' ดอกไม้',
-  ' คลองเตย',
-  ' คลองตัน',
-  ' พระโขนง',
-  ' สวนหลวง',
-  '	อ่อนนุช',
-  '	พัฒนาการ',
-  ' บางขุนเทียน',
-  '	บางค้อ',
-  ' บางมด',
-  '	จอมทอง',
-  '	สีกัน',
-  '	ดอนเมือง',
-  ' สนามบิน',
-  ' ทุ่งพญาไท',
-  '	ถนนพญาไท',
-  '	ถนนเพชรบุรี',
-  '	มักกะสัน',
-  '	ลาดพร้าว',
-  ' จรเข้บัว',
-  '	คลองเตยเหนือ',
-  '	คลองตันเหนือ',
-  '	พระโขนงเหนือ',
-  '	บางแค',
-  '	บางแคเหนือ',
-  ' บางไผ่',
-  '	หลักสอง',
-  '	ทุ่งสองห้อง',
-  '	ตลาดบางเขน',
-  ' สายไหม',
-  '	ออเงิน',
-  '	คลองถนน',
-  '	คันนายาว',
-  '	รามอินทรา',
-  ' สะพานสูง',
-  ' ราษฎร์พัฒนา',
-  '	ทับช้าง',
-  '	วังทองหลาง',
-  ' สะพานสอง',
-  '	คลองเจ้าคุณสิงห์',
-  '	พลับพลา',
-  '	สามวาตะวันตก',
-  ' สามวาตะวันออก',
-  ' บางชัน',
-  ' ทรายกองดิน',
-  '	ทรายกองดินใต้',
-  '	บางนาเหนือ',
-  ' บางนาใต้',
-  ' ทวีวัฒนา',
-  '	ศาลาธรรมสพน์',
-  '	บางมด',
-  '	ทุ่งครุ',
-  ' บางบอนเหนือ',
-  '	บางบอนใต้',
-  ' คลองบางพราน',
-  ' คลองบางบอน',
-]; //แขวง
-
-List<String> list2 = <String>[
-  '	พระนคร',
-  '	ดุสิต',
-  ' หนองจอก',
-  ' บางรัก',
-  '	บางเขน',
-  '	บางกะปิ',
-  '	ปทุมวัน',
-  '	ป้อมปราบศัตรูพ่าย',
-  ' พระโขนง',
-  ' มีนบุรี',
-  '	ลาดกระบัง',
-  '	ยานนาวา',
-  '	สัมพันธวงศ์',
-  ' พญาไท',
-  ' ธนบุรี',
-  ' บางกอกใหญ่',
-  ' ห้วยขวาง',
-  ' คลองสาน',
-  '	ตลิ่งชัน',
-  '	บางกอกน้อย',
-  '	บางขุนเทียน',
-  '	ภาษีเจริญ',
-  ' หนองแขม',
-  '	ราษฎร์บูรณะ',
-  '	บางพลัด',
-  '	ดินแดง',
-  '	บึงกุ่ม',
-  '	สาทร',
-  '	บางซื่อ',
-  ' จตุจักร',
-  '	บางคอแหลม',
-  '	ประเวศ',
-  '	คลองเตย',
-  '	สวนหลวง',
-  '	จอมทอง',
-  '	ดอนเมือง',
-  '	ราชเทวี',
-  '	ลาดพร้าว',
-  ' วัฒนา',
-  ' บางแค',
-  '	หลักสี่',
-  '	สายไหม',
-  ' คันนายาว',
-  ' สะพานสูง',
-  '	วังทองหลาง',
-  ' คลองสามวา',
-  '	บางนา',
-  '	ทวีวัฒนา',
-  '	ทุ่งครุ',
-  '	บางบอน',
-]; //เขต
 
 List<String> list3 = <String>[
   '1',
@@ -265,63 +31,14 @@ List<String> list3 = <String>[
   '10',
 ]; //อายุ
 
-List<String> list4 = <String>[
-  'ปอมเมอเรเนียน (Pomeranian)',
-  'ไซบีเรียน ฮัสกี (Siberian Husky)',
-  'ปั๊ก (Pug)',
-  'ชิวาวา (Chihuahua)',
-  'ไทยบางแก้ว (Thai Bangkaew)',
-  'เฟรนช์ บูลด็อก (French Bulldog)',
-  'โกลเด้น รีทรีฟเวอร์ (Golden Retriever)',
-  'ไทยหลังอาน (Thai Ridgeback)',
-  'อเมริกัน บูลลี่ (American Bully)',
-  'พิทบูล (Pitbull)',
-  'ชิสุ (Shih Tzu)',
-  'บีเกิล (Beagle)',
-  'หมาไทย',
-  'ลาบราดอร์รีทรีฟเวอร์ (Labrador Retriever)',
-  'คอร์กี้ (Corgi)',
-  'พุดเดิ้ล (Poodle)',
-  'อิงลิช บูลล์ด็อก (English Bulldogs)',
-  'แจ็ครัสเซลล์เทอร์เรีย (Jack Russell Terrier)',
-  'ยอร์คเชียร์เทอร์เรีย (Yorkshire Terrier)',
-  'ซามอยด์ (Samoyed)',
-]; //พันธุ์
-
-List<String> list5 = <String>[
-  'สุนัขขนสีเดียวล้วน',
-  'สุนัขขนสองสี',
-  'สุนัขขนสามสี',
-  'สุนัขขนสีลายทักซิโด้',
-  'สุนัขขนสีลายหินอ่อน',
-  'สุนัขขนสีดำด่าง',
-  'สุนัขขนสีลายจุด',
-  'สุนัขขนสีลายเสือ',
-  'สุนัขขนสีซาเบิล',
-  'สุนัขขนสีอานม้า',
-]; //สีขน
-List<String> list6 = <String>[
-  'DEA 1.1',
-  'DEA 1.2',
-  'DEA 3',
-  'DEA 4',
-  'DEA 5',
-  'DEA 6',
-  'DEA 7',
-  'DEA 8',
-]; //กรุ๊ปเลือด
-
 class addpet extends StatefulWidget {
   @override
   _addpetState createState() => _addpetState();
 }
 
 class _addpetState extends State<addpet> {
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   final dio = Dio();
-  login() {
-    if (usernameController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty) {}
-  }
 
   @override
   void initState() {
@@ -439,6 +156,48 @@ class _addpetState extends State<addpet> {
     });
   }
 
+  static String printJson(jsonObject, {bool isShowLog = true}) {
+    JsonEncoder encoder = new JsonEncoder.withIndent("     ");
+    String response = encoder.convert(jsonObject);
+    if (true == isShowLog) {
+      log(response);
+    }
+    return response;
+  }
+
+  int? sex_pet;
+  String? id_user;
+  void addPet() async {
+    id_user = await storageToken.read(key: 'id_user');
+    try {
+      final Map<String, dynamic> petData = {
+        "picture_pet": image,
+        "id_blood": petbloodsSelect!.idBlood,
+        "id_skin": petskinSelect!.idSkin,
+        "id_breed": petbreedSelect!.idBreed.toString(),
+        "name_pet": nameControl.text,
+        "age_pet": dropdownValue3,
+        "id_user": id_user,
+        "id_pet": 69,
+        "health_pet": "1111",
+        "sex_pet": sex_pet == 0 ? "ผู้" : "เมีย"
+      };
+
+      {}
+      printJson(petData);
+      Response response =
+          await dio.post(url_api + '/pet/create-pet', data: petData);
+      if (response.statusCode == 200) {
+        print("Maid work saved successfully");
+      } else {
+        print("HTTP Error: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  String? image;
   Future<void> chooseFile(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile = await picker.pickImage(
@@ -449,6 +208,7 @@ class _addpetState extends State<addpet> {
     if (pickedFile == null) return;
     final bytes = await pickedFile.readAsBytes();
     final String base64String = base64Encode(bytes);
+    image = base64String;
     setState(() {});
   }
 
@@ -524,14 +284,9 @@ class _addpetState extends State<addpet> {
     }
   }
 
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  String dropdownValue1 = list1.first; //แขวง
-  String dropdownValue2 = list2.first; //เขต
+  TextEditingController nameControl = TextEditingController();
+
   String dropdownValue3 = list3.first; //อายุ
-  String dropdownValue4 = list4.first; //พันธุ์
-  String dropdownValue5 = list5.first; //สีขน
-  String dropdownValue6 = list6.first; //กรุ๊ปเลือด
 
   List<bool> isSelected = [false, false]; // 0 = เพศผู้, 1 = เพศเมีย
 
@@ -608,6 +363,7 @@ class _addpetState extends State<addpet> {
                     for (int i = 0; i < isSelected.length; i++) {
                       isSelected[i] = i == index;
                     }
+                    sex_pet = index;
                   });
                 },
                 constraints: BoxConstraints.tightFor(
@@ -620,6 +376,7 @@ class _addpetState extends State<addpet> {
               Container(
                 width: 380, // ปรับความกว้างตามที่ต้องการ
                 child: TextField(
+                  controller: nameControl,
                   decoration: InputDecoration(
                     labelText: 'ชื่อสัตว์เลี้ยง',
                     border: OutlineInputBorder(
@@ -854,8 +611,9 @@ class _addpetState extends State<addpet> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => Menu())));
+                    addPet();
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: ((context) => Menu())));
                   },
                   child: Text('บันทึก')), // <-- Check this comma
             ],
