@@ -1,15 +1,58 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
 
-class realuser extends StatefulWidget {
-  const realuser({super.key});
+import '../constant/domain.dart';
+import '../model/user.model.dart';
+
+class Realuser extends StatefulWidget {
+  const Realuser({super.key});
 
   @override
-  State<realuser> createState() => _realuserState();
+  State<Realuser> createState() => _RealuserState();
 }
 
-class _realuserState extends State<realuser> {
+class _RealuserState extends State<Realuser> {
+  final dio = Dio();
+  String? idUser;
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  
+ @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  List<User> list = [];
+  Future<void> getData() async {
+    try {
+      list = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response =
+          await dio.get(url_api + '/user/get-user/' + idUser!);
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          list.add(User(
+            username: element["username"],
+            information: element["information"],
+            nameSubdistrict: element["name_subdistrict"],
+            nameDistrict: element["name_district"],
+            contact: element["contact"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,10 +137,13 @@ class _realuserState extends State<realuser> {
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          'jib.cnc',
+                          ' ${list.isNotEmpty ? list[0].username : ""}',
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
-                        ),
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                          ),
+                        )
                       ],
                     ),
                   ],
@@ -129,9 +175,12 @@ class _realuserState extends State<realuser> {
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          '0970466989',
+                          ' ${list.isNotEmpty ? list[0].contact : ""}',
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                          ),
                         ),
                       ],
                     ),
@@ -164,9 +213,12 @@ class _realuserState extends State<realuser> {
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          'รองเมือง',
+                          ' ${list.isNotEmpty ? list[0].idSubdistrict : ""}',
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                          ),
                         ),
                         SizedBox(width: 10.0),
                         Text(
@@ -174,10 +226,13 @@ class _realuserState extends State<realuser> {
                           style: TextStyle(fontSize: 20.0),
                         ),
                         SizedBox(width: 10.0),
-                        Text(
-                          'ปทุมวัน',
+                       Text(
+                          ' ${list.isNotEmpty ? list[0].idDistrict : ""}',
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                          ),
                         ),
                       ],
                     ),
@@ -210,10 +265,13 @@ class _realuserState extends State<realuser> {
                         ),
                         SizedBox(width: 10.0),
                         Text(
-                          'line jib.cnc',
+                          ' ${list.isNotEmpty ? list[0].information : ""}',
                           style: TextStyle(
-                              fontSize: 20.0, fontWeight: FontWeight.bold),
-                        ),
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 5, 5, 5), // Replace with your desired text color
+                          ),
+                        )
                       ],
                     ),
                   ],
