@@ -82,10 +82,10 @@ class _AllpetState extends State<Allpet> {
           style: TextStyle(color: Colors.black),
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.edit, color: Colors.black),
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: Icon(Icons.edit, color: Colors.black),
+          //   onPressed: () {},
+          // ),
           IconButton(
             icon: Icon(Icons.add, color: Colors.black),
             onPressed: () {
