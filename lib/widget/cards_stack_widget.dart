@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../main.dart';
+import '../model/pet_match.model.dart';
 import '../model/profile.dart';
 import 'action_button_widget.dart';
 import 'drag_widget.dart';
@@ -14,28 +15,7 @@ class CardsStackWidget extends StatefulWidget {
 
 class _CardsStackWidgetState extends State<CardsStackWidget>
     with SingleTickerProviderStateMixin {
-  List<Profile> draggableItems = [
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-  ];
+  List<PetMatchModel> draggableItems = [];
 
   ValueNotifier<Swipe> swipeNotifier = ValueNotifier(Swipe.none);
   late final AnimationController _animationController;
@@ -107,7 +87,7 @@ class _CardsStackWidgetState extends State<CardsStackWidget>
                         ),
                       ),
                       child: DragWidget(
-                        profile: draggableItems[index],
+                        petMatchModel: draggableItems[index],
                         index: index,
                         swipeNotifier: swipeNotifier,
                         isLastCard: true,
@@ -116,7 +96,7 @@ class _CardsStackWidgetState extends State<CardsStackWidget>
                   );
                 } else {
                   return DragWidget(
-                    profile: draggableItems[index],
+                    petMatchModel: draggableItems[index],
                     index: index,
                     swipeNotifier: swipeNotifier,
                   );

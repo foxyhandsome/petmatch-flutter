@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:petmatch/widget/background_curve_widget.dart';
 
+import '../constant/domain.dart';
 import '../main.dart';
+import '../model/pet_match.model.dart';
 import '../model/profile.dart';
 import '../widget/action_button_widget.dart';
 import '../widget/drag_widget.dart';
@@ -15,34 +18,38 @@ class PetMatch extends StatefulWidget {
 
 class _PetMatchState extends State<PetMatch>
     with SingleTickerProviderStateMixin {
-  List<Profile> draggableItems = [
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-    const Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: 'asset/images/pet1.jpg'),
-  ];
+  final dio = Dio();
+
+  List<PetMatchModel> petMatchModels = [];
+  Future<void> getPetMatchModel() async {
+    try {
+      petMatchModels = [];
+      Response responseService = await dio.post(
+          url_api + '/match/get-pet-for-match',
+          data: {"id_user": 8, "id_userhome": 8});
+      if (responseService.statusCode == 201) {
+        List<PetMatchModel> response = [];
+        responseService.data.forEach((element) {
+          response.add(PetMatchModel.fromJson(element));
+        });
+        setState(() {
+          petMatchModels = response;
+        });
+      } else {
+        print('Request failed with status: ${responseService.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
 
   ValueNotifier<Swipe> swipeNotifier = ValueNotifier(Swipe.none);
   late final AnimationController _animationController;
 
   @override
   void initState() {
+    getPetMatchModel();
     super.initState();
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 500),
@@ -50,7 +57,7 @@ class _PetMatchState extends State<PetMatch>
     );
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        draggableItems.removeLast();
+        petMatchModels.removeLast();
         _animationController.reset();
 
         swipeNotifier.value = Swipe.none;
@@ -73,8 +80,8 @@ class _PetMatchState extends State<PetMatch>
                 builder: (context, swipe, _) => Stack(
                   clipBehavior: Clip.none,
                   alignment: Alignment.center,
-                  children: List.generate(draggableItems.length, (index) {
-                    if (index == draggableItems.length - 1) {
+                  children: List.generate(petMatchModels.length, (index) {
+                    if (index == petMatchModels.length - 1) {
                       return PositionedTransition(
                         rect: RelativeRectTween(
                           begin: RelativeRect.fromSize(
@@ -111,7 +118,7 @@ class _PetMatchState extends State<PetMatch>
                             ),
                           ),
                           child: DragWidget(
-                            profile: draggableItems[index],
+                            petMatchModel: petMatchModels[index],
                             index: index,
                             swipeNotifier: swipeNotifier,
                             isLastCard: true,
@@ -120,7 +127,7 @@ class _PetMatchState extends State<PetMatch>
                       );
                     } else {
                       return DragWidget(
-                        profile: draggableItems[index],
+                        petMatchModel: petMatchModels[index],
                         index: index,
                         swipeNotifier: swipeNotifier,
                       );
@@ -181,7 +188,7 @@ class _PetMatchState extends State<PetMatch>
                 },
                 onAccept: (int index) {
                   setState(() {
-                    draggableItems.removeAt(index);
+                    petMatchModels.removeAt(index);
                   });
                 },
               ),
@@ -204,7 +211,7 @@ class _PetMatchState extends State<PetMatch>
                 },
                 onAccept: (int index) {
                   setState(() {
-                    draggableItems.removeAt(index);
+                    petMatchModels.removeAt(index);
                   });
                 },
               ),

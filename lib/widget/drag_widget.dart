@@ -3,17 +3,18 @@ import 'package:petmatch/widget/profile_card.dart';
 import 'package:petmatch/widget/tag_widget.dart';
 
 import '../main.dart';
+import '../model/pet_match.model.dart';
 import '../model/profile.dart';
 
 class DragWidget extends StatefulWidget {
   const DragWidget({
     Key? key,
-    required this.profile,
+    required this.petMatchModel,
     required this.index,
     required this.swipeNotifier,
     this.isLastCard = false,
   }) : super(key: key);
-  final Profile profile;
+  final PetMatchModel petMatchModel;
   final int index;
   final ValueNotifier<Swipe> swipeNotifier;
   final bool isLastCard;
@@ -42,7 +43,7 @@ class _DragWidgetState extends State<DragWidget> {
                     : const AlwaysStoppedAnimation(0),
                 child: Stack(
                   children: [
-                    ProfileCard(profile: widget.profile),
+                    ProfileCard(petMatchModel: widget.petMatchModel),
                     widget.swipeNotifier.value != Swipe.none
                         ? widget.swipeNotifier.value == Swipe.right
                             ? Positioned(
@@ -100,7 +101,7 @@ class _DragWidgetState extends State<DragWidget> {
             builder: (BuildContext context, Swipe swipe, Widget? child) {
               return Stack(
                 children: [
-                  ProfileCard(profile: widget.profile),
+                  ProfileCard(petMatchModel: widget.petMatchModel),
                   // heck if this is the last card and Swipe is not equal to Swipe.none
                   swipe != Swipe.none && widget.isLastCard
                       ? swipe == Swipe.right

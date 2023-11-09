@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
+import '../model/pet_match.model.dart';
 import '../model/profile.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({Key? key, required this.profile}) : super(key: key);
-  final Profile profile;
+  const ProfileCard({Key? key, required this.petMatchModel}) : super(key: key);
+  final PetMatchModel petMatchModel;
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +20,14 @@ class ProfileCard extends StatelessWidget {
           Positioned.fill(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                profile.imageAsset,
+              child: Image.memory(
+                base64Decode(petMatchModel.picturePet!),
                 fit: BoxFit.fitHeight,
               ),
+              // child: Image.asset(
+              //   petMatchModel.picturePet,
+              //   fit: BoxFit.fitHeight,
+              // ),
             ),
           ),
           Positioned(
@@ -47,21 +54,34 @@ class ProfileCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      profile.name,
+                      'ชื่อ ${petMatchModel.namePet!}',
                       style: const TextStyle(
                         fontFamily: 'Nunito',
                         fontWeight: FontWeight.w800,
                         fontSize: 21,
                       ),
                     ),
-                    Text(
-                      profile.distance,
-                      style: const TextStyle(
-                        fontFamily: 'Nunito',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        color: Colors.grey,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          'เพศ${petMatchModel.sexPet!}',
+                          style: const TextStyle(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 89, 88, 88),
+                          ),
+                        ),
+                        Text(
+                          ' อายุ ${petMatchModel.agePet!}',
+                          style: const TextStyle(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 89, 88, 88),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
