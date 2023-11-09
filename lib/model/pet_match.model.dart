@@ -17,6 +17,16 @@ class PetMatchModel {
   bool? matchUserguest;
   bool? matchUserhome;
   bool? matchDislike;
+  String? typeSkin;
+  String? typeBlood;
+  String? username;
+  String? password;
+  String? information;
+  String? contact;
+  int? idDistrict;
+  int? idSubdistrict;
+  int? idTypeuser;
+  String? nameBreed;
 
   PetMatchModel(
       {this.idPet,
@@ -36,7 +46,17 @@ class PetMatchModel {
       this.idPetguest,
       this.matchUserguest,
       this.matchUserhome,
-      this.matchDislike});
+      this.matchDislike,
+      this.typeSkin,
+      this.typeBlood,
+      this.username,
+      this.password,
+      this.information,
+      this.contact,
+      this.idDistrict,
+      this.idSubdistrict,
+      this.idTypeuser,
+      this.nameBreed});
 
   PetMatchModel.fromJson(Map<String, dynamic> json) {
     idPet = json['id_pet'];
@@ -54,9 +74,19 @@ class PetMatchModel {
     idPethome = json['id_pethome'];
     idUserguest = json['id_userguest'];
     idPetguest = json['id_petguest'];
-    matchUserguest = json['match_userguest'] ?? false;
-    matchUserhome = json['match_userhome'] ?? false;
-    matchDislike = json['match_dislike'] ?? false;
+    matchUserguest = json['match_userguest'];
+    matchUserhome = json['match_userhome'];
+    matchDislike = json['match_dislike'];
+    typeSkin = json['type_skin'];
+    typeBlood = json['type_blood'];
+    username = json['username'];
+    password = json['password'];
+    information = json['information'];
+    contact = json['contact'];
+    idDistrict = json['id_district'];
+    idSubdistrict = json['id_subdistrict'];
+    idTypeuser = json['id_typeuser'];
+    nameBreed = json['name_breed'];
   }
 
   Map<String, dynamic> toJson() {
@@ -79,6 +109,16 @@ class PetMatchModel {
     data['match_userguest'] = this.matchUserguest;
     data['match_userhome'] = this.matchUserhome;
     data['match_dislike'] = this.matchDislike;
+    data['type_skin'] = this.typeSkin;
+    data['type_blood'] = this.typeBlood;
+    data['username'] = this.username;
+    data['password'] = this.password;
+    data['information'] = this.information;
+    data['contact'] = this.contact;
+    data['id_district'] = this.idDistrict;
+    data['id_subdistrict'] = this.idSubdistrict;
+    data['id_typeuser'] = this.idTypeuser;
+    data['name_breed'] = this.nameBreed;
     return data;
   }
 }
