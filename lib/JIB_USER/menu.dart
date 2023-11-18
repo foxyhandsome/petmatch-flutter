@@ -5,6 +5,7 @@ import 'package:petmatch/JIB_USER/home.dart';
 import 'package:petmatch/JIB_USER/pet_match.dart';
 import 'package:petmatch/JIB_USER/realuser.dart';
 import 'package:petmatch/JIB_USER/reqmatch.dart';
+import 'package:petmatch/JIB_USER/select_pet.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key});
@@ -18,7 +19,7 @@ class _MenuState extends State<Menu> {
 
   List<Widget> _screens = [
     Allpet(),
-    PetMatch(),
+    SelectPet(),
     Reqmatch(),
     History(),
     Realuser(),
