@@ -58,12 +58,6 @@ class _RealuserState extends State<Realuser> {
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 239, 83, 80),
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
         title: Text(
           "โปรไฟล์ตัวเอง",
           style: TextStyle(color: Colors.black),

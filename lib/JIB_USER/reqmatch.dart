@@ -34,8 +34,7 @@ class _ReqmatchState extends State<Reqmatch> {
   Future<void> getData() async {
     try {
       pets = [];
-      // idUser = await storageToken.read(key: 'id_user');
-      idUser = "20";
+      idUser = await storageToken.read(key: 'id_user');
       final response = await dio.post(url_api + '/match/pet-ticket', data: {
         "id_user": int.parse(idUser!),
         "id_userhome": int.parse(idUser!),
@@ -85,12 +84,6 @@ class _ReqmatchState extends State<Reqmatch> {
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 239, 83, 80),
           elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
           title: Text(
             "ข้อเสนอการจับคู่",
             style: TextStyle(color: Colors.black),
@@ -152,7 +145,7 @@ class _ReqmatchState extends State<Reqmatch> {
                                         width:
                                             4), // ระยะห่างระหว่างไอคอนกับข้อความ
                                     Container(
-                                      width: 150,
+                                      width: 100,
                                       child: Text(
                                         "${pets[index].nameSubdistrict},${pets[index].nameDistrict}",
                                         style: TextStyle(
