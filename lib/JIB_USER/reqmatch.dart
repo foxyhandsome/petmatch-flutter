@@ -63,6 +63,7 @@ class _ReqmatchState extends State<Reqmatch> {
               idBreed: element["id_breed"],
               idPet: element["id_pet"],
               idSkin: element["id_skin"],
+               idMatch: element["id_match"],
               idUser: element["id_user"],
               namePet: element["name_pet"],
               picturePet: element["picture_pet"],
@@ -73,6 +74,60 @@ class _ReqmatchState extends State<Reqmatch> {
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+
+  Future<void> updateApprove(Pet pet) async {
+    try {
+      pets = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.post(url_api + '/match/reply-pet-match-info', data: {
+        "id_match": pet.idMatch,
+        "match_userguest": true,
+        "match_userguest_deny": false
+      });
+      if (response.statusCode == 201) {
+        final responseData = response.data;
+        getData();
+        setState(() {});
+      } else {
+        getData();
+        setState(() {});
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+       getData();
+       setState(() {});
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+  
+  Future<void> updateReject(Pet pet) async {
+    try {
+      pets = [];
+      idUser = await storageToken.read(key: 'id_user');
+      final response = await dio.post(url_api + '/match/reply-pet-match-info', data: {
+       "id_match": pet.idMatch,
+        "match_userguest": false,
+        "match_userguest_deny": true
+      });
+      if (response.statusCode == 201) {
+        final responseData = response.data;
+        getData();
+        setState(() {});
+      } else {
+            getData();
+            setState(() {});
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+       getData();
+            setState(() {});
       // Handle any exceptions that may occur during the request
       print('Error: $e');
     }
@@ -169,7 +224,9 @@ class _ReqmatchState extends State<Reqmatch> {
                                         icon:
                                             Icon(Icons.check), // ไอคอนของยอมรับ
                                         color: Color.fromARGB(255, 0, 128, 0),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          updateApprove(pets[index]);
+                                        },
                                       ),
                                     ),
                                     SizedBox(
@@ -186,7 +243,9 @@ class _ReqmatchState extends State<Reqmatch> {
                                         icon:
                                             Icon(Icons.close), // ไอคอนของปฏิเสธ
                                         color: Color.fromARGB(255, 255, 0, 0),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          updateReject(pets[index]);
+                                        },
                                       ),
                                     ),
                                   ],

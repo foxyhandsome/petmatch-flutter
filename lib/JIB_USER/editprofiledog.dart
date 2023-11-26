@@ -1,82 +1,364 @@
+import "dart:convert";
+import "dart:developer";
 import "dart:io";
 
 import "package:dio/dio.dart";
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:image_picker/image_picker.dart";
 
-List<String> list1 = <String>['แขวง 1', 'แขวง 2']; //แขวง
-List<String> list2 = <String>['เขต 1', 'เขต 2', 'เขต 3']; //เขต
-List<String> list3 = <String>[
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-]; //อายุ
-List<String> list4 = <String>[
-  'พันธุ์ 1',
-  'พันธุ์ 2',
-  'พันธุ์ 3',
-  'พันธุ์ 4',
-  'พันธุ์ 5',
-]; //พันธุ์
-List<String> list5 = <String>['สี 1', 'สี 2', 'สี 3', 'สี 4', 'สี 5']; //สีขน
-List<String> list6 = <String>['A', 'B', 'C', 'D', 'E', 'F', 'G']; //กรุ๊ปเลือด
+import "../constant/domain.dart";
+import "../model/pet.model.dart";
+import "../model/petblood.model.dart";
+import "../model/petbreed.model.dart";
+import "../model/petskin.model.dart";
+import "addpet.dart";
 
 class Editprofiledog extends StatefulWidget {
-  const Editprofiledog({super.key});
-
+  Editprofiledog({Key? key, required this.pet}) : super(key: key);
+  final int pet;
   @override
-  State<Editprofiledog> createState() => _EditprofiledogState();
+  _EditprofiledogState createState() => _EditprofiledogState();
 }
 
 class _EditprofiledogState extends State<Editprofiledog> {
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
   final dio = Dio();
-  login() {
-    if (usernameController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty) {}
+
+  @override
+  void initState() {
+    getPetblood();
+    getPetskin();
+    getPetbreed();
+    super.initState();
   }
 
-  File? _image;
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  String dropdownValue1 = list1.first; //แขวง
-  String dropdownValue2 = list2.first; //เขต
+// <------------เลือด------------>
+  List<Petblood> petbloods = [];
+  Petblood? petbloodsSelect;
+  Future<void> getPetblood() async {
+    try {
+      petbloods = [];
+      Response responseService =
+          await dio.get(url_api + '/petblood/get-petblood');
+      if (responseService.statusCode == 200) {
+        // final responseData = response.data;
+        List<Petblood> response = [];
+        responseService.data.forEach((element) {
+          response.add(Petblood.fromJson(element));
+        });
+        setState(() {
+          petbloods = response;
+        });
+      } else {
+        print('Request failed with status: ${responseService.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+  void _onDropDownItemSelectedPetblood(Petblood newSelectedBank) {
+    setState(() {
+      petbloodsSelect = newSelectedBank;
+    });
+  }
+  // <----------------------------->
+
+  // <------------สีขน------------>
+  List<Petskin> petskins = [];
+  Petskin? petskinSelect;
+  Future<void> getPetskin() async {
+    try {
+      petskins = [];
+      Response responseService =
+          await dio.get(url_api + '/petskin/get-petskin');
+      if (responseService.statusCode == 200) {
+        // final responseData = response.data;
+        List<Petskin> response = [];
+        responseService.data.forEach((element) {
+          response.add(Petskin.fromJson(element));
+        });
+        setState(() {
+          petskins = response;
+        });
+      } else {
+        print('Request failed with status: ${responseService.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+  void _onDropDownItemSelectedPetskin(Petskin newSelectedPetskin) {
+    setState(() {
+      petskinSelect = newSelectedPetskin;
+    });
+  }
+  // <----------------------------->
+
+  // <------------สายพันธุ์------------>
+  List<Petbreed> petbreeds = [];
+  Petbreed? petbreedSelect;
+  Future<void> getPetbreed() async {
+    try {
+      petbreeds = [];
+      Response responseService =
+          await dio.get(url_api + '/petbreed/get-petbreed');
+      if (responseService.statusCode == 200) {
+        // final responseData = response.data;
+        List<Petbreed> response = [];
+        responseService.data.forEach((element) {
+          response.add(Petbreed.fromJson(element));
+        });
+        setState(() {
+          petbreeds = response;
+        });
+      } else {
+        print('Request failed with status: ${responseService.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+  void _onDropDownItemSelectedPetbreed(Petbreed newSelectedPetbreed) {
+    setState(() {
+      petbreedSelect = newSelectedPetbreed;
+    });
+  }
+
+  final ImagePicker _picker = ImagePicker();
+  XFile? _image;
+  Future getImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  static String printJson(jsonObject, {bool isShowLog = true}) {
+    JsonEncoder encoder = new JsonEncoder.withIndent("     ");
+    String response = encoder.convert(jsonObject);
+    if (true == isShowLog) {
+      log(response);
+    }
+    return response;
+  }
+
+  int? sex_pet;
+  String? id_user;
+  void editpet(BuildContext context) async {
+    id_user = await storageToken.read(key: 'id_user');
+    try {
+      final Map<String, dynamic> petData = {
+        "picture_pet": image,
+        "id_blood": petbloodsSelect!.idBlood,
+        "id_skin": petskinSelect!.idSkin,
+        "id_breed": petbreedSelect!.idBreed.toString(),
+        "name_pet": nameControl.text,
+        "age_pet": dropdownValue3,
+        "id_user": id_user,
+        "health_pet": imageBreed,
+        "sex_pet": sex_pet == 0 ? "ผู้" : "เมีย"
+      };
+      Response response =
+          await dio.post(url_api + '/pet/edit-pet/'+ widget.pet.toString(), 
+          data: petData);
+      if (response.statusCode == 201) {
+        Navigator.of(context).pop();
+      } else {
+        print("HTTP Error: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  String? image;
+  Future<void> chooseFile(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(
+      source: source,
+      maxWidth: 500,
+      imageQuality: 100,
+    );
+    if (pickedFile == null) return;
+    final bytes = await pickedFile.readAsBytes();
+    final String base64String = base64Encode(bytes);
+    image = base64String;
+    setState(() {});
+  }
+
+  void _showImageSourceActionSheet(BuildContext context) {
+    Function(ImageSource) selectImageSource = (imageSource) {
+      chooseFile(imageSource);
+    };
+
+    if (Platform.isIOS) {
+      showCupertinoModalPopup(
+        context: context,
+        builder: (context) => CupertinoActionSheet(
+          actions: [
+            CupertinoActionSheetAction(
+              child: Text(
+                'ถ่ายภาพ',
+                style: TextStyle(
+                  fontFamily: 'anupark',
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                selectImageSource(ImageSource.camera);
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: Text(
+                'เลือกภาพถ่าย',
+                style: TextStyle(
+                  fontFamily: 'anupark',
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                selectImageSource(ImageSource.gallery);
+              },
+            )
+          ],
+        ),
+      );
+    } else {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => Wrap(children: [
+          ListTile(
+            leading: Icon(Icons.camera_alt),
+            title: Text(
+              'ถ่ายภาพ',
+              style: TextStyle(
+                fontFamily: 'anupark',
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSource(ImageSource.camera);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.photo_album),
+            title: Text(
+              'เลือกภาพถ่าย',
+              style: TextStyle(
+                fontFamily: 'anupark',
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSource(ImageSource.gallery);
+            },
+          ),
+        ]),
+      );
+    }
+  }
+
+  String? imageBreed;
+  Future<void> chooseFileBreed(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(
+      source: source,
+      maxWidth: 500,
+      imageQuality: 100,
+    );
+    if (pickedFile == null) return;
+    final bytes = await pickedFile.readAsBytes();
+    final String base64String = base64Encode(bytes);
+    imageBreed = base64String;
+    setState(() {});
+  }
+
+  void _showImageSourceActionSheetBreed(BuildContext context) {
+    Function(ImageSource) selectImageSource = (imageSource) {
+      chooseFileBreed(imageSource);
+    };
+
+    if (Platform.isIOS) {
+      showCupertinoModalPopup(
+        context: context,
+        builder: (context) => CupertinoActionSheet(
+          actions: [
+            CupertinoActionSheetAction(
+              child: Text(
+                'ถ่ายภาพ',
+                style: TextStyle(
+                  fontFamily: 'anupark',
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                selectImageSource(ImageSource.camera);
+              },
+            ),
+            CupertinoActionSheetAction(
+              child: Text(
+                'เลือกภาพถ่าย',
+                style: TextStyle(
+                  fontFamily: 'anupark',
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                selectImageSource(ImageSource.gallery);
+              },
+            )
+          ],
+        ),
+      );
+    } else {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => Wrap(children: [
+          ListTile(
+            leading: Icon(Icons.camera_alt),
+            title: Text(
+              'ถ่ายภาพ',
+              style: TextStyle(
+                fontFamily: 'anupark',
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSource(ImageSource.camera);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.photo_album),
+            title: Text(
+              'เลือกภาพถ่าย',
+              style: TextStyle(
+                fontFamily: 'anupark',
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              selectImageSource(ImageSource.gallery);
+            },
+          ),
+        ]),
+      );
+    }
+  }
+
+  TextEditingController nameControl = TextEditingController();
+
   String dropdownValue3 = list3.first; //อายุ
-  String dropdownValue4 = list4.first; //พันธุ์
-  String dropdownValue5 = list5.first; //สีขน
-  String dropdownValue6 = list6.first; //กรุ๊ปเลือด
 
   List<bool> isSelected = [false, false]; // 0 = เพศผู้, 1 = เพศเมีย
-
-  Future getImageDog() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
-
-  Future getImagePetCert() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +373,7 @@ class _EditprofiledogState extends State<Editprofiledog> {
           },
         ),
         title: Text(
-          "แก้ไขข้อมูล",
+          "แก้ไขสัตว์เลี้ยง",
           style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
         ),
       ),
@@ -111,32 +393,47 @@ class _EditprofiledogState extends State<Editprofiledog> {
             children: <Widget>[
 ///////////////////////////สัตว์เลี้ยง//////////////////////////////////////////////////////////////////////////////////////
 
+              Text(
+                "ข้อมูลสัตว์เลี้ยง",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
 
               SizedBox(height: 10.0),
-              GestureDetector(
-                onTap: getImageDog,
-                child: Container(
+              if (image != null)
+                Container(
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle, // กำหนดให้เป็นรูปวงกลม
+                    shape: BoxShape.circle,
                     border: Border.all(
-                      color: Color.fromARGB(255, 239, 83, 80), // สีขอบ
-                      width: 5.0, // ความหนาของ border
+                      color: Color.fromARGB(
+                          255, 239, 83, 80), // Set the border color
+                      width: 5.0, // Set the border width
                     ),
                   ),
-                  child: ClipOval(
-                    child: _image == null
-                        ? CircleAvatar(
-                            radius: 120,
-                            backgroundColor: Color.fromRGBO(255, 255, 255, 0.69), // สีพื้นหลังของ CircleAvatar
-                            child: Icon(Icons.pets, size: 100, color: Colors.black),
-                          )
-                        : CircleAvatar(
-                            radius: 120,
-                            backgroundImage: FileImage(_image!),
-                          ),
-                  ),
+                  child: CircleAvatar(
+                      radius: 120,
+                      backgroundImage: MemoryImage(base64Decode("${image}"))),
                 ),
+
+              SizedBox(height: 20.0),
+              Text(
+                "รูปสัตว์เลี้ยง",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
+
+              SizedBox(height: 15.0),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    _showImageSourceActionSheet(context);
+                  },
+                  child: Text('อัปโหลดรูปสัตว์เลี้ยง')),
+              SizedBox(height: 20.0),
 
               SizedBox(height: 20.0),
               ToggleButtons(
@@ -166,6 +463,7 @@ class _EditprofiledogState extends State<Editprofiledog> {
                     for (int i = 0; i < isSelected.length; i++) {
                       isSelected[i] = i == index;
                     }
+                    sex_pet = index;
                   });
                 },
                 constraints: BoxConstraints.tightFor(
@@ -174,140 +472,275 @@ class _EditprofiledogState extends State<Editprofiledog> {
                 ),
               ),
 
-              SizedBox(height: 10.0),
-              Text(
-                "แก้ไขพันธุ์",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 5.0),
-              DropdownMenu<String>(
-                initialSelection: list4.first,
-                onSelected: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue4 = value!;
-                  });
-                },
-                dropdownMenuEntries:
-                    list4.map<DropdownMenuEntry<String>>((String value) {
-                  return DropdownMenuEntry<String>(value: value, label: value);
-                }).toList(),
-              ),
-
-              SizedBox(height: 10.0),
-              Text(
-                "แก้ไขสีขน",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 5.0),
-              DropdownMenu<String>(
-                initialSelection: list5.first,
-                onSelected: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue5 = value!;
-                  });
-                },
-                dropdownMenuEntries:
-                    list5.map<DropdownMenuEntry<String>>((String value) {
-                  return DropdownMenuEntry<String>(value: value, label: value);
-                }).toList(),
-              ),
-
-              SizedBox(height: 10.0),
-              Text(
-                "แก้ไขกรุ๊ปเลือด",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 5.0),
-              DropdownMenu<String>(
-                initialSelection: list6.first,
-                onSelected: (String? value) {
-                  // This is called when the user selects an item.
-                  setState(() {
-                    dropdownValue6 = value!;
-                  });
-                },
-                dropdownMenuEntries:
-                    list6.map<DropdownMenuEntry<String>>((String value) {
-                  return DropdownMenuEntry<String>(value: value, label: value);
-                }).toList(),
-              ),
-
-              SizedBox(height: 30.0),
-              Text(
-                "แก้ไขใบพันธุ์ประวัติสัตว์เลี้ยง",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-
-              SizedBox(height: 10.0),
-              GestureDetector(
-                onTap: getImageDog,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color.fromARGB(255, 239, 83, 80),
-                      width: 5.0,
-                    ),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: _image == null
-                        ? Container(
-                            width: 300,
-                            height: 300,
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            child: Icon(Icons.local_hospital, size: 100),
-                          )
-                        : Container(
-                            width: 400,
-                            height: 300,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: FileImage(_image!),
-                              ),
-                            ),
-                          ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 30.0),
-                Container(
-                  width: 250, // กำหนดความกว้างของปุ่ม
-                  height: 50, // กำหนดความสูงของปุ่ม
-                  child: ElevatedButton(
-                    onPressed: () {
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 80, 239, 181),
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(20.0), // ปรับความโค้งมน
+              SizedBox(height: 20.0),
+              Container(
+                width: 380, // ปรับความกว้างตามที่ต้องการ
+                child: TextField(
+                  controller: nameControl,
+                  decoration: InputDecoration(
+                    labelText: 'ชื่อสัตว์เลี้ยง',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.white, // สีเส้นขอบ
                       ),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Icon(
-                          Icons.save,
-                          size: 32.0,
-                          color: Colors.white,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Colors.black, // สีเส้นขอบเมื่อไม่ได้รับการกด
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(
+                            255, 239, 83, 80), // สีเส้นขอบเมื่อได้รับการกด
+                      ),
+                    ),
+                    // Gradient ขอบของ TextField
+                    contentPadding: EdgeInsets.all(10.0),
+                    hintStyle: TextStyle(color: Colors.white),
+                    hintText: 'ใส่ชื่อสัตว์เลี้ยง',
+                    prefixIcon: Icon(Icons.pets),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 10.0),
+              Text(
+                "อายุ(ปี)",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.0),
+              DropdownMenu<String>(
+                initialSelection: list3.first,
+                onSelected: (String? value) {
+                  // This is called when the user selects an item.
+                  setState(() {
+                    dropdownValue3 = value!;
+                  });
+                },
+                dropdownMenuEntries:
+                    list3.map<DropdownMenuEntry<String>>((String value) {
+                  return DropdownMenuEntry<String>(value: value, label: value);
+                }).toList(),
+                width: 380,
+              ),
+
+              SizedBox(height: 10.0),
+              Text(
+                "สายพันธุ์",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.0),
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 37, 37, 37), width: 1)),
+                width: double.infinity,
+                margin: EdgeInsets.only(left: 5, right: 5),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Petbreed>(
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color.fromARGB(255, 30, 30, 30),
+                      fontFamily: "verdana_regular",
+                    ),
+                    hint: Text(
+                      "เลือกสายพันธุ์",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontFamily: "verdana_regular",
+                      ),
+                    ),
+                    items: petbreeds
+                        .map<DropdownMenuItem<Petbreed>>((Petbreed value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Icon(valueItem.bank_logo),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(value.nameBreed!),
+                          ],
                         ),
-                        SizedBox(width: 10.0),
-                        Text(
-                          'บันทึก',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold
-                          ),
+                      );
+                    }).toList(),
+                    isExpanded: true,
+                    isDense: true,
+                    onChanged: (Petbreed? newSelectedPetbreed) {
+                      _onDropDownItemSelectedPetbreed(newSelectedPetbreed!);
+                    },
+                    value: petbreedSelect,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Text(
+                "สีขน",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.0),
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 37, 37, 37), width: 1)),
+                width: double.infinity,
+                margin: EdgeInsets.only(left: 5, right: 5),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Petskin>(
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color.fromARGB(255, 30, 30, 30),
+                      fontFamily: "verdana_regular",
+                    ),
+                    hint: Text(
+                      "เลือกสีขน",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontFamily: "verdana_regular",
+                      ),
+                    ),
+                    items: petskins
+                        .map<DropdownMenuItem<Petskin>>((Petskin value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Icon(valueItem.bank_logo),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(value.typeSkin!),
+                          ],
                         ),
-                      ],
+                      );
+                    }).toList(),
+                    isExpanded: true,
+                    isDense: true,
+                    onChanged: (Petskin? newSelectedPetskin) {
+                      _onDropDownItemSelectedPetskin(newSelectedPetskin!);
+                    },
+                    value: petskinSelect,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Text(
+                "กรุ๊ปเลือด",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.0),
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 37, 37, 37), width: 1)),
+                width: double.infinity,
+                margin: EdgeInsets.only(left: 5, right: 5),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Petblood>(
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color.fromARGB(255, 30, 30, 30),
+                      fontFamily: "verdana_regular",
+                    ),
+                    hint: Text(
+                      "เลือกกรุ๊ปเลือด",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontFamily: "verdana_regular",
+                      ),
+                    ),
+                    items: petbloods
+                        .map<DropdownMenuItem<Petblood>>((Petblood value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Icon(valueItem.bank_logo),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(value.typeBlood!),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                    isExpanded: true,
+                    isDense: true,
+                    onChanged: (Petblood? newSelectedPetblood) {
+                      _onDropDownItemSelectedPetblood(newSelectedPetblood!);
+                    },
+                    value: petbloodsSelect,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.0),
+              if (imageBreed != null)
+                Container(
+                  width: 400, // กำหนดความกว้างของ Container
+                  height: 300, // กำหนดความสูงของ Container
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, // กำหนดให้เป็นสี่เหลี่ยม
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: MemoryImage(base64Decode("${imageBreed}")),
+                    ),
+                    border: Border.all(
+                      // เพิ่ม border
+                      color: Colors.black, // สีของ border
+                      width: 2.0, // ความหนาของ border
                     ),
                   ),
                 ),
+
+              SizedBox(height: 20.0),
+              Text(
+                "ใบยืนยันสายพันธุ์สัตว์เลี้ยง",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+
+              SizedBox(height: 15.0),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    _showImageSourceActionSheetBreed(context);
+                  },
+                  child: Text('อัปโหลดใบยืนยันพันธุ์')),
+              SizedBox(height: 20.0),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    editpet(context);
+                  },
+                  child: Text('บันทึก')), // <-- Check this comma
             ],
           ),
         ),

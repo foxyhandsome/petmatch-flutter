@@ -131,7 +131,9 @@ class _ProfiledogState extends State<Profiledog> {
             icon: Icon(Icons.edit, color: Color.fromARGB(255, 245, 244, 244)),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => Editprofiledog())));
+                  MaterialPageRoute(builder: ((context) => Editprofiledog(
+                    pet: widget.pet.idPet!
+                  ))));
             },
           ),
           IconButton(
