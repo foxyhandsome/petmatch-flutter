@@ -72,7 +72,7 @@ class _PetMatchState extends State<PetMatch>
       "id_userguest": petMatchModels[index].idUser,
       "id_petguest": petMatchModels[index].idPet,
       "match_userguest": false,
-      "match_userguest_deny" : false,
+      "match_userguest_deny": false,
       "match_userhome": true,
       "match_dislike": false
     });
@@ -84,7 +84,7 @@ class _PetMatchState extends State<PetMatch>
         "id_userguest": petMatchModels[index].idUser,
         "id_petguest": petMatchModels[index].idPet,
         "match_userguest": false,
-        "match_userguest_deny" : false,
+        "match_userguest_deny": false,
         "match_userhome": true,
         "match_dislike": false
       });
@@ -107,7 +107,7 @@ class _PetMatchState extends State<PetMatch>
       "id_userguest": petMatchModels[index].idUser,
       "id_petguest": petMatchModels[index].idPet,
       "match_userguest": false,
-      "match_userguest_deny" : false,
+      "match_userguest_deny": false,
       "match_userhome": false,
       "match_dislike": true
     });
@@ -119,7 +119,7 @@ class _PetMatchState extends State<PetMatch>
         "id_userguest": petMatchModels[index].idUser,
         "id_petguest": petMatchModels[index].idPet,
         "match_userguest": false,
-        "match_userguest_deny" : false,
+        "match_userguest_deny": false,
         "match_userhome": false,
         "match_dislike": true
       });
@@ -245,6 +245,14 @@ class _PetMatchState extends State<PetMatch>
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  ActionButtonWidget(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
                                   ActionButtonWidget(
                                     onPressed: () {
                                       actionDisLike(index);

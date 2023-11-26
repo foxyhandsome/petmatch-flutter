@@ -1,280 +1,432 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:petmatch/JIB_USER/home.dart';
 import 'package:petmatch/JIB_USER/menu.dart';
+import 'package:petmatch/model/petbreed.model.dart';
+import 'package:petmatch/model/petskin.model.dart';
 
-List<String> list7 = <String>[
-  'ปอมเมอเรเนียน (Pomeranian)',
-  'ไซบีเรียน ฮัสกี (Siberian Husky)',
-  'ปั๊ก (Pug)',
-  'ชิวาวา (Chihuahua)',
-  'ไทยบางแก้ว (Thai Bangkaew)',
-  'เฟรนช์ บูลด็อก (French Bulldog)',
-  'โกลเด้น รีทรีฟเวอร์ (Golden Retriever)',
-  'ไทยหลังอาน (Thai Ridgeback)',
-  'อเมริกัน บูลลี่ (American Bully)',
-  'พิทบูล (Pitbull)',
-  'ชิสุ (Shih Tzu)',
-  'บีเกิล (Beagle)',
-  'หมาไทย',
-  'ลาบราดอร์รีทรีฟเวอร์ (Labrador Retriever)',
-  'คอร์กี้ (Corgi)',
-  'พุดเดิ้ล (Poodle)',
-  'อิงลิช บูลล์ด็อก (English Bulldogs)',
-  'แจ็ครัสเซลล์เทอร์เรีย (Jack Russell Terrier)',
-  'ยอร์คเชียร์เทอร์เรีย (Yorkshire Terrier)',
-  'ซามอยด์ (Samoyed)',
-];
+import '../constant/domain.dart';
+import '../model/petblood.model.dart';
+
+List<String> list3 = <String>[
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  '13',
+  '14',
+  '15',
+  '16',
+  '17',
+  '18',
+  '19',
+  '20',
+]; //อายุ
 
 /// Flutter code sample for [ToggleButtons].
 
-const List<Widget> fruits = <Widget>[
-  Text('เพศผู้'),
-  Text('เพศเมีย'),
-];
-
 class Filter extends StatefulWidget {
-  const Filter({super.key});
+  const Filter({Key? key});
+
+  @override
+  _FilterState createState() => _FilterState();
+}
+
+class _FilterState extends State<Filter> {
+  static FlutterSecureStorage storageToken = new FlutterSecureStorage();
+  final dio = Dio();
+
+  @override
+  void initState() {
+    getPetblood();
+    getPetskin();
+    getPetbreed();
+    super.initState();
+  }
+
+// <------------เลือด------------>
+  List<Petblood> petbloods = [];
+  Petblood? petbloodsSelect;
+  Future<void> getPetblood() async {
+    try {
+      petbloods = [];
+      Response responseService =
+          await dio.get(url_api + '/petblood/get-petblood');
+      if (responseService.statusCode == 200) {
+        // final responseData = response.data;
+        List<Petblood> response = [];
+        responseService.data.forEach((element) {
+          response.add(Petblood.fromJson(element));
+        });
+        setState(() {
+          petbloods = response;
+        });
+      } else {
+        print('Request failed with status: ${responseService.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+  void _onDropDownItemSelectedPetblood(Petblood newSelectedBank) {
+    setState(() {
+      petbloodsSelect = newSelectedBank;
+    });
+  }
+  // <----------------------------->
+
+  // <------------สีขน------------>
+  List<Petskin> petskins = [];
+  Petskin? petskinSelect;
+  Future<void> getPetskin() async {
+    try {
+      petskins = [];
+      Response responseService =
+          await dio.get(url_api + '/petskin/get-petskin');
+      if (responseService.statusCode == 200) {
+        // final responseData = response.data;
+        List<Petskin> response = [];
+        responseService.data.forEach((element) {
+          response.add(Petskin.fromJson(element));
+        });
+        setState(() {
+          petskins = response;
+        });
+      } else {
+        print('Request failed with status: ${responseService.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+  void _onDropDownItemSelectedPetskin(Petskin newSelectedPetskin) {
+    setState(() {
+      petskinSelect = newSelectedPetskin;
+    });
+  }
+  // <----------------------------->
+
+  // <------------สายพันธุ์------------>
+  List<Petbreed> petbreeds = [];
+  Petbreed? petbreedSelect;
+  Future<void> getPetbreed() async {
+    try {
+      petbreeds = [];
+      Response responseService =
+          await dio.get(url_api + '/petbreed/get-petbreed');
+      if (responseService.statusCode == 200) {
+        // final responseData = response.data;
+        List<Petbreed> response = [];
+        responseService.data.forEach((element) {
+          response.add(Petbreed.fromJson(element));
+        });
+        setState(() {
+          petbreeds = response;
+        });
+      } else {
+        print('Request failed with status: ${responseService.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+  void _onDropDownItemSelectedPetbreed(Petbreed newSelectedPetbreed) {
+    setState(() {
+      petbreedSelect = newSelectedPetbreed;
+    });
+  }
+
+  static String printJson(jsonObject, {bool isShowLog = true}) {
+    JsonEncoder encoder = new JsonEncoder.withIndent("     ");
+    String response = encoder.convert(jsonObject);
+    if (true == isShowLog) {
+      log(response);
+    }
+    return response;
+  }
+
+  int? sex_pet;
+  String? id_user;
+  void addPet(BuildContext context) async {
+    id_user = await storageToken.read(key: 'id_user');
+    try {
+      final Map<String, dynamic> petData = {
+        "id_blood": petbloodsSelect!.idBlood,
+        "id_skin": petskinSelect!.idSkin,
+        "id_breed": petbreedSelect!.idBreed.toString(),
+        "name_pet": nameControl.text,
+        "age_pet": dropdownValue3,
+        "id_user": id_user,
+        "sex_pet": sex_pet == 0 ? "ผู้" : "เมีย"
+      };
+      Response response =
+          await dio.post(url_api + '/pet/create-pet', data: petData);
+      if (response.statusCode == 201) {
+        Navigator.of(context).pop();
+      } else {
+        print("HTTP Error: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  TextEditingController nameControl = TextEditingController();
+
+  String dropdownValue3 = list3.first; //อายุ
+
+  List<bool> isSelected = [false, false]; // 0 = เพศผู้, 1 = เพศเมีย
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(useMaterial3: true),
-      home: const selectedGender(title: 'ToggleButtons Sample'),
-    );
-  }
-  
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-}
-
-class selectedGender extends StatefulWidget {
-  const selectedGender({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<selectedGender> createState() => _selectedGenderState();
-}
-
-class _selectedGenderState extends State<selectedGender> {
-  final List<bool> _selectedFruits = <bool>[true, false];
-  // String selectedBreed = '20';
-
- String dropdownValue7 = list7.first; //กรุ๊ปเลือด
-
-  bool isSolidColor = false;
-  bool isTwoTone = false;
-  bool isThreeColor = false;
-  bool isTuxedoPattern = false;
-  bool isMerlePattern = false;
-  bool isBlackAndTan = false;
-  bool isSpotsPattern = false;
-  bool isTigerPattern = false;
-  bool isSableColor = false;
-  bool isBrindleColor = false;
-
-  var selectedRange = RangeValues(1, 10);
-
-  get selectedGender => null;
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 239, 83, 80),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon:
+              Icon(Icons.arrow_back, color: Color.fromARGB(255, 255, 255, 255)),
           onPressed: () {
-             Navigator.push(context, MaterialPageRoute(builder: ((context) => Menu())));;
+            Navigator.of(context).pop();
           },
         ),
         title: Text(
-          "Filter",
-          style: TextStyle(color: Color.fromARGB(255, 248, 248, 248)),
+          "เลือกรูปแบบสัตว์เลี้ยงที่สนใจ",
+          style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20.0),
+      // backgroundColor: Color.fromARGB(255, 255, 255, 255),
+
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color:
+              Color.fromARGB(255, 255, 255, 255), // Set your desired color here
+        ),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(65, 0, 0, 0),
-                child: Text(
-                  "เพศ",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+///////////////////////////สัตว์เลี้ยง//////////////////////////////////////////////////////////////////////////////////////
+
+              SizedBox(height: 10.0),
+              Text(
+                "อายุไม่เกิน(ปี)",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              ToggleButtons(
-                onPressed: (int index) {
+              SizedBox(height: 5.0),
+              DropdownMenu<String>(
+                initialSelection: list3.first,
+                onSelected: (String? value) {
+                  // This is called when the user selects an item.
                   setState(() {
-                    for (int i = 0; i < _selectedFruits.length; i++) {
-                      _selectedFruits[i] = i == index;
-                    }
+                    dropdownValue3 = value!;
                   });
                 },
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                selectedBorderColor: Colors.red[700],
-                selectedColor: Colors.white,
-                fillColor: Colors.red[400],
-                color: Colors.red[400],
-                constraints: const BoxConstraints(
-                  minHeight: 40.0,
-                  minWidth: 80.0,
-                ),
-                isSelected: _selectedFruits,
-                children: fruits,
+                dropdownMenuEntries:
+                    list3.map<DropdownMenuEntry<String>>((String value) {
+                  return DropdownMenuEntry<String>(value: value, label: value);
+                }).toList(),
+                width: 380,
               ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Text(
-                  "อายุสัตว์เลี้ยง",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+
+              SizedBox(height: 10.0),
+              Text(
+                "สายพันธุ์",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              SliderTheme(
-                data: SliderThemeData(
-                  activeTrackColor:
-                      Colors.red[400], // เปลี่ยนสีให้เป็นสีดำที่นี่
-                ),
-                child: RangeSlider(
-                  values: selectedRange,
-                  onChanged: (RangeValues age) {
-                    setState(() => selectedRange = age);
-                  },
-                  min: 0,
-                  max: 10,
-                  divisions: 10,
-                  labels: RangeLabels(
-                    '${selectedRange.start}',
-                    '${selectedRange.end}',
+              SizedBox(height: 5.0),
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 37, 37, 37), width: 1)),
+                width: double.infinity,
+                margin: EdgeInsets.only(left: 5, right: 5),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Petbreed>(
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color.fromARGB(255, 30, 30, 30),
+                      fontFamily: "verdana_regular",
+                    ),
+                    hint: Text(
+                      "เลือกสายพันธุ์",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontFamily: "verdana_regular",
+                      ),
+                    ),
+                    items: petbreeds
+                        .map<DropdownMenuItem<Petbreed>>((Petbreed value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Icon(valueItem.bank_logo),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(value.nameBreed!),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                    isExpanded: true,
+                    isDense: true,
+                    onChanged: (Petbreed? newSelectedPetbreed) {
+                      _onDropDownItemSelectedPetbreed(newSelectedPetbreed!);
+                    },
+                    value: petbreedSelect,
                   ),
                 ),
               ),
+              SizedBox(height: 10.0),
               Text(
-                'เลือกพันธุ์สุนัข:',
+                "สีขน",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
               SizedBox(height: 5.0),
-                  DropdownMenu<String>(
-                        initialSelection: list7.first,
-                        onSelected: (String? value) {
-                          // This is called when the user selects an item.
-                          setState(() {
-                            dropdownValue7 = value!;
-                          });
-                        },
-                        dropdownMenuEntries: list7.map<DropdownMenuEntry<String>>((String value) {
-                          return DropdownMenuEntry<String>(value: value, label: value);
-                        }).toList(),
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 37, 37, 37), width: 1)),
+                width: double.infinity,
+                margin: EdgeInsets.only(left: 5, right: 5),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Petskin>(
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color.fromARGB(255, 30, 30, 30),
+                      fontFamily: "verdana_regular",
+                    ),
+                    hint: Text(
+                      "เลือกสีขน",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontFamily: "verdana_regular",
                       ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Text(
-                  "สีขนสัตว์เลี้ยง",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    items: petskins
+                        .map<DropdownMenuItem<Petskin>>((Petskin value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Icon(valueItem.bank_logo),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(value.typeSkin!),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                    isExpanded: true,
+                    isDense: true,
+                    onChanged: (Petskin? newSelectedPetskin) {
+                      _onDropDownItemSelectedPetskin(newSelectedPetskin!);
+                    },
+                    value: petskinSelect,
+                  ),
                 ),
               ),
-
-              CheckboxListTile(
-                title: Text('สุนัขขนสีเดียวล้วน'),
-                value: isSolidColor,
-                onChanged: (newValue) {
-                  setState(() {
-                    isSolidColor = newValue!;
-                  });
-                },
+              SizedBox(height: 10.0),
+              Text(
+                "กรุ๊ปเลือด",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              CheckboxListTile(
-                title: Text('สุนัขขนสองสี'),
-                value: isTwoTone,
-                onChanged: (newValue) {
-                  setState(() {
-                    isTwoTone = newValue!;
-                  });
-                },
+              SizedBox(height: 5.0),
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 37, 37, 37), width: 1)),
+                width: double.infinity,
+                margin: EdgeInsets.only(left: 5, right: 5),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<Petblood>(
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: const Color.fromARGB(255, 30, 30, 30),
+                      fontFamily: "verdana_regular",
+                    ),
+                    hint: Text(
+                      "เลือกกรุ๊ปเลือด",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontFamily: "verdana_regular",
+                      ),
+                    ),
+                    items: petbloods
+                        .map<DropdownMenuItem<Petblood>>((Petblood value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Icon(valueItem.bank_logo),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(value.typeBlood!),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                    isExpanded: true,
+                    isDense: true,
+                    onChanged: (Petblood? newSelectedPetblood) {
+                      _onDropDownItemSelectedPetblood(newSelectedPetblood!);
+                    },
+                    value: petbloodsSelect,
+                  ),
+                ),
               ),
-              CheckboxListTile(
-                title: Text('สุนัขขนสามสี'),
-                value: isThreeColor,
-                onChanged: (newValue) {
-                  setState(() {
-                    isThreeColor = newValue!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: Text('สุนัขขนสีลายทักซิโด้'),
-                value: isTuxedoPattern,
-                onChanged: (newValue) {
-                  setState(() {
-                    isTuxedoPattern = newValue!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: Text('สุนัขขนสีลายหินอ่อน'),
-                value: isMerlePattern,
-                onChanged: (newValue) {
-                  setState(() {
-                    isMerlePattern = newValue!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: Text('สุนัขขนสีดำด่าง'),
-                value: isBlackAndTan,
-                onChanged: (newValue) {
-                  setState(() {
-                    isBlackAndTan = newValue!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: Text('สุนัขขนสีลายจุด'),
-                value: isSpotsPattern,
-                onChanged: (newValue) {
-                  setState(() {
-                    isSpotsPattern = newValue!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: Text('สุนัขขนสีลายเสือ'),
-                value: isTigerPattern,
-                onChanged: (newValue) {
-                  setState(() {
-                    isTigerPattern = newValue!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: Text('สุนัขขนสีซาเบิล'),
-                value: isSableColor,
-                onChanged: (newValue) {
-                  setState(() {
-                    isSableColor = newValue!;
-                  });
-                },
-              ),
-              CheckboxListTile(
-                title: Text('สุนัขขนสีอานม้า'),
-                value: isBrindleColor,
-                onChanged: (newValue) {
-                  setState(() {
-                    isBrindleColor = newValue!;
-                  });
-                },
-              ),
+              SizedBox(height: 20.0),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 239, 83, 80),
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  onPressed: () {
+                    addPet(context);
+                  },
+                  child: Text(
+                    'ไปจับคู่เล๊ย',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  )), // <-- Check this comma
             ],
           ),
         ),

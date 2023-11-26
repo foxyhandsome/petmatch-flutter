@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:petmatch/JIB_USER/Filter.dart';
 import 'package:petmatch/JIB_USER/pet_match.dart';
 import 'package:petmatch/constant/domain.dart';
 
@@ -115,13 +116,17 @@ class _SelectPetState extends State<SelectPet> {
                   children: <Widget>[
                     ElevatedButton.icon(
                       onPressed: () {
+                        // selectedGender
+                        // Navigator.push(
+                        //         context,
+                        //         MaterialPageRoute(
+                        //             builder: ((context) =>
+                        //                 PetMatch(pet: pets[index]))))
+                        //     .then((value) => {getData()});
                         Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: ((context) =>
-                                        PetMatch(pet: pets[index]))))
-                            .then((value) => {getData()});
-                        ;
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => Filter())));
                       },
                       icon: Icon(
                         Icons.pets,
