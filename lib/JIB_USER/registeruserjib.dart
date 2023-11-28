@@ -84,7 +84,9 @@ class _RegisteruserjibState extends State<Registeruserjib> {
           "id_subdistrict": id_subdistrict,
           "id_typeuser": 1
         });
-        if (response.statusCode == 200) {
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: ((context) => Loginjib())));
         } else {
           print('Request failed with status: ${response.statusCode}');
         }
@@ -371,10 +373,7 @@ class _RegisteruserjibState extends State<Registeruserjib> {
                       ),
                     ),
                     onPressed: () {
-                      register(context).then((value) => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: ((context) => Loginjib()))));
+                      register(context);
                     },
                     child: Text('สมัครสมาชิก')),
               ),
