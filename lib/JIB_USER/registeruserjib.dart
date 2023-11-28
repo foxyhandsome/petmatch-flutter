@@ -71,23 +71,27 @@ class _RegisteruserjibState extends State<Registeruserjib> {
   }
 
   Future<void> register(BuildContext context) async {
-    try {
-      final response = await dio.post(url_api + '/user/create-user', data: {
-        "username": username.text,
-        "password": password.text,
-        "contact": contact.text,
-        "information": information.text,
-        "id_district": id_district,
-        "id_subdistrict": id_subdistrict,
-        "id_typeuser": 1
-      });
-      if (response.statusCode == 200) {
-      } else {
-        print('Request failed with status: ${response.statusCode}');
+    if (username.text != '' && password.text != '' && contact.text != '') {
+      //
+    } else {
+      try {
+        final response = await dio.post(url_api + '/user/create-user', data: {
+          "username": username.text,
+          "password": password.text,
+          "contact": contact.text,
+          "information": information.text,
+          "id_district": id_district,
+          "id_subdistrict": id_subdistrict,
+          "id_typeuser": 1
+        });
+        if (response.statusCode == 200) {
+        } else {
+          print('Request failed with status: ${response.statusCode}');
+        }
+      } catch (e) {
+        // Handle any exceptions that may occur during the request
+        print('Error: $e');
       }
-    } catch (e) {
-      // Handle any exceptions that may occur during the request
-      print('Error: $e');
     }
   }
 
@@ -98,10 +102,10 @@ class _RegisteruserjibState extends State<Registeruserjib> {
   }
 
   File? _image;
-  TextEditingController username = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController contact = TextEditingController();
-  TextEditingController information = TextEditingController();
+  TextEditingController username = TextEditingController(text: '');
+  TextEditingController password = TextEditingController(text: '');
+  TextEditingController contact = TextEditingController(text: '');
+  TextEditingController information = TextEditingController(text: '');
   int? id_district;
   int? id_subdistrict;
 
@@ -367,8 +371,10 @@ class _RegisteruserjibState extends State<Registeruserjib> {
                       ),
                     ),
                     onPressed: () {
-                      register(context).then((value) => Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) => Loginjib()))));
+                      register(context).then((value) => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => Loginjib()))));
                     },
                     child: Text('สมัครสมาชิก')),
               ),
