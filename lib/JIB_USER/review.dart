@@ -141,7 +141,7 @@ class _ReviewState extends State<Review> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "${review.username}:",
+              "รีวิวจากผู้ใช้ ${review.username}",
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10.0),

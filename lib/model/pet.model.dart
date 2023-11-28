@@ -31,7 +31,8 @@ class Pet {
   int? idPet;
   String? sexPet;
   String? healthPet;
-
+  String? create_date;
+  String? update_date;
   Pet(
       {this.namePet,
       this.agePet,
@@ -64,12 +65,16 @@ class Pet {
       this.matchDislike,
       this.idPet,
       this.sexPet,
+      this.create_date,
+      this.update_date,
       this.healthPet});
 
   Pet.fromJson(Map<String, dynamic> json) {
     namePet = json['name_pet'];
     agePet = json['age_pet'];
     idSkin = json['id_skin'];
+    create_date = json['create_date'];
+    update_date = json['update_date'];
     idBlood = json['id_blood'];
     idUser = json['id_user'];
     idBreed = json['id_breed'];
@@ -114,6 +119,8 @@ class Pet {
     data['name_breed'] = this.nameBreed;
     data['username'] = this.username;
     data['password'] = this.password;
+    data['create_date'] = this.create_date;
+    data['update_date'] = this.update_date;
     data['information'] = this.information;
     data['contact'] = this.contact;
     data['id_district'] = this.idDistrict;

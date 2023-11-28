@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:intl/intl.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -64,7 +64,9 @@ class _ReqmatchState extends State<Reqmatch> {
               idBreed: element["id_breed"],
               idPet: element["id_pet"],
               idSkin: element["id_skin"],
-               idMatch: element["id_match"],
+              idMatch: element["id_match"],
+              create_date: element["create_date"],
+              update_date: element["update_date"],
               idUser: element["id_user"],
               namePet: element["name_pet"],
               picturePet: element["picture_pet"],
@@ -80,25 +82,33 @@ class _ReqmatchState extends State<Reqmatch> {
     }
   }
 
+  String convertDateTime(String dateTimeString) {
+    DateTime dateTime = DateTime.parse(dateTimeString);
+
+    // Convert to the desired format
+    var formattedDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
+
+    return formattedDateTime;
+  }
 
   Future<void> updateApprove(Pet pet) async {
     try {
       pets = [];
       idUser = await storageToken.read(key: 'id_user');
-      final response = await dio.post(url_api + '/match/reply-pet-match-info', data: {
-        "id_match": pet.idMatch,
-        "match_userguest": true,
-        "match_userguest_deny": false
-      });
-       Fluttertoast.showToast(
-        msg: "ยอมรับข้อเสนอเรียบร้อยแล้ว",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
+      final response = await dio.post(url_api + '/match/reply-pet-match-info',
+          data: {
+            "id_match": pet.idMatch,
+            "match_userguest": true,
+            "match_userguest_deny": false
+          });
+      Fluttertoast.showToast(
+          msg: "ยอมรับข้อเสนอเรียบร้อยแล้ว",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);
       if (response.statusCode == 201) {
         final responseData = response.data;
         getData();
@@ -109,44 +119,43 @@ class _ReqmatchState extends State<Reqmatch> {
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
-       getData();
-       setState(() {});
+      getData();
+      setState(() {});
       // Handle any exceptions that may occur during the request
       print('Error: $e');
     }
   }
 
-  
   Future<void> updateReject(Pet pet) async {
     try {
       pets = [];
       idUser = await storageToken.read(key: 'id_user');
-      final response = await dio.post(url_api + '/match/reply-pet-match-info', data: {
-       "id_match": pet.idMatch,
-        "match_userguest": false,
-        "match_userguest_deny": true
-      });
-       Fluttertoast.showToast(
-        msg: "ปฎิเสธข้อเสนอเรียบร้อยแล้ว",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.black,
-        textColor: Colors.white,
-        fontSize: 16.0
-    );
+      final response = await dio.post(url_api + '/match/reply-pet-match-info',
+          data: {
+            "id_match": pet.idMatch,
+            "match_userguest": false,
+            "match_userguest_deny": true
+          });
+      Fluttertoast.showToast(
+          msg: "ปฎิเสธข้อเสนอเรียบร้อยแล้ว",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0);
       if (response.statusCode == 201) {
         final responseData = response.data;
         getData();
         setState(() {});
       } else {
-            getData();
-            setState(() {});
+        getData();
+        setState(() {});
         print('Request failed with status: ${response.statusCode}');
       }
     } catch (e) {
-       getData();
-            setState(() {});
+      getData();
+      setState(() {});
       // Handle any exceptions that may occur during the request
       print('Error: $e');
     }
@@ -211,20 +220,46 @@ class _ReqmatchState extends State<Reqmatch> {
                                     ),
                                   ],
                                 ),
-                                subtitle: Row(
-                                  children: <Widget>[
-                                    Icon(Icons.location_on,
-                                        color: Colors.grey), // ไอคอนของที่อยู่
+                                subtitle: Column(
+                                  children: [
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(Icons.location_on,
+                                            color:
+                                                Colors.grey), // ไอคอนของที่อยู่
+                                        SizedBox(
+                                            width:
+                                                4), // ระยะห่างระหว่างไอคอนกับข้อความ
+                                        Container(
+                                          width: 100,
+                                          child: Text(
+                                            "${pets[index].nameSubdistrict},${pets[index].nameDistrict}",
+                                            style: TextStyle(
+                                                overflow: TextOverflow.clip),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                     SizedBox(
-                                        width:
-                                            4), // ระยะห่างระหว่างไอคอนกับข้อความ
-                                    Container(
-                                      width: 100,
-                                      child: Text(
-                                        "${pets[index].nameSubdistrict},${pets[index].nameDistrict}",
-                                        style: TextStyle(
-                                            overflow: TextOverflow.clip),
-                                      ),
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(Icons.calendar_month,
+                                            color:
+                                                Colors.grey), // ไอคอนของที่อยู่
+                                        SizedBox(
+                                            width:
+                                                4), // ระยะห่างระหว่างไอคอนกับข้อความ
+                                        Container(
+                                          width: 100,
+                                          child: Text(
+                                            "วันที่ส่งข้อเสนอ ${convertDateTime(pets[index].create_date!)}",
+                                            style: TextStyle(
+                                                overflow: TextOverflow.clip),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
