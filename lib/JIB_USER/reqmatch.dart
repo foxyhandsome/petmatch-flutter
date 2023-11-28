@@ -84,10 +84,7 @@ class _ReqmatchState extends State<Reqmatch> {
 
   String convertDateTime(String dateTimeString) {
     DateTime dateTime = DateTime.parse(dateTimeString);
-
-    // Convert to the desired format
     var formattedDateTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(dateTime);
-
     return formattedDateTime;
   }
 
