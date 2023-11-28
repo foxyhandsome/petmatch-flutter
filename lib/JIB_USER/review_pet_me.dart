@@ -2,28 +2,28 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:petmatch/model/review.model.dart';
 
 import '../constant/domain.dart';
-import '../model/pet_match.model.dart';
-import '../model/review.model.dart';
+import '../model/pet.model.dart';
 
-class Review extends StatefulWidget {
-  final PetMatchModel petMatchModel;
-  const Review({super.key, required this.petMatchModel});
+class ReviewPetMe extends StatefulWidget {
+  final Pet pet;
+  const ReviewPetMe({super.key, required this.pet});
 
   @override
-  State<Review> createState() => _ReviewState();
+  State<ReviewPetMe> createState() => _ReviewPetMeState();
 }
 
-class _ReviewState extends State<Review> {
+class _ReviewPetMeState extends State<ReviewPetMe> {
   final dio = Dio();
 
   List<ReviewModel> reviewModelList = [];
   Future<void> getReviewModel() async {
     try {
       final List<ReviewModel> tempReviewList = [];
-      Response responseService = await dio
-          .get(url_api + '/review/get-review/${widget.petMatchModel.idPet}');
+      Response responseService =
+          await dio.get(url_api + '/review/get-review/${widget.pet.idPet}');
       if (responseService.statusCode == 200) {
         responseService.data.forEach((element) {
           tempReviewList.add(ReviewModel.fromJson(element));
@@ -77,8 +77,8 @@ class _ReviewState extends State<Review> {
               ),
               child: CircleAvatar(
                 radius: 60,
-                backgroundImage: MemoryImage(
-                    base64Decode("${widget.petMatchModel.picturePet}")),
+                backgroundImage:
+                    MemoryImage(base64Decode("${widget.pet.picturePet}")),
               ),
             ),
           ),
@@ -95,7 +95,7 @@ class _ReviewState extends State<Review> {
                 ),
                 SizedBox(width: 10.0),
                 Text(
-                  '${widget.petMatchModel.namePet}',
+                  '${widget.pet.namePet}',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],

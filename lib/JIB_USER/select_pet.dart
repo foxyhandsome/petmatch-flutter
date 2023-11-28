@@ -126,7 +126,9 @@ class _SelectPetState extends State<SelectPet> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => Filter())));
+                                builder: ((context) => Filter(
+                                      pet: pets[index],
+                                    ))));
                       },
                       icon: Icon(
                         Icons.pets,

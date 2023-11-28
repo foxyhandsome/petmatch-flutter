@@ -6,10 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:petmatch/JIB_USER/home.dart';
 import 'package:petmatch/JIB_USER/menu.dart';
+import 'package:petmatch/JIB_USER/pet_match.dart';
+import 'package:petmatch/model/district.model.dart';
+import 'package:petmatch/model/district_sub.model.dart';
 import 'package:petmatch/model/petbreed.model.dart';
 import 'package:petmatch/model/petskin.model.dart';
 
 import '../constant/domain.dart';
+import '../model/RequestMatch.model.dart';
+import '../model/pet.model.dart';
 import '../model/petblood.model.dart';
 
 List<String> list3 = <String>[
@@ -38,7 +43,8 @@ List<String> list3 = <String>[
 /// Flutter code sample for [ToggleButtons].
 
 class Filter extends StatefulWidget {
-  const Filter({Key? key});
+  final Pet pet;
+  const Filter({Key? key, required this.pet});
 
   @override
   _FilterState createState() => _FilterState();
@@ -53,6 +59,7 @@ class _FilterState extends State<Filter> {
     getPetblood();
     getPetskin();
     getPetbreed();
+    getData();
     super.initState();
   }
 
@@ -187,6 +194,78 @@ class _FilterState extends State<Filter> {
     } catch (e) {
       print("Error: $e");
     }
+  }
+
+  int? id_district;
+  int? id_subdistrict;
+  List<DropdownMenuEntry<Districtmodel>> dataList =
+      <DropdownMenuEntry<Districtmodel>>[];
+  Future<void> getData() async {
+    try {
+      dataList = [];
+      final response = await dio.get(url_api + '/district/get-district');
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        for (var element in responseData) {
+          dataList.add(DropdownMenuEntry<Districtmodel>(
+            value: Districtmodel.fromJson(element),
+            label: element["name_district"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle any exceptions that may occur during the request
+      print('Error: $e');
+    }
+  }
+
+  List<DropdownMenuEntry<DistrictSubModel>> dataSubList =
+      <DropdownMenuEntry<DistrictSubModel>>[];
+  Future<void> getDataSub(int id) async {
+    try {
+      final response = await dio.get(url_api +
+          '/subdistrict/get-subdistrictbydistrictid/' +
+          id.toString());
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        // dataSubList = [];
+        for (var element in responseData) {
+          dataSubList.add(DropdownMenuEntry<DistrictSubModel>(
+            value: DistrictSubModel.fromJson(element),
+            label: element["name_subdistrict"],
+          ));
+        }
+        setState(() {});
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+      setState(() {});
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  RequestMatch? req;
+  goToMatch() {
+    req = RequestMatch(
+      age: dropdownValue3,
+      petbreedSelect: petbreedSelect?.idBreed ?? null,
+      petskinSelect: petskinSelect?.idSkin,
+      petbloodsSelect: petbloodsSelect?.idBlood,
+      id_district: id_district ?? null,
+      sexPet: widget.pet.sexPet ?? null,
+    );
+    printJson(req);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: ((context) => PetMatch(pet: widget.pet, requestMatch: req!)),
+      ),
+    );
   }
 
   TextEditingController nameControl = TextEditingController();
@@ -411,17 +490,35 @@ class _FilterState extends State<Filter> {
                   ),
                 ),
               ),
+              Text(
+                "เลือกเขต",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 5.0),
+              DropdownMenu<Districtmodel>(
+                hintText: 'เลือกเขต',
+                dropdownMenuEntries: dataList,
+                onSelected: (Districtmodel? data) {
+                  setState(() {
+                    id_district = data!.idDistrict!;
+                    dataSubList = [];
+                  });
+                  print(data!.idDistrict);
+                },
+                width: 340,
+              ),
+
               SizedBox(height: 20.0),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 239, 83, 80),
                     minimumSize: const Size.fromHeight(50),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   onPressed: () {
-                    addPet(context);
+                    goToMatch();
                   },
                   child: Text(
                     'ไปจับคู่เล๊ย',

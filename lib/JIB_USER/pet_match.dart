@@ -4,10 +4,12 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:petmatch/JIB_USER/review.dart';
 import 'package:petmatch/widget/background_curve_widget.dart';
 
 import '../constant/domain.dart';
 import '../main.dart';
+import '../model/RequestMatch.model.dart';
 import '../model/pet.model.dart';
 import '../model/pet_match.model.dart';
 import '../model/profile.dart';
@@ -16,7 +18,8 @@ import '../widget/drag_widget.dart';
 
 class PetMatch extends StatefulWidget {
   final Pet pet;
-  const PetMatch({super.key, required this.pet});
+  final RequestMatch requestMatch;
+  const PetMatch({super.key, required this.pet, required this.requestMatch});
 
   @override
   State<PetMatch> createState() => _PetMatchState();
@@ -32,11 +35,34 @@ class _PetMatchState extends State<PetMatch>
     id_user = await storageToken.read(key: 'id_user');
     try {
       petMatchModels = [];
-      Response responseService = await dio
-          .post(url_api + '/match/get-pet-for-match', data: {
+      // Response responseService = await dio
+      //     .post(url_api + '/match/get-pet-for-match', data: {
+      //   "id_user": id_user,
+      //   "id_userhome": id_user,
+      //   "id_userguest": id_user
+      // });
+      printJson({
         "id_user": id_user,
         "id_userhome": id_user,
-        "id_userguest": id_user
+        "id_userguest": id_user,
+        "sex_pet": widget.pet.sexPet,
+        "age_pet": widget.requestMatch.age,
+        "id_blood": widget.requestMatch.petbloodsSelect,
+        "id_breed": widget.requestMatch.petbreedSelect,
+        "id_skin": widget.requestMatch.petskinSelect,
+        "id_district": widget.requestMatch.id_district
+      });
+      Response responseService =
+          await dio.post(url_api + '/match/get-pet-for-match', data: {
+        "id_user": id_user,
+        "id_userhome": id_user,
+        "id_userguest": id_user,
+        "sex_pet": widget.pet.sexPet,
+        "age_pet": widget.requestMatch.age,
+        "id_blood": widget.requestMatch.petbloodsSelect,
+        "id_breed": widget.requestMatch.petbreedSelect,
+        "id_skin": widget.requestMatch.petskinSelect,
+        "id_district": widget.requestMatch.id_district
       });
       if (responseService.statusCode == 201) {
         List<PetMatchModel> response = [];
@@ -246,7 +272,16 @@ class _PetMatchState extends State<PetMatch>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ActionButtonWidget(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: ((context) => Review(
+                                              petMatchModel:
+                                                  petMatchModels[index])),
+                                        ),
+                                      );
+                                    },
                                     icon: Icon(
                                       Icons.star,
                                       color: Colors.yellow,

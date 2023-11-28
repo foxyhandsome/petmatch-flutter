@@ -29,12 +29,12 @@ class _HomeState extends State<Home> {
           icon: Icon(Icons.search_rounded,
               color: Color.fromARGB(255, 245, 243, 243)),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: ((context) => Filter()),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: ((context) => Filter()),
+            //   ),
+            // );
           },
         ),
       ),
@@ -172,11 +172,12 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.fromLTRB(10, 610, 100, 0),
                 child: Container(
                   width: 70, // Adjust the width to make it a circle
-                  height: 70, // Make the width and height the same for a circular shape
+                  height:
+                      70, // Make the width and height the same for a circular shape
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color:
-                        Color.fromARGB(255, 241, 250, 250), // Background color of the circular button
+                    color: Color.fromARGB(255, 241, 250,
+                        250), // Background color of the circular button
                   ),
                   child: TextButton(
                     style: ButtonStyle(
@@ -198,11 +199,12 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.fromLTRB(130, 610, 110, 0),
                 child: Container(
                   width: 70, // Adjust the width to make it a circle
-                  height: 70, // Make the width and height the same for a circular shape
+                  height:
+                      70, // Make the width and height the same for a circular shape
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color:
-                        Color.fromARGB(255, 255, 0, 0), // Background color of the circular button
+                    color: Color.fromARGB(255, 255, 0,
+                        0), // Background color of the circular button
                   ),
                   child: TextButton(
                     style: ButtonStyle(
@@ -213,7 +215,8 @@ class _HomeState extends State<Home> {
                       // Action when the button is clicked
                     },
                     child: Icon(
-                      Icons.cancel_outlined, // Replace this with the icon you want
+                      Icons
+                          .cancel_outlined, // Replace this with the icon you want
                       color: Color.fromARGB(255, 253, 253, 253),
                       size: 50, // Adjust the icon size
                     ),
@@ -224,11 +227,12 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.fromLTRB(220, 610, 110, 0),
                 child: Container(
                   width: 70, // Adjust the width to make it a circle
-                  height: 70, // Make the width and height the same for a circular shape
+                  height:
+                      70, // Make the width and height the same for a circular shape
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color:
-                        Color.fromARGB(255, 30, 255, 0), // Background color of the circular button
+                    color: Color.fromARGB(255, 30, 255,
+                        0), // Background color of the circular button
                   ),
                   child: TextButton(
                     style: ButtonStyle(
@@ -246,15 +250,16 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-                Padding(
+              Padding(
                 padding: const EdgeInsets.fromLTRB(350, 610, 0, 0),
                 child: Container(
                   width: 70, // Adjust the width to make it a circle
-                  height: 70, // Make the width and height the same for a circular shape
+                  height:
+                      70, // Make the width and height the same for a circular shape
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color:
-                        Color.fromARGB(255, 255, 255, 255), // Background color of the circular button
+                    color: Color.fromARGB(255, 255, 255,
+                        255), // Background color of the circular button
                   ),
                   child: TextButton(
                     style: ButtonStyle(
@@ -265,7 +270,8 @@ class _HomeState extends State<Home> {
                       // Action when the button is clicked
                     },
                     child: Icon(
-                      Icons.arrow_forward, // Replace this with the icon you want
+                      Icons
+                          .arrow_forward, // Replace this with the icon you want
                       color: Color.fromARGB(255, 239, 83, 80),
                       size: 30, // Adjust the icon size
                     ),
