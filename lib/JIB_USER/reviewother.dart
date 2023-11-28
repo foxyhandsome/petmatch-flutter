@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petmatch/model/review.model.dart';
 
 import '../constant/domain.dart';
@@ -64,6 +65,15 @@ class _reviewotherState extends State<reviewother> {
         url_api + '/review/create-review',
         data: requestData,
       );
+      Fluttertoast.showToast(
+        msg: "รีวิวสำเร็จ",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
 
       if (responseService.statusCode == 200 ||
           responseService.statusCode == 201) {

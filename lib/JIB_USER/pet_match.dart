@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petmatch/JIB_USER/review.dart';
 import 'package:petmatch/widget/background_curve_widget.dart';
 
@@ -114,6 +115,15 @@ class _PetMatchState extends State<PetMatch>
         "match_userhome": true,
         "match_dislike": false
       });
+      Fluttertoast.showToast(
+        msg: "ส่งข้อเสนอเรียบร้อยแล้ว",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
 
       if (responseService.statusCode == 201) {
       } else {
@@ -149,6 +159,15 @@ class _PetMatchState extends State<PetMatch>
         "match_userhome": false,
         "match_dislike": true
       });
+      Fluttertoast.showToast(
+        msg: "ไม่ถูกใจสัตว์เลี้ยงตัวนี้",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
 
       if (responseService.statusCode == 201) {
       } else {

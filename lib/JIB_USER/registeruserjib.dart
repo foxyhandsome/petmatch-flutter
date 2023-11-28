@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
@@ -73,7 +74,17 @@ class _RegisteruserjibState extends State<Registeruserjib> {
   Future<void> register(BuildContext context) async {
     if ((username.text == "" || username.text.isEmpty) ||
         (password.text == "" || password.text.isEmpty) ||
-        (contact.text == "" || contact.text.isEmpty)) {
+        (contact.text == "" || contact.text.isEmpty)) 
+        {
+          Fluttertoast.showToast(
+        msg: "กรุณากรอกข้อมูลให้ครบทุกช่อง",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
       //
     } else {
       try {
@@ -86,11 +97,22 @@ class _RegisteruserjibState extends State<Registeruserjib> {
           "id_subdistrict": id_subdistrict,
           "id_typeuser": 1
         });
+            Fluttertoast.showToast(
+            msg: "สมัครสมาชิกสำเร็จ",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
         if (response.statusCode == 200 || response.statusCode == 201) {
           Navigator.push(
               context, MaterialPageRoute(builder: ((context) => Loginjib())));
+         
         } else {
           print('Request failed with status: ${response.statusCode}');
+          
         }
       } catch (e) {
         // Handle any exceptions that may occur during the request

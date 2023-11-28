@@ -268,7 +268,7 @@ class _RealuserState extends State<Realuser> {
                         Text(
                           ' ${list.isNotEmpty ? list[0].information : ""}',
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: 15.0,
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 5, 5,
                                 5), // Replace with your desired text color
