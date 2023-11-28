@@ -71,7 +71,7 @@ class _RegisteruserjibState extends State<Registeruserjib> {
   }
 
   Future<void> register(BuildContext context) async {
-    if (username.text != '' && password.text != '' && contact.text != '') {
+    if (username.text == '' && password.text == '' && contact.text == '') {
       //
     } else {
       try {
