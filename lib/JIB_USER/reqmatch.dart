@@ -178,92 +178,135 @@ class _ReqmatchState extends State<Reqmatch> {
                       (index) => SizedBox(
                         child: Container(
                           margin: EdgeInsets.all(10),
-                          child: Center(
-                            child: Container(
-                              child: ListTile(
-                                contentPadding: EdgeInsets.all(
-                                    10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
-                                tileColor:
-                                    Colors.white, // สีพื้นหลังของ ListTile
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      color: Color.fromARGB(255, 239, 83, 80),
-                                      width:
-                                          1), // กำหนดสีและความกว้างของเส้นกรอบ
-                                  borderRadius: BorderRadius.circular(
-                                      10), // กำหนดรูปร่างของกรอบ
+                          child: Container(
+                            margin: EdgeInsets.only(left: 10, right: 10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Color.fromARGB(255, 171, 36, 3),
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [],
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Theme.of(context).cardColor,
+                                  Theme.of(context).cardColor,
+                                ],
+                              ),
+                            ),
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Container(
+                                    margin:
+                                        EdgeInsets.only(left: 12, right: 12),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox(height: 2),
+                                        SizedBox(height: 2),
+                                        Text(
+                                          '${pets[index].namePet}',
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                leading: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => profileother()),
-                                    );
-                                  },
+                                SizedBox(height: 18),
+                                Center(
+                                    child: Container(
+                                  // Adjust the height as needed based on other content
                                   child: CircleAvatar(
                                     radius: 30,
                                     backgroundImage: MemoryImage(base64Decode(
                                         "${pets[index].picturePet}")),
                                   ),
-                                ),
-                                title: Row(
-                                  children: <Widget>[
-                                    Text(
-                                      "${pets[index].namePet}",
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                subtitle: Column(
+                                )),
+                                SizedBox(height: 18),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: <Widget>[
-                                        Icon(Icons.location_on,
-                                            color:
-                                                Colors.grey), // ไอคอนของที่อยู่
-                                        SizedBox(
-                                            width:
-                                                4), // ระยะห่างระหว่างไอคอนกับข้อความ
-                                        Container(
-                                          width: 100,
-                                          child: Text(
-                                            "${pets[index].nameSubdistrict},${pets[index].nameDistrict}",
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 12, right: 12),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'เขต : ${pets[index].nameDistrict} ',
                                             style: TextStyle(
-                                                overflow: TextOverflow.clip),
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        Icon(Icons.calendar_month,
-                                            color:
-                                                Colors.grey), // ไอคอนของที่อยู่
-                                        SizedBox(
-                                            width:
-                                                4), // ระยะห่างระหว่างไอคอนกับข้อความ
-                                        Container(
-                                          width: 100,
-                                          child: Text(
-                                            "วันที่ส่งข้อเสนอ ${convertDateTime(pets[index].create_date!)}",
-                                            style: TextStyle(
-                                                overflow: TextOverflow.clip),
-                                          ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
-                                trailing: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                                SizedBox(height: 4),
+                                Container(
+                                  margin: EdgeInsets.only(left: 12, right: 12),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                          'แขวง :  ${pets[index].nameSubdistrict}',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          softWrap:
+                                              true, // Allow text to wrap to the next line
+                                          overflow: TextOverflow.fade),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     Container(
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color:
+                                              Color.fromARGB(255, 196, 209, 59),
+                                          width: 2.0,
+                                        ),
+                                      ),
+                                      child: IconButton(
+                                        icon:
+                                            Icon(Icons.pets), // ไอคอนของยอมรับ
+                                        color:
+                                            Color.fromARGB(255, 196, 209, 59),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: ((context) =>
+                                                      profileother(
+                                                        pet: pets[index],
+                                                      ))));
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      width: 60,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
@@ -281,9 +324,10 @@ class _ReqmatchState extends State<Reqmatch> {
                                       ),
                                     ),
                                     SizedBox(
-                                        width:
-                                            15.0), // ระยะห่างระหว่างกรอบวงกลม
+                                      width: 10,
+                                    ),
                                     Container(
+                                      width: 60,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
@@ -301,9 +345,164 @@ class _ReqmatchState extends State<Reqmatch> {
                                     ),
                                   ],
                                 ),
-                              ),
+                                SizedBox(height: 10),
+                              ],
                             ),
                           ),
+
+                          // child: Center(
+                          //   child: Container(
+                          //     child: ListTile(
+                          //       contentPadding: EdgeInsets.all(
+                          //           10), // ปรับระยะห่างของเนื้อหาภายใน ListTile
+                          //       tileColor:
+                          //           Colors.white, // สีพื้นหลังของ ListTile
+                          //       shape: RoundedRectangleBorder(
+                          //         side: BorderSide(
+                          //             color: Color.fromARGB(255, 239, 83, 80),
+                          //             width:
+                          //                 1), // กำหนดสีและความกว้างของเส้นกรอบ
+                          //         borderRadius: BorderRadius.circular(
+                          //             10), // กำหนดรูปร่างของกรอบ
+                          //       ),
+                          //       leading: GestureDetector(
+                          //         onTap: () {
+                          //           Navigator.push(
+                          //             context,
+                          //             MaterialPageRoute(
+                          //                 builder: (context) => profileother()),
+                          //           );
+                          //         },
+                          //         child: CircleAvatar(
+                          //           radius: 30,
+                          //           backgroundImage: MemoryImage(base64Decode(
+                          //               "${pets[index].picturePet}")),
+                          //         ),
+                          //       ),
+                          //       title: Row(
+                          //         children: <Widget>[
+                          //           Text(
+                          //             "${pets[index].namePet}",
+                          //             style: TextStyle(
+                          //                 fontSize: 22,
+                          //                 fontWeight: FontWeight.bold),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //       subtitle: Column(
+                          //         children: [
+                          //           Row(
+                          //             children: <Widget>[
+                          //               Icon(Icons.location_on,
+                          //                   color:
+                          //                       Colors.grey), // ไอคอนของที่อยู่
+                          //               SizedBox(
+                          //                   width:
+                          //                       4), // ระยะห่างระหว่างไอคอนกับข้อความ
+                          //               Container(
+                          //                 width: 100,
+                          //                 child: Text(
+                          //                   "${pets[index].nameSubdistrict},${pets[index].nameDistrict}",
+                          //                   style: TextStyle(
+                          //                       overflow: TextOverflow.clip),
+                          //                 ),
+                          //               ),
+                          //             ],
+                          //           ),
+                          //           SizedBox(
+                          //             height: 10,
+                          //           ),
+                          //           Row(
+                          //             children: <Widget>[
+                          //               Icon(Icons.calendar_month,
+                          //                   color:
+                          //                       Colors.grey), // ไอคอนของที่อยู่
+                          //               SizedBox(
+                          //                   width:
+                          //                       4), // ระยะห่างระหว่างไอคอนกับข้อความ
+                          //               Container(
+                          //                 width: 100,
+                          //                 child: Text(
+                          //                   "วันที่ส่งข้อเสนอ ${convertDateTime(pets[index].create_date!)}",
+                          //                   style: TextStyle(
+                          //                       overflow: TextOverflow.clip),
+                          //                 ),
+                          //               ),
+                          //             ],
+                          //           ),
+                          //           SizedBox(
+                          //             height: 30,
+                          //           ),
+                          //         ],
+                          //       ),
+                          //       trailing: Column(
+                          //         children: <Widget>[
+                          //           Container(
+                          //             width: 40,
+                          //             decoration: BoxDecoration(
+                          //               shape: BoxShape.circle,
+                          //               border: Border.all(
+                          //                 color:
+                          //                     Color.fromARGB(255, 196, 209, 59),
+                          //                 width: 2.0,
+                          //               ),
+                          //             ),
+                          //             child: IconButton(
+                          //               icon:
+                          //                   Icon(Icons.pets), // ไอคอนของยอมรับ
+                          //               color:
+                          //                   Color.fromARGB(255, 196, 209, 59),
+                          //               onPressed: () {
+                          //                 Navigator.push(
+                          //                     context,
+                          //                     MaterialPageRoute(
+                          //                         builder: ((context) =>
+                          //                             profileother(
+                          //                               pet: pets[index],
+                          //                             ))));
+                          //               },
+                          //             ),
+                          //           ),
+                          //           Container(
+                          //             width: 40,
+                          //             decoration: BoxDecoration(
+                          //               shape: BoxShape.circle,
+                          //               border: Border.all(
+                          //                 color: Color.fromARGB(255, 0, 128, 0),
+                          //                 width: 2.0,
+                          //               ),
+                          //             ),
+                          //             child: IconButton(
+                          //               icon:
+                          //                   Icon(Icons.check), // ไอคอนของยอมรับ
+                          //               color: Color.fromARGB(255, 0, 128, 0),
+                          //               onPressed: () {
+                          //                 updateApprove(pets[index]);
+                          //               },
+                          //             ),
+                          //           ),
+                          //           Container(
+                          //             width: 40,
+                          //             decoration: BoxDecoration(
+                          //               shape: BoxShape.circle,
+                          //               border: Border.all(
+                          //                 color: Color.fromARGB(255, 255, 0, 0),
+                          //               ),
+                          //             ),
+                          //             child: IconButton(
+                          //               icon:
+                          //                   Icon(Icons.close), // ไอคอนของปฏิเสธ
+                          //               color: Color.fromARGB(255, 255, 0, 0),
+                          //               onPressed: () {
+                          //                 updateReject(pets[index]);
+                          //               },
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ),
                       ),
                     ),
