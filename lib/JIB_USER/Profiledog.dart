@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petmatch/JIB_USER/editprofiledog.dart';
 import 'package:petmatch/JIB_USER/pecert.dart';
 import 'package:petmatch/JIB_USER/review.dart';
@@ -34,6 +35,15 @@ class _ProfiledogState extends State<Profiledog> {
         Navigator.pop(context);
         Navigator.pop(context);
         print('Pet with ID $id deleted successfully');
+         Fluttertoast.showToast(
+        msg: "ลบสัตว์เลี้ยงเรียบร้อยแล้ว",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
       } else {
         // Handle errors here
         print('HTTP Error: ${response.statusCode}');

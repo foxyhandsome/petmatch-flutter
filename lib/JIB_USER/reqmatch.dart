@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/history.dart';
 import 'package:petmatch/JIB_USER/home.dart';
@@ -89,6 +90,15 @@ class _ReqmatchState extends State<Reqmatch> {
         "match_userguest": true,
         "match_userguest_deny": false
       });
+       Fluttertoast.showToast(
+        msg: "ยอมรับข้อเสนอเรียบร้อยแล้ว",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
       if (response.statusCode == 201) {
         final responseData = response.data;
         getData();
@@ -116,6 +126,15 @@ class _ReqmatchState extends State<Reqmatch> {
         "match_userguest": false,
         "match_userguest_deny": true
       });
+       Fluttertoast.showToast(
+        msg: "ปฎิเสธข้อเสนอเรียบร้อยแล้ว",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
       if (response.statusCode == 201) {
         final responseData = response.data;
         getData();

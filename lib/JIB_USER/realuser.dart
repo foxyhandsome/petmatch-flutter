@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petmatch/JIB_USER/editprofileuser.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
 
@@ -292,6 +293,14 @@ class _RealuserState extends State<Realuser> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: ((context) => Loginjib())));
+                    Fluttertoast.showToast(
+                        msg: "ออกจากระบบเรียบร้อยแล้ว",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.black,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

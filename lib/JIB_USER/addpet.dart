@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/loginjib.dart';
@@ -192,6 +193,15 @@ class _AddpetState extends State<Addpet> {
       };
       Response response =
           await dio.post(url_api + '/pet/create-pet', data: petData);
+        Fluttertoast.showToast(
+        msg: "เพิ่มสัตว์เลี้ยงเรียบร้อยแล้ว",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
       if (response.statusCode == 201) {
         Navigator.of(context).pop();
       } else {
@@ -199,6 +209,15 @@ class _AddpetState extends State<Addpet> {
       }
     } catch (e) {
       print("Error: $e");
+      Fluttertoast.showToast(
+        msg: "กรุณากรอกข้อมูลให้ครบ",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
     }
   }
 

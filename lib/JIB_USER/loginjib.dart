@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:petmatch/JIB_USER/allpet.dart';
 import 'package:petmatch/JIB_USER/menu.dart';
 import 'package:petmatch/JIB_USER/registeruserjib.dart';
@@ -36,10 +37,28 @@ class _LoginjibState extends State<Loginjib> {
           value: response.data["id_user"].toString(),
         );
         GotoHome();
+         Fluttertoast.showToast(
+        msg: "ลงชื่อเข้าใช้ระบบเรียบร้อย",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
         // Handle the response here as needed
       } else {
         // Handle case where either username or password is empty
         print('Username or password is empty.');
+        Fluttertoast.showToast(
+        msg: "กรุณากรอกชื่อผู้ใช้หรือรหัสผ่านให้ถูกต้อง",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
       }
     } catch (e) {
       // Handle exceptions that may occur during the request
