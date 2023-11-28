@@ -7,6 +7,8 @@ import 'package:petmatch/JIB_USER/realuser.dart';
 import 'package:petmatch/JIB_USER/reqmatch.dart';
 import 'package:petmatch/JIB_USER/select_pet.dart';
 
+import 'history_real.dart';
+
 class Menu extends StatefulWidget {
   const Menu({Key? key});
 
@@ -22,6 +24,7 @@ class _MenuState extends State<Menu> {
     SelectPet(),
     Reqmatch(),
     History(),
+    HistoryReal(),
     Realuser(),
   ];
 
@@ -56,7 +59,12 @@ class _MenuState extends State<Menu> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month_outlined),
-            label: 'ประวัติการจับคู่',
+            label: 'ที่เคยถูกใจ',
+            backgroundColor: Color.fromARGB(255, 239, 83, 80),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            label: 'ประวัติที่จับคู่',
             backgroundColor: Color.fromARGB(255, 239, 83, 80),
           ),
           BottomNavigationBarItem(

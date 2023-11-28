@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:petmatch/authenticationsScreen/navigationbar/reviewother.dart';
+import 'package:petmatch/JIB_USER/reviewother.dart';
 import '../../JIB_USER/editprofileuser.dart';
 import '../../JIB_USER/pecert.dart';
 import '../../model/pet.model.dart';

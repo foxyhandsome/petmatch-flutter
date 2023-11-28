@@ -3,21 +3,21 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:petmatch/JIB_USER/editprofileuser.dart';
-import 'package:petmatch/JIB_USER/review_pet_me.dart';
-import 'package:petmatch/authenticationsScreen/navigationbar/profileother.dart';
 import 'package:petmatch/JIB_USER/reviewother.dart';
-import 'package:petmatch/constant/domain.dart';
+import 'package:petmatch/JIB_USER/select_pet_review.dart';
 import 'package:petmatch/model/pet.model.dart';
 
-class History extends StatefulWidget {
-  const History({super.key});
+import '../authenticationsScreen/navigationbar/profileother.dart';
+import '../constant/domain.dart';
+
+class HistoryReal extends StatefulWidget {
+  const HistoryReal({super.key});
 
   @override
-  State<History> createState() => _HistoryState();
+  State<HistoryReal> createState() => _HistoryRealState();
 }
 
-class _HistoryState extends State<History> {
+class _HistoryRealState extends State<HistoryReal> {
   final dio = Dio();
   String? idUser;
   static FlutterSecureStorage storageToken = new FlutterSecureStorage();
@@ -33,36 +33,37 @@ class _HistoryState extends State<History> {
     try {
       pets = [];
       idUser = await storageToken.read(key: 'id_user');
-      final response = await dio.post(url_api + '/match/get-pet-like', data: {
+      final response =
+          await dio.post(url_api + '/match/pet-match-history', data: {
         "id_userhome": int.parse(idUser!),
       });
       if (response.statusCode == 201) {
         final responseData = response.data;
         for (var element in responseData) {
           pets.add(Pet(
-              provinceName: element["province_name"],
-              nameDistrict: element["name_district"],
-              nameSubdistrict: element["name_subdistrict"],
-              username: element["username"],
-              typeSkin: element["type_skin"],
-              typeBlood: element["type_blood"],
-              password: element["password"],
-              nameBreed: element["name_breed"],
-              information: element["information"],
-              idTypeuser: element["id_typeuser"],
-              idSubdistrict: element["id_subdistrict"],
-              idDistrict: element["id_district"],
-              contact: element["contact"],
-              agePet: element["age_pet"],
-              healthPet: element["health_pet"],
-              idBlood: element["id_blood"],
-              idBreed: element["id_breed"],
-              idPet: element["id_pet"],
-              idSkin: element["id_skin"],
-              idUser: element["id_user"],
-              namePet: element["name_pet"],
-              picturePet: element["picture_pet"],
-              sexPet: element["sex_pet"]));
+              provinceName: element["province_name_guest"],
+              nameDistrict: element["name_district_guest"],
+              nameSubdistrict: element["name_subdistrict_guest"],
+              username: element["username_guest"],
+              typeSkin: element["type_skin_guest"],
+              typeBlood: element["type_blood_guest"],
+              password: element["password_guest"],
+              nameBreed: element["name_breed_guest"],
+              information: element["information_guest"],
+              idTypeuser: element["id_typeuser_guest"],
+              idSubdistrict: element["id_subdistrict_guest"],
+              idDistrict: element["id_district_guest"],
+              contact: element["contact_guest"],
+              agePet: element["age_pet_guest"],
+              healthPet: element["health_pet_guest"],
+              idBlood: element["id_blood_guest"],
+              idBreed: element["id_breed_guest"],
+              idPet: element["id_pet_guest"],
+              idSkin: element["id_skin_guest"],
+              idUser: element["id_user_guest"],
+              namePet: element["name_pet_guest"],
+              picturePet: element["picture_pet_guest"],
+              sexPet: element["sex_pet_guest"]));
         }
         setState(() {});
       } else {
@@ -81,7 +82,7 @@ class _HistoryState extends State<History> {
           backgroundColor: Color.fromARGB(255, 239, 83, 80),
           elevation: 0,
           title: Text(
-            "ประวัติสัตว์เลี้ยงที่ถูกใจ",
+            "ประวัติที่จับคู่",
             style: TextStyle(color: Colors.black),
           ),
           actions: [],
@@ -161,8 +162,8 @@ class _HistoryState extends State<History> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: ((context) =>
-                                                    ReviewPetMe(
-                                                      pet: pets[index],
+                                                    SelectPetReview(
+                                                      pet_guest: pets[index],
                                                     ))));
                                       },
                                     ),
